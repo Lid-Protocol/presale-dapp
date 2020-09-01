@@ -2,7 +2,13 @@ import React from 'react';
 import { Text, Box, Flex, Grid, Image, Link } from '@chakra-ui/core';
 import { shortEther, toBN, toWei } from 'utils';
 import addresses from 'contracts/addresses';
-import { totalPresale } from '../config';
+import { totalPresale, tokenName } from '../config';
+
+import imgTokenLogo from 'assets/images/logo.png';
+import imgETHLogo from 'assets/images/ethereum-eth-logo.png';
+import imgETHLogoWhite from 'assets/images/ethereum-eth-logo-white.png';
+import imgLidLogo from 'assets/images/logo-lid.png';
+import imgDepositor from 'assets/images/depositor.png';
 
 interface ISubHeading {
   totalEth: string;
@@ -70,7 +76,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
             bg="lid.bg"
           >
             <Text fontSize="18px" m="0" p="0" color="lid.fgMed">
-              Verified CXN Presale Contract
+              {`Verified ${tokenName} Presale Contract`}
             </Text>
             {addresses.presale ? (
               <Link
@@ -93,11 +99,11 @@ const SubHeadings: React.FC<ISubHeading> = ({
             color="white"
             borderRadius="5px"
             p="25px"
-            bg="linear-gradient(0deg, rgba(12,101,235,1) 0%, rgba(28,158,247,1) 100%)"
+            background="linear-gradient(0deg, rgba(12,101,235,1) 0%, rgba(28,158,247,1) 100%)"
           >
             <Image
-              src="/ethereum-eth-logo-white.png"
-              alt="Lid Website"
+              src={imgETHLogoWhite}
+              alt="eth logo"
               w="auto"
               h="25px"
               display="inline-block"
@@ -118,11 +124,11 @@ const SubHeadings: React.FC<ISubHeading> = ({
             color="white"
             borderRadius="5px"
             p="25px"
-            bg="linear-gradient(0deg, rgba(12,101,235,1) 0%, rgba(28,158,247,1) 100%)"
+            background="linear-gradient(0deg, rgba(12,101,235,1) 0%, rgba(28,158,247,1) 100%)"
           >
             <Image
-              src="/logo.png"
-              alt="Lid Website"
+              src={imgTokenLogo}
+              alt="token logo"
               w="auto"
               h="25px"
               display="inline-block"
@@ -130,7 +136,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
               top="-3px"
             />
             <Text ml="10px" mt="5px" color="lid.bg" display="inline-block">
-              Your CXN Tokens
+              {`Your ${tokenName} Tokens`}
             </Text>
             <Text fontSize="38px" w="100%" fontWeight="bold">
               {maxShares !== '0'
@@ -153,8 +159,8 @@ const SubHeadings: React.FC<ISubHeading> = ({
             bg="lid.bg"
           >
             <Image
-              src="/Depositor.png"
-              alt="Lid Website"
+              src={imgDepositor}
+              alt="depositor"
               w="auto"
               h="25px"
               display="inline-block"
@@ -178,8 +184,8 @@ const SubHeadings: React.FC<ISubHeading> = ({
             bg="lid.bg"
           >
             <Image
-              src="/ethereum-eth-logo.png"
-              alt="Lid Website"
+              src={imgETHLogo}
+              alt="eth logo"
               w="auto"
               h="25px"
               display="inline-block"
@@ -203,8 +209,8 @@ const SubHeadings: React.FC<ISubHeading> = ({
             bg="lid.bg"
           >
             <Image
-              src="/logo.png"
-              alt="Lid Website"
+              src={imgTokenLogo}
+              alt="token logo"
               w="auto"
               h="25px"
               display="inline-block"
@@ -212,7 +218,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
               top="-3px"
             />
             <Text ml="10px" mt="5px" color="lid.fgMed" display="inline-block">
-              Total Presale CXN
+              {`Total Presale ${tokenName}`}
             </Text>
             <Text fontSize="38px" w="100%" fontWeight="bold" color="lid.brand">
               {shortEther(toWei(totalPresale))}
@@ -228,7 +234,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
             bg="lid.bg"
           >
             <Image
-              src="/logo-lid.png"
+              src={imgLidLogo}
               alt="Lid Website"
               w="auto"
               h="25px"

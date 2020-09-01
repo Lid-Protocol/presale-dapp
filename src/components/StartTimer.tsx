@@ -1,7 +1,8 @@
 import React from 'react';
 import { Text, Box, Link } from '@chakra-ui/core';
+import { shortEther } from 'utils';
 import CountDown from './CountDown';
-import { shortEther } from '../utils';
+import { tokenName } from '../config';
 
 interface IStartTimer {
   startTime: number;
@@ -28,7 +29,7 @@ const StartTimer: React.FC<IStartTimer> = ({
       textAlign="center"
     >
       <Text fontSize={{ base: '28px', sm: '36px' }} fontWeight="bold">
-        Your CXN Access Starts In:
+        {`Your ${tokenName} Access Starts In:`}
       </Text>
       <CountDown expiryTimestamp={accessTime} />
       <Text>

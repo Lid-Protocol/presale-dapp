@@ -1,6 +1,10 @@
 import React from 'react';
 import { Text, Box, Flex, Image, Link, Button } from '@chakra-ui/core';
 import Blockie from './Blockie';
+import { partnerSiteUrl, tokenName } from '../config';
+
+import imgTokenLogo from 'assets/images/logo.png';
+import imgLidLogo from 'assets/images/logo-lid.png';
 
 interface IHeader {
   address: string;
@@ -19,15 +23,10 @@ const Header: React.FC<IHeader> = ({ address, onConnect }) => {
         pl={{ base: '20px', lg: '0px' }}
         pr={{ base: '20px', lg: '0px' }}
       >
-        <Link
-          display="inline-block"
-          href="https://cxn.network/"
-          m="0px"
-          ml="-3px"
-        >
+        <Link display="inline-block" href={partnerSiteUrl} m="0px" ml="-3px">
           <Image
-            src="/logo.png"
-            alt="CXN Logo"
+            src={imgTokenLogo}
+            alt="token logo"
             w="auto"
             h="60px"
             display="inline-block"
@@ -42,7 +41,7 @@ const Header: React.FC<IHeader> = ({ address, onConnect }) => {
             ml="20px"
             color="lid.brand"
           >
-            CXN Presale
+            {`${tokenName} Presale`}
           </Text>
         </Link>
         {address ? (
@@ -86,8 +85,8 @@ const Header: React.FC<IHeader> = ({ address, onConnect }) => {
       >
         <Link display="inline-block" href="https://lid.sh" m="0px">
           <Image
-            src="/logo-lid.png"
-            alt="Lid Logo"
+            src={imgLidLogo}
+            alt="lid logo"
             w="auto"
             h="20px"
             display="inline-block"

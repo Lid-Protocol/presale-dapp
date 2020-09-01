@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/core';
 import { Contract } from 'web3-eth-contract';
 import { removeDecimal, toBN, toWei, fromWei } from 'utils';
-import { referralBP, basisPoint, accountCap } from '../config';
+import { referralBP, basisPoint, accountCap, tokenName } from '../config';
 
 interface IDepositForm {
   web3: Web3 | null;
@@ -124,7 +124,7 @@ const DepositForm: React.FC<IDepositForm> = ({
         borderColor="lid.stroke"
       >
         <Text fontSize={{ base: '24px', sm: '36px' }} fontWeight="bold">
-          Deposit ETH for CXN
+          {`Deposit ETH for ${tokenName}`}
         </Text>
         <Text fontSize="18px" color="blue.500">
           Minimum 0.01 ETH, Maximum {removeDecimal(fromWei(hardcap))} ETH
@@ -133,7 +133,7 @@ const DepositForm: React.FC<IDepositForm> = ({
           Your Available Max: {removeDecimal(fromWei(availableMax))} ETH
         </Text>
         <Text fontSize="18px">
-          Estimated CXN:{' '}
+          {`Estimated ${tokenName}: `}
           {!depositVal
             ? '0'
             : removeDecimal(

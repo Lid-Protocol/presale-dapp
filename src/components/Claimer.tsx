@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, Box, Button, Grid } from '@chakra-ui/core';
 import { shortEther, toBN, toWei } from 'utils';
 import { Contract } from 'web3-eth-contract';
-import { totalPresale } from '../config';
+import { totalPresale, tokenName } from '../config';
 import CountDownShort from './CountDownShort';
 
 interface IClaimer {
@@ -29,7 +29,7 @@ const Claimer: React.FC<IClaimer> = ({
       return;
     }
     if (toBN(accountRedeemable).lt(toBN('1'))) {
-      alert('You must have at least 1 wei of CXN to claim.');
+      alert(`You must have at least 1 wei of ${tokenName} to claim.`);
       return;
     }
     await lidPresaleSC.methods.redeem().send({ from: address });
@@ -61,13 +61,13 @@ const Claimer: React.FC<IClaimer> = ({
         p="20px"
       >
         <Text fontSize={{ base: '24px', sm: '36px' }} fontWeight="bold">
-          Claim Your CXN
+          {`Claim Your ${tokenName}`}
         </Text>
         <Text fontSize="18px" color="blue.500">
           2% released / hour
         </Text>
         <Text fontSize="18px" color="lid.fg">
-          CXN to Claim: {shortEther(accountRedeemable)}
+          {`${tokenName} to Claim: ${shortEther(accountRedeemable)}`}
         </Text>
         <Button
           isDisabled={accountRedeemable === '0'}
@@ -106,7 +106,7 @@ const Claimer: React.FC<IClaimer> = ({
           bg="lid.bg"
         >
           <Text fontSize="18px" m="0" p="0" color="lid.fgMed">
-            Total CXN Claimed
+            {`Total ${tokenName} Claimed`}
           </Text>
           <Text fontSize="38px" w="100%" fontWeight="bold">
             {shortEther(accountClaimedTokens)}
@@ -121,7 +121,7 @@ const Claimer: React.FC<IClaimer> = ({
           bg="lid.bg"
         >
           <Text fontSize="18px" m="0" p="0" color="lid.fgMed">
-            CXN / Hour
+            {`${tokenName} / Hour`}
           </Text>
           <Text fontSize="38px" w="100%" fontWeight="bold">
             {maxShares !== '0'
@@ -149,7 +149,7 @@ const Claimer: React.FC<IClaimer> = ({
         p="20px"
       >
         <Text fontSize="18px" color="lid.fg">
-          More CXN available to claim in
+          {`More ${tokenName} available to claim in`}
         </Text>
         <CountDownShort
           expiryTimestamp={toBN(finalEndTime)

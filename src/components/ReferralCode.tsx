@@ -14,6 +14,9 @@ const ReferralCode: React.FC<IReferralCode> = ({
   earnedReferrals,
   referralCounts
 }) => {
+  const siteUrl = window.location.href;
+  console.log('siteUrl', siteUrl);
+
   return (
     <Box
       w="100%"
@@ -36,7 +39,7 @@ const ReferralCode: React.FC<IReferralCode> = ({
         mb="20px"
         p="20px"
       >
-        <CopyToClipboard text={'https://cxn.lid.sh/#/' + address}>
+        <CopyToClipboard text={`${siteUrl}#/${address}`}>
           <Button
             display="block"
             color="lid.fgLight"
@@ -66,7 +69,7 @@ const ReferralCode: React.FC<IReferralCode> = ({
           borderRadius="28px"
           w="100%"
         >
-          https://cxn.lid.sh/#/{address}
+          {`${siteUrl}#/${address}`}
         </Text>
       </Box>
       <Grid

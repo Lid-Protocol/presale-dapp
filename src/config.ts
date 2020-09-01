@@ -12,6 +12,6 @@ export const infuraIds = [
 export const totalPresale = '90000000';
 export const referralBP = '250';
 export const basisPoint = '10000';
-export const siteUrl = 'https://cxn.network/';
+export const partnerSiteUrl = 'https://cxn.network/';
 export const tokenName = 'CXN';
 export const accountCap = Web3.utils.toWei('20');

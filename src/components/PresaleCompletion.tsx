@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, Box, Button } from '@chakra-ui/core';
 import { Contract } from 'web3-eth-contract';
+import { tokenName } from '../config';
 
 interface IPresaleCompletion {
   isEnded: boolean;
@@ -39,7 +40,7 @@ const PresaleCompletion: React.FC<IPresaleCompletion> = ({
       textAlign="center"
     >
       <Text fontSize="18px" m="0" p="0" color="lid.fg">
-        To Complete CXN Presale:
+        {`To Complete ${tokenName} Presale:`}
       </Text>
       {!isEnded && (
         <Text fontSize="14px" m="0" p="0" color="lid.fgMed">
