@@ -1,2 +1,2 @@
 export * from './helper';
-export * from './config';
+export * from './web3Modal';

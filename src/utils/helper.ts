@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-import { infuraIds } from './config';
+import { infuraIds } from '../config';
 
 export const toBN = Web3.utils.toBN;
 export const toWei = Web3.utils.toWei;
