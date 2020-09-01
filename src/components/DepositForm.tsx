@@ -34,7 +34,7 @@ const DepositForm: React.FC<IDepositForm> = ({
   totalEth,
   currentPrice
 }) => {
-  const [displayVal, setDisplayVal] = useState('');
+  const [displayVal, setDisplayVal] = useState('0');
   const depositVal = !!displayVal ? toWei(displayVal) : '0';
 
   const availableByAccountDeposit = toBN(accountCap).gte(
@@ -185,6 +185,7 @@ const DepositForm: React.FC<IDepositForm> = ({
             color="lid.fgLight"
             w="120px"
             h="50px"
+            top="0"
             position="absolute"
             right="0px"
             zIndex={2}
