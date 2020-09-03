@@ -19,6 +19,7 @@ const App: React.FC = () => {
   );
 
   console.log(images);
+  console.log(tokenName);
 
   return (
     <>
