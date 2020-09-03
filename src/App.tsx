@@ -24,7 +24,7 @@ const App: React.FC = () => {
   return (
     <>
       <Helmet>
-        <link
+        {/* <link
           rel="apple-touch-icon"
           sizes="180x180"
           href={require(`assets/images/${tokenName.toLocaleLowerCase()}/apple-icon-180x180.png`)}
@@ -52,26 +52,27 @@ const App: React.FC = () => {
           type="image/png"
           sizes="96x96"
           href={require(`assets/images/${tokenName.toLocaleLowerCase()}/favicon-96x96.png`)}
-        />
-        <link
+        /> */}
+        {/* <link
           rel="icon"
           href={require(`assets/images/${tokenName.toLocaleLowerCase()}/favicon.ico`)}
-        />
+        /> */}
+        <link rel="icon" href={images['favicon.ico']} />
 
         <meta name="msapplication-TileColor" content="#ffffff" />
-        <meta
+        {/* <meta
           name="msapplication-TileImage"
           content={require(`assets/images/${tokenName.toLocaleLowerCase()}/ms-icon-144x144.png`)}
-        />
+        /> */}
 
         <meta
           name="description"
           content={`Deposit $ETH and earn $${tokenName} in this Lid Certified Presale.`}
         />
-        <meta
+        {/* <meta
           itemProp="image"
           content={require(`assets/images/${tokenName.toLocaleLowerCase()}/opengraph.jpg`)}
-        />
+        /> */}
 
         <meta property="og:url" content={siteUrl} />
         <meta property="og:type" content="website" />
@@ -80,10 +81,10 @@ const App: React.FC = () => {
           property="og:description"
           content={`Deposit $ETH and earn $${tokenName} in this Lid Certified Presale.`}
         />
-        <meta
+        {/* <meta
           property="og:image"
           content={require(`assets/images/${tokenName.toLocaleLowerCase()}/opengraph.jpg`)}
-        />
+        /> */}
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${tokenName} Presale`} />
@@ -91,10 +92,10 @@ const App: React.FC = () => {
           name="twitter:description"
           content={`Deposit $ETH and earn $${tokenName} in this Lid Certified Presale.`}
         />
-        <meta
+        {/* <meta
           name="twitter:image"
           content={require(`assets/images/${tokenName.toLocaleLowerCase()}/opengraph.jpg`)}
-        />
+        /> */}
 
         <title>{tokenName} Presale</title>
       </Helmet>
