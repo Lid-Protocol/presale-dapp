@@ -3,8 +3,7 @@ import { Text, Box, Flex, Image, Link, Button } from '@chakra-ui/core';
 import Blockie from './Blockie';
 import { partnerSiteUrl, tokenName } from '../config';
 
-import imgTokenLogo from 'assets/images/logo.png';
-import imgLidLogo from 'assets/images/logo-lid.png';
+import imgLidLogo from 'assets/images/common/logo-lid.png';
 
 interface IHeader {
   address: string;
@@ -25,7 +24,7 @@ const Header: React.FC<IHeader> = ({ address, onConnect }) => {
       >
         <Link display="inline-block" href={partnerSiteUrl} m="0px" ml="-3px">
           <Image
-            src={imgTokenLogo}
+            src={require(`assets/images/${tokenName.toLocaleLowerCase()}/logo.png`)}
             alt="token logo"
             w="auto"
             h="60px"

@@ -4,11 +4,10 @@ import { shortEther, toBN, toWei } from 'utils';
 import addresses from 'contracts/addresses';
 import { totalPresale, tokenName } from '../config';
 
-import imgTokenLogo from 'assets/images/logo.png';
-import imgETHLogo from 'assets/images/ethereum-eth-logo.png';
-import imgETHLogoWhite from 'assets/images/ethereum-eth-logo-white.png';
-import imgLidLogo from 'assets/images/logo-lid.png';
-import imgDepositor from 'assets/images/depositor.png';
+import imgETHLogo from 'assets/images/common/ethereum-eth-logo.png';
+import imgETHLogoWhite from 'assets/images/common/ethereum-eth-logo-white.png';
+import imgLidLogo from 'assets/images/common/logo-lid.png';
+import imgDepositor from 'assets/images/common/depositor.png';
 
 interface ISubHeading {
   totalEth: string;
@@ -127,7 +126,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
             background="linear-gradient(0deg, rgba(12,101,235,1) 0%, rgba(28,158,247,1) 100%)"
           >
             <Image
-              src={imgTokenLogo}
+              src={require(`assets/images/${tokenName.toLocaleLowerCase()}/logo.png`)}
               alt="token logo"
               w="auto"
               h="25px"
@@ -209,7 +208,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
             bg="lid.bg"
           >
             <Image
-              src={imgTokenLogo}
+              src={require(`assets/images/${tokenName.toLocaleLowerCase()}/logo.png`)}
               alt="token logo"
               w="auto"
               h="25px"

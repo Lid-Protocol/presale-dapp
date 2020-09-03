@@ -18,6 +18,7 @@
     "@types/react": "^16.9.0",
     "@types/react-copy-to-clipboard": "^4.3.0",
     "@types/react-dom": "^16.9.0",
+    "@types/react-helmet": "^6.1.0",
     "@types/styled-components": "^5.1.2",
     "@unilogin/provider": "^0.6.1",
     "@walletconnect/web3-provider": "^1.2.1",
@@ -28,6 +29,7 @@
     "react": "^16.13.1",
     "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.13.1",
+    "react-helmet": "^6.1.0",
     "react-scripts": "3.4.3",
     "react-timer-hook": "^2.0.2",
     "squarelink": "^1.1.4",
@@ -56,5 +58,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/webpack-env": "^1.15.2"
   }
 }

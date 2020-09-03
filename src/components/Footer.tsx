@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, Box, Link, Image } from '@chakra-ui/core';
 
-import imgLidWhite from 'assets/images/LID_white_h.png';
+import imgLidWhite from 'assets/images/common/LID_white_h.png';
 import iconDiscord from 'assets/images/icons/discord.png';
 import iconTelegram from 'assets/images/icons/telegram.png';
 import iconTwitter from 'assets/images/icons/twitter.png';
