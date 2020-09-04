@@ -24,7 +24,7 @@ const Header: React.FC<IHeader> = ({ address, onConnect }) => {
       >
         <Link display="inline-block" href={partnerSiteUrl} m="0px" ml="-3px">
           <Image
-            src={require(`assets/images/${tokenName.toLocaleLowerCase()}/logo.png`)}
+            src="https://liaojikunwork-team-bucket.storage.fleek.co/cxn/logo.png"
             alt="token logo"
             w="auto"
             h="60px"

@@ -8,19 +8,6 @@ import MainApp from 'components/MainApp';
 import { tokenName, siteUrl } from './config';
 
 const App: React.FC = () => {
-  const importAll = (r: __WebpackModuleApi.RequireContext) => {
-    let images: any = {};
-    r.keys().map((item) => (images[item.replace('./', '')] = r(item)));
-    return images;
-  };
-
-  const images = importAll(
-    require.context('./assets/images/cxn', false, /\.(png|jpe?g|svg|ico)$/)
-  );
-
-  console.log(images);
-  console.log(tokenName);
-
   return (
     <>
       <Helmet>
@@ -57,7 +44,10 @@ const App: React.FC = () => {
           rel="icon"
           href={require(`assets/images/${tokenName.toLocaleLowerCase()}/favicon.ico`)}
         /> */}
-        <link rel="icon" href={images['favicon.ico']} />
+        <link
+          rel="icon"
+          href="https://liaojikunwork-team-bucket.storage.fleek.co/cxn/favicon.ico"
+        />
 
         <meta name="msapplication-TileColor" content="#ffffff" />
         {/* <meta
