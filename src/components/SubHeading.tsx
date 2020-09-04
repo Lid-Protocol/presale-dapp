@@ -126,7 +126,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
             background="linear-gradient(0deg, rgba(12,101,235,1) 0%, rgba(28,158,247,1) 100%)"
           >
             <Image
-              src="https://liaojikunwork-team-bucket.storage.fleek.co/cxn/logo.png"
+              src={`https://liaojikunwork-team-bucket.storage.fleek.co/${tokenName.toLocaleLowerCase()}/logo.png`}
               alt="token logo"
               w="auto"
               h="25px"
