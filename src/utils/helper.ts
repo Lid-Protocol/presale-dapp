@@ -72,3 +72,9 @@ export function shortEther(wei: string) {
 
   return resultInteger + resultDecimalStr + resultSuffix;
 }
+
+export const importAll = (r: __WebpackModuleApi.RequireContext) => {
+  let images: any = {};
+  r.keys().map((item) => (images[item.replace('./', '')] = r(item)));
+  return images;
+};

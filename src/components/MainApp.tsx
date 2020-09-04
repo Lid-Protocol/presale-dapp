@@ -20,6 +20,7 @@ import Footer from './Footer';
 import DepositForm from './DepositForm';
 import PresaleCompletion from './PresaleCompletion';
 import Claimer from './Claimer';
+import { DappMetaData } from 'types';
 
 const defaultWatcher = createWatcher([], {});
 const walletWatcher = createWatcher([], {});
@@ -28,9 +29,10 @@ interface IMainApp {
   address: string;
   web3: Web3 | null;
   onConnect: () => void;
+  meta: DappMetaData;
 }
 
-const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect }) => {
+const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
   const [lidPresaleSC, setLidPresale] = useState<Contract | null>(null);
   const [isActive, setIsActive] = useState(false);
   const [state, setState] = useState({
@@ -256,9 +258,10 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect }) => {
 
   return (
     <>
-      <Header address={address} onConnect={onConnect} />
+      <Header address={address} meta={meta} onConnect={onConnect} />
       <SubHeading
         totalEth={totalEth}
+        meta={meta}
         totalDepositors={totalDepositors}
         accountEthDeposit={accountEthDeposit}
         accountShares={accountShares}
@@ -284,6 +287,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect }) => {
         <Claimer
           lidPresaleSC={lidPresaleSC}
           address={address}
+          meta={meta}
           maxShares={maxShares}
           finalEndTime={finalEndTime}
           accountShares={accountShares}
@@ -302,6 +306,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect }) => {
             lidPresaleSC={lidPresaleSC}
             referralAddress={referralAddress}
             maxDeposit={maxDeposit}
+            meta={meta}
             accountEthDeposit={accountEthDeposit}
             totalEth={totalEth}
             currentPrice={currentPrice}
@@ -313,6 +318,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect }) => {
         <StartTimer
           startTime={startTime}
           accessTime={accessTime}
+          meta={meta}
           stakingLid={stakingLid}
         />
       )}
@@ -333,6 +339,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect }) => {
       />
       {isActive && isEnded && !isPaused && (
         <PresaleCompletion
+          meta={meta}
           isEnded={isEnded}
           address={address}
           lidPresaleSC={lidPresaleSC}

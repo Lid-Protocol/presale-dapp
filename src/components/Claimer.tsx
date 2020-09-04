@@ -2,8 +2,8 @@ import React from 'react';
 import { Text, Box, Button, Grid } from '@chakra-ui/core';
 import { shortEther, toBN, toWei } from 'utils';
 import { Contract } from 'web3-eth-contract';
-import { totalPresale, tokenName } from '../config';
 import CountDownShort from './CountDownShort';
+import { DappMetaData } from 'types';
 
 interface IClaimer {
   lidPresaleSC: Contract | null;
@@ -13,6 +13,7 @@ interface IClaimer {
   accountShares: string;
   accountRedeemable: string;
   accountClaimedTokens: string;
+  meta: DappMetaData;
 }
 
 const Claimer: React.FC<IClaimer> = ({
@@ -22,14 +23,15 @@ const Claimer: React.FC<IClaimer> = ({
   finalEndTime,
   accountShares,
   accountRedeemable,
-  accountClaimedTokens
+  accountClaimedTokens,
+  meta
 }) => {
   const handleClaim = async function () {
     if (!lidPresaleSC) {
       return;
     }
     if (toBN(accountRedeemable).lt(toBN('1'))) {
-      alert(`You must have at least 1 wei of ${tokenName} to claim.`);
+      alert(`You must have at least 1 wei of ${meta.tokenName} to claim.`);
       return;
     }
     await lidPresaleSC.methods.redeem().send({ from: address });
@@ -61,13 +63,13 @@ const Claimer: React.FC<IClaimer> = ({
         p="20px"
       >
         <Text fontSize={{ base: '24px', sm: '36px' }} fontWeight="bold">
-          {`Claim Your ${tokenName}`}
+          {`Claim Your ${meta.tokenName}`}
         </Text>
         <Text fontSize="18px" color="blue.500">
           2% released / hour
         </Text>
         <Text fontSize="18px" color="lid.fg">
-          {`${tokenName} to Claim: ${shortEther(accountRedeemable)}`}
+          {`${meta.tokenName} to Claim: ${shortEther(accountRedeemable)}`}
         </Text>
         <Button
           isDisabled={accountRedeemable === '0'}
@@ -106,7 +108,7 @@ const Claimer: React.FC<IClaimer> = ({
           bg="lid.bg"
         >
           <Text fontSize="18px" m="0" p="0" color="lid.fgMed">
-            {`Total ${tokenName} Claimed`}
+            {`Total ${meta.tokenName} Claimed`}
           </Text>
           <Text fontSize="38px" w="100%" fontWeight="bold">
             {shortEther(accountClaimedTokens)}
@@ -121,13 +123,13 @@ const Claimer: React.FC<IClaimer> = ({
           bg="lid.bg"
         >
           <Text fontSize="18px" m="0" p="0" color="lid.fgMed">
-            {`${tokenName} / Hour`}
+            {`${meta.tokenName} / Hour`}
           </Text>
           <Text fontSize="38px" w="100%" fontWeight="bold">
             {maxShares !== '0'
               ? shortEther(
                   toBN(accountShares)
-                    .mul(toBN(toWei(totalPresale)))
+                    .mul(toBN(toWei(meta.totalPresale)))
                     .div(toBN(maxShares))
                     .mul(toBN('2'))
                     .div(toBN('100'))
@@ -149,7 +151,7 @@ const Claimer: React.FC<IClaimer> = ({
         p="20px"
       >
         <Text fontSize="18px" color="lid.fg">
-          {`More ${tokenName} available to claim in`}
+          {`More ${meta.tokenName} available to claim in`}
         </Text>
         <CountDownShort
           expiryTimestamp={toBN(finalEndTime)

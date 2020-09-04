@@ -15,7 +15,6 @@ const ReferralCode: React.FC<IReferralCode> = ({
   referralCounts
 }) => {
   const siteUrl = window.location.href;
-  console.log('siteUrl', siteUrl);
 
   return (
     <Box

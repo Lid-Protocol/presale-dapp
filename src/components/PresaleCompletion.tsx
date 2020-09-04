@@ -1,18 +1,20 @@
 import React from 'react';
 import { Text, Box, Button } from '@chakra-ui/core';
 import { Contract } from 'web3-eth-contract';
-import { tokenName } from '../config';
+import { DappMetaData } from 'types';
 
 interface IPresaleCompletion {
   isEnded: boolean;
   address: string;
   lidPresaleSC: Contract | null;
+  meta: DappMetaData;
 }
 
 const PresaleCompletion: React.FC<IPresaleCompletion> = ({
   isEnded,
   address,
-  lidPresaleSC
+  lidPresaleSC,
+  meta
 }) => {
   const handleSendToUniswap = async function () {
     if (!lidPresaleSC) {
@@ -40,7 +42,7 @@ const PresaleCompletion: React.FC<IPresaleCompletion> = ({
       textAlign="center"
     >
       <Text fontSize="18px" m="0" p="0" color="lid.fg">
-        {`To Complete ${tokenName} Presale:`}
+        {`To Complete ${meta.tokenName} Presale:`}
       </Text>
       {!isEnded && (
         <Text fontSize="14px" m="0" p="0" color="lid.fgMed">

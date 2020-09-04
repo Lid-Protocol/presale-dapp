@@ -1,16 +1,17 @@
 import React from 'react';
 import { Text, Box, Flex, Image, Link, Button } from '@chakra-ui/core';
 import Blockie from './Blockie';
-import { partnerSiteUrl, tokenName } from '../config';
 
 import imgLidLogo from 'assets/images/common/logo-lid.png';
+import { DappMetaData } from 'types';
 
 interface IHeader {
   address: string;
   onConnect: () => void;
+  meta: DappMetaData;
 }
 
-const Header: React.FC<IHeader> = ({ address, onConnect }) => {
+const Header: React.FC<IHeader> = ({ address, onConnect, meta }) => {
   return (
     <Box w="100%" bg="lid.bgMed" m="0" pt="0px">
       <Flex
@@ -22,9 +23,16 @@ const Header: React.FC<IHeader> = ({ address, onConnect }) => {
         pl={{ base: '20px', lg: '0px' }}
         pr={{ base: '20px', lg: '0px' }}
       >
-        <Link display="inline-block" href={partnerSiteUrl} m="0px" ml="-3px">
+        <Link
+          display="inline-block"
+          href={meta.tokenOwnerWebsite}
+          m="0px"
+          ml="-3px"
+        >
           <Image
-            src={require(`assets/images/${tokenName.toLocaleLowerCase()}/logo.png`)}
+            src={require(`assets/images/${meta.tokenName
+              ?.toString()
+              .toLowerCase()}/logo.png`)}
             alt="token logo"
             w="auto"
             h="60px"
@@ -40,7 +48,7 @@ const Header: React.FC<IHeader> = ({ address, onConnect }) => {
             ml="20px"
             color="lid.brand"
           >
-            {`${tokenName} Presale`}
+            {`${meta.tokenName} Presale`}
           </Text>
         </Link>
         {address ? (

@@ -2,18 +2,20 @@ import React from 'react';
 import { Text, Box, Link } from '@chakra-ui/core';
 import { shortEther } from 'utils';
 import CountDown from './CountDown';
-import { tokenName } from '../config';
+import { DappMetaData } from 'types';
 
 interface IStartTimer {
   startTime: number;
   accessTime: number;
   stakingLid: string;
+  meta: DappMetaData;
 }
 
 const StartTimer: React.FC<IStartTimer> = ({
   startTime,
   accessTime,
-  stakingLid
+  stakingLid,
+  meta
 }) => {
   return (
     <Box
@@ -29,7 +31,7 @@ const StartTimer: React.FC<IStartTimer> = ({
       textAlign="center"
     >
       <Text fontSize={{ base: '28px', sm: '36px' }} fontWeight="bold">
-        {`Your ${tokenName} Access Starts In:`}
+        {`Your ${meta.tokenName} Access Starts In:`}
       </Text>
       <CountDown expiryTimestamp={accessTime} />
       <Text>

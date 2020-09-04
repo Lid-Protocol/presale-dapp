@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/core';
 import { Contract } from 'web3-eth-contract';
 import { removeDecimal, toBN, toWei, fromWei } from 'utils';
-import { referralBP, basisPoint, accountCap, tokenName } from '../config';
+import { DappMetaData } from 'types';
 
 interface IDepositForm {
   web3: Web3 | null;
@@ -21,6 +21,7 @@ interface IDepositForm {
   totalEth: string;
   hardcap: string;
   currentPrice: string;
+  meta: DappMetaData;
 }
 
 const DepositForm: React.FC<IDepositForm> = ({
@@ -32,15 +33,16 @@ const DepositForm: React.FC<IDepositForm> = ({
   accountEthDeposit,
   hardcap,
   totalEth,
-  currentPrice
+  currentPrice,
+  meta
 }) => {
   const [displayVal, setDisplayVal] = useState('0');
   const depositVal = !!displayVal ? toWei(displayVal) : '0';
 
-  const availableByAccountDeposit = toBN(accountCap).gte(
+  const availableByAccountDeposit = toBN(meta.accountCap).gte(
     toBN(accountEthDeposit)
   )
-    ? toBN(accountCap).sub(toBN(accountEthDeposit))
+    ? toBN(meta.accountCap).sub(toBN(accountEthDeposit))
     : toBN('1');
   const availableByTotalDeposit = toBN(hardcap).gte(toBN(totalEth))
     ? toBN(hardcap)
@@ -48,8 +50,8 @@ const DepositForm: React.FC<IDepositForm> = ({
         .add(
           toBN(hardcap)
             .sub(toBN(totalEth))
-            .mul(toBN(referralBP))
-            .div(toBN(basisPoint))
+            .mul(toBN(meta.referralBP))
+            .div(toBN(meta.basisPoint))
         )
     : toBN('1');
 
@@ -124,7 +126,7 @@ const DepositForm: React.FC<IDepositForm> = ({
         borderColor="lid.stroke"
       >
         <Text fontSize={{ base: '24px', sm: '36px' }} fontWeight="bold">
-          {`Deposit ETH for ${tokenName}`}
+          {`Deposit ETH for ${meta.tokenName}`}
         </Text>
         <Text fontSize="18px" color="blue.500">
           Minimum 0.01 ETH, Maximum {removeDecimal(fromWei(hardcap))} ETH
@@ -133,7 +135,7 @@ const DepositForm: React.FC<IDepositForm> = ({
           Your Available Max: {removeDecimal(fromWei(availableMax))} ETH
         </Text>
         <Text fontSize="18px">
-          {`Estimated ${tokenName}: `}
+          {`Estimated ${meta.tokenName}: `}
           {!depositVal
             ? '0'
             : removeDecimal(
