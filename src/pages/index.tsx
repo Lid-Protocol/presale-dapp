@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, Switch, Route } from 'react-router-dom';
 import { DappMetaData } from 'types';
 import { importAll } from 'utils';
@@ -9,7 +9,7 @@ import App from './App';
 import NotFound from './NotFound';
 
 export default () => {
-  const [meta, setMeta] = React.useState<DappMetaData>({
+  const [meta, setMeta] = useState<DappMetaData>({
     tokenName: '',
     tokenSymbol: '',
     tokenOwnerWebsite: '',
@@ -20,13 +20,13 @@ export default () => {
     accountCap: '0'
   });
 
-  const [favicon, setFavicon] = React.useState<string>('');
+  const [favicon, setFavicon] = useState<string>('');
 
-  const [showError, setShowError] = React.useState<boolean>(false);
+  const [showError, setShowError] = useState<boolean>(false);
 
   const history = useHistory();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchProjectMeta = async () => {
       try {
         let config: DappMetaData = meta;
