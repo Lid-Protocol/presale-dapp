@@ -7,4 +7,5 @@ export interface DappMetaData {
   referralBP: string;
   basisPoint: string;
   accountCap: string;
+  favicon: string;
 }

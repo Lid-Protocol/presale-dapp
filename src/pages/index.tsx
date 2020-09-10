@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, Switch, Route } from 'react-router-dom';
+import fleekStorage from '@fleekhq/fleek-storage-js';
 import { DappMetaData } from 'types';
-import { importAll } from 'utils';
 import Web3 from 'web3';
 import Head from 'layout/Head';
 import Web3Wrapper from 'containers/Web3Wrapper';
@@ -17,53 +17,46 @@ export default () => {
     totalPresale: '0',
     referralBP: '0',
     basisPoint: '0',
-    accountCap: '0'
+    accountCap: '0',
+    favicon: ''
   });
-
-  const [favicon, setFavicon] = useState<string>('');
 
   const [showError, setShowError] = useState<boolean>(false);
 
   const history = useHistory();
 
   useEffect(() => {
-    const fetchProjectMeta = async () => {
+    const loadProject = async () => {
       try {
-        let config: DappMetaData = meta;
         const project: string = history.location.pathname.split('/')[1];
+        const input = {
+          apiKey: process.env.REACT_APP_FLEEK_API_KEY || '',
+          apiSecret: process.env.REACT_APP_FLEEK_API_SECRET || '',
+          key: `config.${project.toLowerCase()}.json`
+        };
 
-        let images = importAll(
-          require.context(
-            `../assets/images/lid`,
-            false,
-            /\.(png|jpe?g|svg|ico)$/
-          )
-        );
+        let { data } = await fleekStorage.get(input);
 
-        setFavicon(images['favicon.ico']);
+        let config: DappMetaData = JSON.parse(data);
 
-        // if undefined, show lid default project
-        config = project
-          ? require(`../templates/config.${project}.json`)
-          : require(`../templates/config.lid.json`);
-
-        await setMeta({
+        setMeta({
           ...config,
-          accountCap: Web3.utils.toWei(config.accountCap)
+          accountCap: Web3.utils.toWei(config.accountCap),
+          favicon: ''
         });
       } catch (error) {
         setShowError(true);
       }
     };
 
-    fetchProjectMeta();
+    loadProject();
   }, []);
 
   return (
     <>
       {meta.tokenName && !showError && (
         <>
-          <Head favicon={favicon} meta={meta} />
+          <Head meta={meta} />
           <Web3Wrapper>
             {(address, web3, onConnect) => (
               <Switch>

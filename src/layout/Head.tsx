@@ -4,10 +4,9 @@ import { DappMetaData } from 'types';
 
 interface IProps {
   meta: DappMetaData;
-  favicon: string;
 }
 
-export default ({ meta, favicon }: IProps) => {
+export default ({ meta }: IProps) => {
   return (
     <>
       {meta.tokenName && (
@@ -45,7 +44,7 @@ export default ({ meta, favicon }: IProps) => {
             rel="icon"
             href={require(`assets/images/${meta.tokenName.toLowerCase()}/favicon.ico`)}
           />
-          <link rel="icon" href={favicon} />
+          <link rel="icon" href={meta.favicon} />
 
           <meta name="msapplication-TileColor" content="#ffffff" />
           <meta
