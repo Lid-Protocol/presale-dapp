@@ -28,14 +28,17 @@ export default () => {
   useEffect(() => {
     const loadProject = async () => {
       try {
-        const project: string = history.location.pathname.split('/')[1];
+        const project: string = history.location.pathname
+          .split('/')[1]
+          .toLowerCase();
         const input = {
           apiKey: process.env.REACT_APP_FLEEK_API_KEY || '',
           apiSecret: process.env.REACT_APP_FLEEK_API_SECRET || '',
-          key: `config.${project.toLowerCase()}.json`
+          key: `${project}/config.${project}.json`
         };
 
-        let { data } = await fleekStorage.get(input);
+        let { data, bucket } = await fleekStorage.get(input);
+        console.log(bucket);
 
         let config: DappMetaData = JSON.parse(data);
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { DappMetaData } from 'types';
+import { formatAssetUrl } from 'utils';
 
 interface IProps {
   meta: DappMetaData;
@@ -14,42 +15,47 @@ export default ({ meta }: IProps) => {
           <link
             rel="apple-touch-icon"
             sizes="180x180"
-            href={require(`assets/images/${meta.tokenName.toLowerCase()}/apple-icon-180x180.png`)}
+            href={`${formatAssetUrl(meta.tokenName, 'apple-icon-180x180.png')}`}
           />
           <link
             rel="icon"
             type="image/png"
             sizes="192x192"
-            href={require(`assets/images/${meta.tokenName.toLowerCase()}/android-icon-192x192.png`)}
+            href={`${formatAssetUrl(
+              meta.tokenName,
+              'android-icon-192x192.png'
+            )}`}
           />
           <link
             rel="icon"
             type="image/png"
             sizes="16x16"
-            href={require(`assets/images/${meta.tokenName.toLowerCase()}/favicon-16x16.png`)}
+            href={`${formatAssetUrl(meta.tokenName, 'favicon-16x16.png')}`}
           />
           <link
             rel="icon"
             type="image/png"
             sizes="32x32"
-            href={require(`assets/images/${meta.tokenName.toLowerCase()}/favicon-32x32.png`)}
+            href={`${formatAssetUrl(meta.tokenName, 'favicon-32x32.png')}`}
           />
           <link
             rel="icon"
             type="image/png"
             sizes="96x96"
-            href={require(`assets/images/${meta.tokenName.toLowerCase()}/favicon-96x96.png`)}
+            href={`${formatAssetUrl(meta.tokenName, 'favicon-96x96.png')}`}
           />
           <link
             rel="icon"
-            href={require(`assets/images/${meta.tokenName.toLowerCase()}/favicon.ico`)}
+            href={`${formatAssetUrl(meta.tokenName, 'favicon.ico')}`}
           />
-          <link rel="icon" href={meta.favicon} />
 
           <meta name="msapplication-TileColor" content="#ffffff" />
           <meta
             name="msapplication-TileImage"
-            content={require(`assets/images/${meta.tokenName.toLowerCase()}/ms-icon-144x144.png`)}
+            content={`${formatAssetUrl(
+              meta.tokenName,
+              ''
+            )}${meta.tokenName.toLowerCase()}/ms-icon-144x144.png)`}
           />
 
           <meta
@@ -74,15 +80,21 @@ export default ({ meta }: IProps) => {
 
           {/* <meta
             property="og:image"
-            content={require(`assets/images/${meta.tokenName.toLowerCase()}/opengraph.jpg`)}
+            content={`${
+              formatAssetUrl(meta.tokenName, 'opengraph.jpg')
+            }`}
           />
           <meta
             itemProp="image"
-            content={require(`assets/images/${meta.tokenName.toLowerCase()}/opengraph.jpg`)}
+            content={`${
+              formatAssetUrl(meta.tokenName, 'opengraph.jpg')
+            }`}
           />
           <meta
             name="twitter:image"
-            content={require(`assets/images/${meta.tokenName.toLowerCase()}/opengraph.jpg`)}
+            content={`${
+              formatAssetUrl(meta.tokenName, 'opengraph.jpg')
+            }`}
           /> */}
 
           <title>{meta.tokenName} Presale</title>

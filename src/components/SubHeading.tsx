@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, Box, Flex, Grid, Image, Link } from '@chakra-ui/core';
-import { shortEther, toBN, toWei } from 'utils';
+import { shortEther, toBN, toWei, formatAssetUrl } from 'utils';
 import addresses from 'contracts/addresses';
 
 import imgETHLogo from 'assets/images/common/ethereum-eth-logo.png';
@@ -128,7 +128,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
             background="linear-gradient(0deg, rgba(12,101,235,1) 0%, rgba(28,158,247,1) 100%)"
           >
             <Image
-              src={require(`assets/images/${meta.tokenName.toLocaleLowerCase()}/logo.png`)}
+              src={formatAssetUrl(meta.tokenName, 'logo.png')}
               alt="token logo"
               w="auto"
               h="25px"
@@ -210,9 +210,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
             bg="lid.bg"
           >
             <Image
-              src={require(`assets/images/${meta.tokenName
-                ?.toString()
-                .toLocaleLowerCase()}/logo.png`)}
+              src={formatAssetUrl(meta.tokenName, 'logo.png')}
               alt="token logo"
               w="auto"
               h="25px"

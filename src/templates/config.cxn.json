@@ -6,5 +6,6 @@
   "totalPresale": "90000000",
   "referralBP": "250",
   "basisPoint": "10000",
-  "accountCap": "20"
+  "accountCap": "20",
+  "favicon": "cxn/favicon.ico"
 }

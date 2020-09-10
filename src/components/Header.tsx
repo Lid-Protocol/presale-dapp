@@ -4,6 +4,7 @@ import Blockie from './Blockie';
 
 import imgLidLogo from 'assets/images/common/logo-lid.png';
 import { DappMetaData } from 'types';
+import { formatAssetUrl } from 'utils';
 
 interface IHeader {
   address: string;
@@ -30,9 +31,7 @@ const Header: React.FC<IHeader> = ({ address, onConnect, meta }) => {
           ml="-3px"
         >
           <Image
-            src={require(`assets/images/${meta.tokenName
-              ?.toString()
-              .toLowerCase()}/logo.png`)}
+            src={`${formatAssetUrl(meta.tokenName, 'logo.png')}`}
             alt="token logo"
             w="auto"
             h="60px"
