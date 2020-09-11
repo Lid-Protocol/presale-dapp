@@ -28,7 +28,13 @@ const Footer: React.FC = () => {
       borderTop="solid 1px"
       borderColor="lid.ltGray"
     >
-      <Link display="inline-block" href="https://lid.sh" m="0px">
+      <Link
+        display="inline-block"
+        target="_blank"
+        rel="noreferrer noopener"
+        href="https://lid.sh"
+        m="0px"
+      >
         <Image
           src={imgLidWhite}
           alt="Lid.sh Website"
@@ -40,14 +46,28 @@ const Footer: React.FC = () => {
       <Text mt="20px" fontSize="14px">
         LID Links
       </Text>
-      <Link display="inline-block" href="https://discord.gg/eyJYrQu" m="20px">
+      <Link
+        display="inline-block"
+        target="_blank"
+        rel="noreferrer noopener"
+        href="https://discord.gg/eyJYrQu"
+        m="20px"
+      >
         <Image w="auto" h="25px" src={iconDiscord} alt="discord" />
       </Link>
-      <Link display="inline-block" href="https://t.me/LIDProtocol" m="20px">
+      <Link
+        display="inline-block"
+        target="_blank"
+        rel="noreferrer noopener"
+        href="https://t.me/LIDProtocol"
+        m="20px"
+      >
         <Image w="auto" h="25px" src={iconTelegram} alt="telegram" />
       </Link>
       <Link
         display="inline-block"
+        target="_blank"
+        rel="noreferrer noopener"
         href="https://twitter.com/LID_Protocol"
         m="20px"
       >
@@ -55,6 +75,8 @@ const Footer: React.FC = () => {
       </Link>
       <Link
         display="inline-block"
+        target="_blank"
+        rel="noreferrer noopener"
         href="https://www.reddit.com/r/LIDProtocol/"
         m="20px"
       >
@@ -62,6 +84,8 @@ const Footer: React.FC = () => {
       </Link>
       <Link
         display="inline-block"
+        target="_blank"
+        rel="noreferrer noopener"
         href="https://github.com/carlsbad-sunshine/lid-contracts"
         m="20px"
       >
@@ -69,6 +93,8 @@ const Footer: React.FC = () => {
       </Link>
       <Link
         display="inline-block"
+        target="_blank"
+        rel="noreferrer noopener"
         href="https://www.youtube.com/channel/UCM6Q_SMoQAALhhiJW5OZF9w/featured"
         m="20px"
       >
