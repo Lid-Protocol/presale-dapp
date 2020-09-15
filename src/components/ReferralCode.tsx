@@ -37,7 +37,7 @@ const ReferralCode: React.FC<IReferralCode> = ({
         mb="20px"
         p="20px"
       >
-        <CopyToClipboard text={`${siteUrl}#/${address}`}>
+        <CopyToClipboard text={`${siteUrl}/#/${address}`}>
           <Button
             display="block"
             color="lid.fgLight"
@@ -67,7 +67,7 @@ const ReferralCode: React.FC<IReferralCode> = ({
           borderRadius="28px"
           w="100%"
         >
-          {`${siteUrl}#/${address}`}
+          {`${siteUrl}/#/${address}`}
         </Text>
       </Box>
       <Grid
