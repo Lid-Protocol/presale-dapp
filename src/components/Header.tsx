@@ -21,8 +21,7 @@ const Header: React.FC<IHeader> = ({ address, onConnect, meta }) => {
         ml="auto"
         mr="auto"
         pt="20px"
-        pl={{ base: '20px', lg: '0px' }}
-        pr={{ base: '20px', lg: '0px' }}
+        px={['20px', '0px']}
       >
         <Link
           display="inline-block"
@@ -42,7 +41,7 @@ const Header: React.FC<IHeader> = ({ address, onConnect, meta }) => {
           <Text
             as="span"
             fontWeight="bold"
-            fontSize={{ base: '28px', sm: '42px' }}
+            fontSize={['28px', '42px']}
             display="inline-block"
             ml="20px"
             color="lid.brand"
@@ -83,8 +82,7 @@ const Header: React.FC<IHeader> = ({ address, onConnect, meta }) => {
         color="lid.fgMed"
         display="block"
         w="100%"
-        pl={{ base: '20px', lg: '0px' }}
-        pr={{ base: '20px', lg: '0px' }}
+        px={['20px', '0px']}
         maxW="1200px"
         ml="auto"
         mr="auto"

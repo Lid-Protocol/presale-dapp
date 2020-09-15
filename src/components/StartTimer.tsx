@@ -23,14 +23,13 @@ const StartTimer: React.FC<IStartTimer> = ({
       w="100%"
       mt="40px"
       mb="40px"
-      pl={{ base: '20px', lg: '0px' }}
-      pr={{ base: '20px', lg: '0px' }}
+      px={['20px', '20px', 0]}
       maxW="1200px"
       ml="auto"
       mr="auto"
       textAlign="center"
     >
-      <Text fontSize={{ base: '28px', sm: '36px' }} fontWeight="bold">
+      <Text fontSize={['28px', '36px']} fontWeight="bold">
         {`Your ${meta.tokenName} Access Starts In:`}
       </Text>
       <CountDown expiryTimestamp={accessTime} />

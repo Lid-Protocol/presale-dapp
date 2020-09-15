@@ -24,8 +24,7 @@ const ReferralCode: React.FC<IReferralCode> = ({
       mr="auto"
       mt="60px"
       mb="60px"
-      pl={{ base: '20px', lg: '0px' }}
-      pr={{ base: '20px', lg: '0px' }}
+      px={['20px', '20px', 0]}
     >
       <Box
         textAlign="left"
@@ -75,14 +74,8 @@ const ReferralCode: React.FC<IReferralCode> = ({
         w="100%"
         gap="20px"
         mb="40px"
-        templateRows={{
-          base: 'repeat(2, 1fr)',
-          md: 'max-content'
-        }}
-        templateColumns={{
-          base: 'auto',
-          md: 'repeat(2, minmax(0, 1fr))'
-        }}
+        templateRows={['repeat(2, 1fr)', 'max-content']}
+        templateColumns={['auto', 'repeat(2, minmax(0, 1fr))']}
       >
         <Box
           w="100%"
