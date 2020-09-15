@@ -18,7 +18,15 @@ export default () => {
     referralBP: '0',
     basisPoint: '0',
     accountCap: '0',
-    favicon: ''
+    favicon: '',
+    addresses: {
+      presale: '',
+      redeemer: '',
+      timer: '',
+      token: '',
+      access: '',
+      staking: ''
+    }
   });
 
   const [showError, setShowError] = useState<boolean>(false);

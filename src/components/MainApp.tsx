@@ -7,7 +7,6 @@ import { createWatcher } from '@makerdao/multicall';
 import { AbiItem } from 'web3-utils';
 import { Contract } from 'web3-eth-contract';
 import { toWei } from 'utils';
-import addresses from 'contracts/addresses';
 import abis from 'contracts/abis';
 import { totalPresale } from '../config';
 
@@ -33,6 +32,7 @@ interface IMainApp {
 }
 
 const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
+  const { addresses } = meta;
   const [lidPresaleSC, setLidPresale] = useState<Contract | null>(null);
   const [isActive, setIsActive] = useState(false);
   const [state, setState] = useState({

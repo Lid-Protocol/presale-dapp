@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, Box, Flex, Grid, Image, Link } from '@chakra-ui/core';
 import { shortEther, toBN, toWei, formatAssetUrl } from 'utils';
-import addresses from 'contracts/addresses';
 
 import imgETHLogo from 'assets/images/common/ethereum-eth-logo.png';
 import imgETHLogoWhite from 'assets/images/common/ethereum-eth-logo-white.png';
@@ -28,6 +27,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
   stakingLid,
   meta
 }) => {
+  const { addresses } = meta;
   return (
     <Box
       w="100%"
