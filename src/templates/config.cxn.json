@@ -2,10 +2,18 @@
   "tokenName": "CXN",
   "tokenSymbol": "CXN",
   "tokenOwnerWebsite": "https://cxn.network/",
-  "siteUrl": "https://cxn.lid.sh/",
+  "siteUrl": "https://sale.lid.sh/cxn",
   "totalPresale": "90000000",
   "referralBP": "250",
   "basisPoint": "10000",
-  "accountCap": "20",
-  "favicon": "cxn/favicon.ico"
+  "accountCap": "25",
+  "favicon": "cxn/favicon.ico",
+  "addresses": {
+    "presale": "0x67A20662b379121A798D5E0BECFB4794a44DF771",
+    "redeemer": "0x13A29398130853131EE6D3177cfE4a27C52A2A56",
+    "timer": "0x21DF9Db1c256EB6dDDACA2fDc0De9392c12E722F",
+    "token": "0xb48e0f69e6a3064f5498d495f77ad83e0874ab28",
+    "access": "0xfD8e59814D601219bddd53879ADa1Ff75fD316e2",
+    "staking": "0x9a54FE35D41bc7c8F7071aBf0cCD952505e29ceb"
+  }
 }
