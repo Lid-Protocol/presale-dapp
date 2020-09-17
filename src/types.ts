@@ -8,4 +8,12 @@ export interface DappMetaData {
   basisPoint: string;
   accountCap: string;
   favicon: string;
+  addresses: {
+    presale: string,
+    redeemer: string,
+    timer: string,
+    token: string,
+    access: string,
+    staking: string
+  };
 }

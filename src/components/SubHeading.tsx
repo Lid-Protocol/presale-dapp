@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, Box, Flex, Grid, Image, Link } from '@chakra-ui/core';
 import { shortEther, toBN, toWei, formatAssetUrl } from 'utils';
-import addresses from 'contracts/addresses';
 
 import imgETHLogo from 'assets/images/common/ethereum-eth-logo.png';
 import imgETHLogoWhite from 'assets/images/common/ethereum-eth-logo-white.png';
@@ -28,6 +27,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
   stakingLid,
   meta
 }) => {
+  const { addresses } = meta;
   return (
     <Box
       w="100%"
@@ -62,11 +62,8 @@ const SubHeadings: React.FC<ISubHeading> = ({
         <Grid
           w="100%"
           gap="20px"
-          templateRows={{
-            base: 'repeat(6, 1fr)',
-            md: 'repeat(2, max-content)'
-          }}
-          templateColumns={{ base: 'auto', md: 'repeat(3, minmax(0, 1fr))' }}
+          templateRows={['repeat(6, 1fr)', 'repeat(2, max-content)']}
+          templateColumns={['auto', 'repeat(3, minmax(0, 1fr))']}
         >
           <Box
             w="100%"

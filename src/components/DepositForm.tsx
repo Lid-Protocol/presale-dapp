@@ -113,8 +113,7 @@ const DepositForm: React.FC<IDepositForm> = ({
       mr="auto"
       mt="60px"
       mb="60px"
-      pl={{ base: '20px', lg: '0px' }}
-      pr={{ base: '20px', lg: '0px' }}
+      px={['20px', '20px', 0]}
     >
       <Box
         w="100%"
@@ -125,7 +124,7 @@ const DepositForm: React.FC<IDepositForm> = ({
         border="solid 1px"
         borderColor="lid.stroke"
       >
-        <Text fontSize={{ base: '24px', sm: '36px' }} fontWeight="bold">
+        <Text fontSize={['24px', '36px']} fontWeight="bold">
           {`Deposit ETH for ${meta.tokenName}`}
         </Text>
         <Text fontSize="18px" color="blue.500">
