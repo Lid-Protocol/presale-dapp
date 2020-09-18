@@ -129,7 +129,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
         },
         {
           target: addresses.presale,
-          call: ['getMaxWhitelistedDeposit()(uint256)'],
+          call: ['maxBuyPerAddress()(uint256)'],
           returns: [['maxDeposit', (val: any) => val.toString()]]
         },
         {

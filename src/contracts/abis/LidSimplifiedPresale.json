@@ -241,6 +241,21 @@
   {
     "constant": true,
     "inputs": [],
+    "name": "isRefunding",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
     "name": "lidEthBP",
     "outputs": [
       {
@@ -257,21 +272,6 @@
     "constant": true,
     "inputs": [],
     "name": "maxBuyPerAddress",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "maxBuyWithoutWhitelisting",
     "outputs": [
       {
         "internalType": "uint256",
@@ -362,6 +362,27 @@
       }
     ],
     "name": "referralCounts",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "refundedEth",
     "outputs": [
       {
         "internalType": "uint256",
@@ -503,37 +524,11 @@
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "name": "whitelist",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "constant": false,
     "inputs": [
       {
         "internalType": "uint256",
         "name": "_maxBuyPerAddress",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_maxBuyWithoutWhitelisting",
         "type": "uint256"
       },
       {
@@ -569,6 +564,11 @@
       {
         "internalType": "contract LidSimplifiedPresaleRedeemer",
         "name": "_redeemer",
+        "type": "address"
+      },
+      {
+        "internalType": "contract LidSimplifiedPresaleAccess",
+        "name": "_access",
         "type": "address"
       },
       {
@@ -693,39 +693,8 @@
   },
   {
     "constant": false,
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "account",
-        "type": "address"
-      },
-      {
-        "internalType": "bool",
-        "name": "value",
-        "type": "bool"
-      }
-    ],
-    "name": "setWhitelist",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "internalType": "address[]",
-        "name": "account",
-        "type": "address[]"
-      },
-      {
-        "internalType": "bool",
-        "name": "value",
-        "type": "bool"
-      }
-    ],
-    "name": "setWhitelistForAll",
+    "inputs": [],
+    "name": "redeem",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -734,7 +703,61 @@
   {
     "constant": false,
     "inputs": [],
-    "name": "redeem",
+    "name": "startRefund",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "topUpRefundFund",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "address payable",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "claimRefund",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "valueWei",
+        "type": "uint256"
+      }
+    ],
+    "name": "updateHardcap",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "valueWei",
+        "type": "uint256"
+      }
+    ],
+    "name": "updateMaxBuy",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -766,8 +789,14 @@
   },
   {
     "constant": true,
-    "inputs": [],
-    "name": "getMaxWhitelistedDeposit",
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "getRefundableEth",
     "outputs": [
       {
         "internalType": "uint256",
