@@ -52,6 +52,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     accountClaimedTokens: '0',
     maxShares: '0',
     hardcap: '0',
+    hardCapTimer: 0,
     stakingLid: '0',
     redeemBP: '0',
     redeemInterval: '1',
@@ -76,6 +77,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     accountClaimedTokens,
     maxShares,
     hardcap,
+    hardCapTimer,
     stakingLid,
     redeemBP,
     redeemInterval,
@@ -140,6 +142,11 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           target: addresses.timer,
           call: ['endTime()(uint256)'],
           returns: [['endTime', (val: any) => val.toNumber() * 1000]]
+        },
+        {
+          target: addresses.timer,
+          call: ['hardCapTimer()(uint256)'],
+          returns: [['hardCapTimer', (val: any) => val.toNumber() / 3600]]
         },
         {
           target: addresses.presale,
@@ -314,7 +321,12 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
       {isActive && !isEnded && !isPaused && (
         <>
           {endTime !== 0 && (
-            <EndTimer expiryTimestamp={endTime} hardcap={hardcap} meta={meta} />
+            <EndTimer
+              expiryTimestamp={endTime}
+              hardcap={hardcap}
+              hardCapTimer={hardCapTimer}
+              meta={meta}
+            />
           )}
           <DepositForm
             web3={web3}

@@ -7,10 +7,16 @@ import { DappMetaData } from '../types';
 interface IEndTimer {
   expiryTimestamp: number | null;
   hardcap: string;
+  hardCapTimer: number;
   meta: DappMetaData;
 }
 
-const EndTimer: React.FC<IEndTimer> = ({ expiryTimestamp, hardcap, meta }) => {
+const EndTimer: React.FC<IEndTimer> = ({
+  expiryTimestamp,
+  hardcap,
+  hardCapTimer,
+  meta
+}) => {
   return (
     <Box
       display="block"
@@ -32,10 +38,10 @@ const EndTimer: React.FC<IEndTimer> = ({ expiryTimestamp, hardcap, meta }) => {
         }
       />
       <Text fontSize={['12px', '14px']} fontWeight="light" mt="-20px">
-        48 hour timer.
+        {hardCapTimer} hour timer.
       </Text>
       <Text fontSize={['12px', '14px']} fontWeight="light">
-        Ends after 48 hours or {fromWei(hardcap)} ETH.
+        Ends after {hardCapTimer} hours or {fromWei(hardcap)} ETH.
       </Text>
     </Box>
   );
