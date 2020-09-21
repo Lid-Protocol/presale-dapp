@@ -19,6 +19,11 @@ const customTheme = {
       buttonBgDk: '#4A4A4A'
     }
   },
+  fonts: {
+    body: 'Gotham, sans-serif',
+    heading: 'Gotham, serif',
+    mono: 'Menlo, monospace'
+  },
   breakpoints: ['650px', '900px', '1240px', '1920px']
 };
 

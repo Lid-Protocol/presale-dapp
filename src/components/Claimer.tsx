@@ -48,8 +48,7 @@ const Claimer: React.FC<IClaimer> = ({
       mr="auto"
       mt="60px"
       mb="60px"
-      pl={{ base: '20px', lg: '0px' }}
-      pr={{ base: '20px', lg: '0px' }}
+      px={['20px', '20px', 0]}
     >
       <Box
         textAlign="center"
@@ -62,7 +61,7 @@ const Claimer: React.FC<IClaimer> = ({
         mb="20px"
         p="20px"
       >
-        <Text fontSize={{ base: '24px', sm: '36px' }} fontWeight="bold">
+        <Text fontSize={['24px', '36px']} fontWeight="bold">
           {`Claim Your ${meta.tokenName}`}
         </Text>
         <Text fontSize="18px" color="blue.500">
@@ -96,8 +95,8 @@ const Claimer: React.FC<IClaimer> = ({
         w="100%"
         gap="20px"
         mb="40px"
-        templateRows={{ base: 'repeat(2, 1fr)', md: 'max-content' }}
-        templateColumns={{ base: 'auto', md: 'repeat(2, minmax(0, 1fr))' }}
+        templateRows={['repeat(2, 1fr)', 'max-content']}
+        templateColumns={['auto', 'repeat(2, minmax(0, 1fr))']}
       >
         <Box
           w="100%"
