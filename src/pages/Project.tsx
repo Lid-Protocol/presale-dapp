@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, Switch, Route } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import fleekStorage from '@fleekhq/fleek-storage-js';
 import { DappMetaData } from 'types';
 import Web3 from 'web3';
-import Head from 'layout/Head';
-import Web3Wrapper from 'containers/Web3Wrapper';
-import App from './App';
 import NotFound from './NotFound';
 import MainApp from 'components/MainApp';
 
@@ -25,7 +22,15 @@ export default ({ address, onConnect, web3 }: IProps) => {
     referralBP: '0',
     basisPoint: '0',
     accountCap: '0',
-    favicon: ''
+    favicon: '',
+    addresses: {
+      access: '',
+      presale: '',
+      redeemer: '',
+      timer: '',
+      staking: '',
+      token: ''
+    }
   });
 
   const [showError, setShowError] = useState<boolean>(false);
