@@ -31,7 +31,7 @@ const Claimer: React.FC<IClaimer> = ({
       return;
     }
     if (toBN(accountRedeemable).lt(toBN('1'))) {
-      alert(`You must have at least 1 wei of ${meta.tokenName} to claim.`);
+      alert(`You must have at least 1 wei of ${meta.tokenSymbol} to claim.`);
       return;
     }
     await lidPresaleSC.methods.redeem().send({ from: address });
@@ -62,13 +62,13 @@ const Claimer: React.FC<IClaimer> = ({
         p="20px"
       >
         <Text fontSize={['24px', '36px']} fontWeight="bold">
-          {`Claim Your ${meta.tokenName}`}
+          {`Claim Your ${meta.tokenSymbol}`}
         </Text>
         <Text fontSize="18px" color="blue.500">
           2% released / hour
         </Text>
         <Text fontSize="18px" color="lid.fg">
-          {`${meta.tokenName} to Claim: ${shortEther(accountRedeemable)}`}
+          {`${meta.tokenSymbol} to Claim: ${shortEther(accountRedeemable)}`}
         </Text>
         <Button
           isDisabled={accountRedeemable === '0'}
@@ -107,7 +107,7 @@ const Claimer: React.FC<IClaimer> = ({
           bg="lid.bg"
         >
           <Text fontSize="18px" m="0" p="0" color="lid.fgMed">
-            {`Total ${meta.tokenName} Claimed`}
+            {`Total ${meta.tokenSymbol} Claimed`}
           </Text>
           <Text fontSize="38px" w="100%" fontWeight="bold">
             {shortEther(accountClaimedTokens)}
@@ -122,7 +122,7 @@ const Claimer: React.FC<IClaimer> = ({
           bg="lid.bg"
         >
           <Text fontSize="18px" m="0" p="0" color="lid.fgMed">
-            {`${meta.tokenName} / Hour`}
+            {`${meta.tokenSymbol} / Hour`}
           </Text>
           <Text fontSize="38px" w="100%" fontWeight="bold">
             {maxShares !== '0'
@@ -150,7 +150,7 @@ const Claimer: React.FC<IClaimer> = ({
         p="20px"
       >
         <Text fontSize="18px" color="lid.fg">
-          {`More ${meta.tokenName} available to claim in`}
+          {`More ${meta.tokenSymbol} available to claim in`}
         </Text>
         <CountDownShort
           expiryTimestamp={toBN(finalEndTime)

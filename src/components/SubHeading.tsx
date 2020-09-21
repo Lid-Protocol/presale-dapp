@@ -74,7 +74,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
             bg="lid.bg"
           >
             <Text fontSize="18px" m="0" p="0" color="lid.fgMed">
-              {`Verified ${meta.tokenName} Presale Contract`}
+              {`Verified ${meta.tokenSymbol} Presale Contract`}
             </Text>
             {addresses.presale ? (
               <Link
@@ -134,7 +134,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
               top="-3px"
             />
             <Text ml="10px" mt="5px" color="lid.bg" display="inline-block">
-              {`Your ${meta.tokenName} Tokens`}
+              {`Your ${meta.tokenSymbol} Tokens`}
             </Text>
             <Text fontSize="38px" w="100%" fontWeight="bold">
               {maxShares !== '0'
@@ -216,7 +216,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
               top="-3px"
             />
             <Text ml="10px" mt="5px" color="lid.fgMed" display="inline-block">
-              {`Total Presale ${meta.tokenName}`}
+              {`Total Presale ${meta.tokenSymbol}`}
             </Text>
             <Text fontSize="38px" w="100%" fontWeight="bold" color="lid.brand">
               {shortEther(toWei(meta.totalPresale))}

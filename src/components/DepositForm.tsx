@@ -131,7 +131,7 @@ const DepositForm: React.FC<IDepositForm> = ({
         borderColor="lid.stroke"
       >
         <Text fontSize={['24px', '36px']} fontWeight="bold">
-          {`Deposit ETH for ${meta.tokenName}`}
+          {`Deposit ETH for ${meta.tokenSymbol}`}
         </Text>
         <Text fontSize="18px" color="blue.500">
           Minimum 0.01 ETH, Maximum {removeDecimal(fromWei(meta.accountCap))}{' '}
@@ -141,7 +141,7 @@ const DepositForm: React.FC<IDepositForm> = ({
           Your Available Max: {removeDecimal(fromWei(availableMax))} ETH
         </Text>
         <Text fontSize="18px">
-          {`Estimated ${meta.tokenName}: `}
+          {`Estimated ${meta.tokenSymbol}: `}
           {!depositVal
             ? '0'
             : removeDecimal(

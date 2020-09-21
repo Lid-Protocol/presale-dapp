@@ -298,7 +298,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
       {isActive && !isEnded && !isPaused && (
         <>
           {endTime !== 0 && (
-            <EndTimer expiryTimestamp={endTime} hardcap={hardcap} />
+            <EndTimer expiryTimestamp={endTime} hardcap={hardcap} meta={meta} />
           )}
           <DepositForm
             web3={web3}
