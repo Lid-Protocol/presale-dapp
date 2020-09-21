@@ -97,7 +97,7 @@ export default ({ meta }: IProps) => {
             }`}
           /> */}
 
-          <title>{meta.tokenName} Presale</title>
+          <title>{meta.tokenSymbol} Presale</title>
         </Helmet>
       )}
     </>
