@@ -53,6 +53,8 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     maxShares: '0',
     hardcap: '0',
     stakingLid: '0',
+    redeemBP: '0',
+    redeemInterval: '1',
     isEnded: false,
     isPaused: false
   });
@@ -75,6 +77,8 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     maxShares,
     hardcap,
     stakingLid,
+    redeemBP,
+    redeemInterval,
     isEnded,
     isPaused
   } = state;
@@ -141,6 +145,16 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           target: addresses.presale,
           call: ['hardcap()(uint256)'],
           returns: [['hardcap', (val: any) => val.toString()]]
+        },
+        {
+          target: addresses.redeemer,
+          call: ['redeemBP()(uint256)'],
+          returns: [['redeemBP', (val: any) => val.toString()]]
+        },
+        {
+          target: addresses.redeemer,
+          call: ['redeemInterval()(uint256)'],
+          returns: [['redeemInterval', (val: any) => val.toString()]]
         }
       ],
       multiCallConfig
@@ -289,6 +303,8 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           address={address}
           meta={meta}
           maxShares={maxShares}
+          redeemBP={redeemBP}
+          redeemInterval={redeemInterval}
           finalEndTime={finalEndTime}
           accountShares={accountShares}
           accountRedeemable={accountRedeemable}

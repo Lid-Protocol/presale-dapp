@@ -13,6 +13,8 @@ interface IClaimer {
   accountShares: string;
   accountRedeemable: string;
   accountClaimedTokens: string;
+  redeemBP: string;
+  redeemInterval: string;
   meta: DappMetaData;
 }
 
@@ -24,8 +26,14 @@ const Claimer: React.FC<IClaimer> = ({
   accountShares,
   accountRedeemable,
   accountClaimedTokens,
+  redeemBP,
+  redeemInterval,
   meta
 }) => {
+  const redeemPercent = Math.floor(
+    Number(redeemBP) / 100 / (Number(redeemInterval) / 3600)
+  );
+
   const handleClaim = async function () {
     if (!lidPresaleSC) {
       return;
@@ -65,7 +73,7 @@ const Claimer: React.FC<IClaimer> = ({
           {`Claim Your ${meta.tokenSymbol}`}
         </Text>
         <Text fontSize="18px" color="blue.500">
-          2% released / hour
+          {redeemPercent}% released / hour
         </Text>
         <Text fontSize="18px" color="lid.fg">
           {`${meta.tokenSymbol} to Claim: ${shortEther(accountRedeemable)}`}
