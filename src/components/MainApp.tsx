@@ -8,7 +8,6 @@ import { AbiItem } from 'web3-utils';
 import { Contract } from 'web3-eth-contract';
 import { toWei } from 'utils';
 import abis from 'contracts/abis';
-import { totalPresale } from '../config';
 
 import Header from './Header';
 import SubHeading from './SubHeading';
@@ -234,7 +233,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           target: addresses.redeemer,
           call: [
             'calculateRatePerEth(uint256,uint256,uint256)(uint256)',
-            toWei(totalPresale),
+            toWei(meta.totalPresale),
             totalEth,
             hardcap
           ],
@@ -246,7 +245,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
             'calculateReedemable(address,uint256,uint256)(uint256)',
             address,
             finalEndTime,
-            toWei(totalPresale)
+            toWei(meta.totalPresale)
           ],
           returns: [['accountRedeemable', (val: any) => val.toString()]]
         }
