@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, Box, Button, Grid } from '@chakra-ui/core';
 import { shortEther, toBN, toWei } from 'utils';
 import { Contract } from 'web3-eth-contract';
@@ -30,9 +30,27 @@ const Claimer: React.FC<IClaimer> = ({
   redeemInterval,
   meta
 }) => {
+  const [active, setActive] = useState(true);
+
   const redeemPercent = Math.floor(
     Number(redeemBP) / 100 / (Number(redeemInterval) / 3600)
   );
+
+  const claimPeriod = toBN(finalEndTime)
+    .add(toBN(redeemInterval).mul(toBN(10000)).div(toBN(redeemBP)))
+    .toNumber();
+
+  useEffect(() => {
+    if (Date.now() / 1000 < claimPeriod) {
+      setActive(true);
+      let interval = setInterval(() => {
+        setActive(Date.now() / 1000 < claimPeriod);
+      }, 500);
+      return () => clearInterval(interval);
+    } else {
+      setActive(false);
+    }
+  }, [redeemBP, redeemInterval]);
 
   const handleClaim = async function () {
     if (!lidPresaleSC) {
@@ -157,15 +175,18 @@ const Claimer: React.FC<IClaimer> = ({
         mb="20px"
         p="20px"
       >
-        <Text fontSize="18px" color="lid.fg">
-          {`More ${meta.tokenSymbol} available to claim in`}
-        </Text>
-        <CountDownShort
-          expiryTimestamp={toBN(finalEndTime)
-            .add(toBN('3600').mul(toBN('50')))
-            .mul(toBN('1000'))
-            .toNumber()}
-        />
+        {active ? (
+          <>
+            <Text fontSize="18px" color="lid.fg">
+              {`More ${meta.tokenSymbol} available to claim in`}
+            </Text>
+            <CountDownShort expiryTimestamp={claimPeriod} />
+          </>
+        ) : (
+          <Text fontSize="18px" color="lid.fg">
+            {`All ${meta.tokenSymbol} available to claim`}
+          </Text>
+        )}
       </Box>
     </Box>
   );

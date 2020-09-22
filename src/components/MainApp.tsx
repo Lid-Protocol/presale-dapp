@@ -54,7 +54,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     hardcap: '0',
     hardCapTimer: 0,
     stakingLid: '0',
-    redeemBP: '0',
+    redeemBP: '1',
     redeemInterval: '1',
     isEnded: false,
     isPaused: false
