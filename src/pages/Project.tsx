@@ -46,11 +46,10 @@ export default ({ address, onConnect, web3 }: IProps) => {
         const input = {
           apiKey: process.env.REACT_APP_FLEEK_API_KEY || '',
           apiSecret: process.env.REACT_APP_FLEEK_API_SECRET || '',
-          key: `${project}-1/config.${project}.json`
+          key: `${project}/config.${project}.json`
         };
 
         let { data, bucket } = await fleekStorage.get(input);
-        console.log(bucket);
 
         let config: DappMetaData = JSON.parse(data);
 
