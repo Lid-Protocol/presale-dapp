@@ -91,7 +91,7 @@ export default ({ meta }: IProps) => {
             content={`${formatAssetUrl(meta.tokenName, 'opengraph.jpg')}`}
           />
 
-          <title>{meta.tokenName} Presale</title>
+          <title>{meta.tokenSymbol} Presale</title>
         </Helmet>
       )}
     </>

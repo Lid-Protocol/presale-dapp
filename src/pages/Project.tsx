@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, Switch, Route } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import fleekStorage from '@fleekhq/fleek-storage-js';
 import { DappMetaData } from 'types';
 import Web3 from 'web3';
-import Head from 'layout/Head';
-import Web3Wrapper from 'containers/Web3Wrapper';
-import App from './App';
 import NotFound from './NotFound';
-import Explore from './Explore';
-import Project from './Project';
+import MainApp from 'components/MainApp';
 
-export default () => {
+interface IProps {
+  address: string;
+  onConnect: () => void;
+  web3: any;
+}
+
+export default ({ address, onConnect, web3 }: IProps) => {
   const [meta, setMeta] = useState<DappMetaData>({
     tokenName: '',
     tokenSymbol: '',
@@ -22,12 +24,12 @@ export default () => {
     accountCap: '0',
     favicon: '',
     addresses: {
+      access: '',
       presale: '',
       redeemer: '',
       timer: '',
-      token: '',
-      access: '',
-      staking: ''
+      staking: '',
+      token: ''
     }
   });
 
@@ -44,7 +46,7 @@ export default () => {
         const input = {
           apiKey: process.env.REACT_APP_FLEEK_API_KEY || '',
           apiSecret: process.env.REACT_APP_FLEEK_API_SECRET || '',
-          key: `${project}/config.${project}.json`
+          key: `${project}-1/config.${project}.json`
         };
 
         let { data, bucket } = await fleekStorage.get(input);
@@ -67,19 +69,17 @@ export default () => {
 
   return (
     <>
-      <Web3Wrapper>
-        {(address, web3, onConnect) => (
-          <Switch>
-            <Route component={Explore} path="/" exact />
-            <Route
-              component={() => (
-                <Project address={address} web3={web3} onConnect={onConnect} />
-              )}
-              path="/:project"
-            />
-          </Switch>
-        )}
-      </Web3Wrapper>
+      {meta.tokenName && !showError && (
+        <>
+          <MainApp
+            address={address}
+            web3={web3}
+            meta={meta}
+            onConnect={onConnect}
+          />
+        </>
+      )}
+      {showError && !meta.tokenName && <NotFound />}
     </>
   );
 };

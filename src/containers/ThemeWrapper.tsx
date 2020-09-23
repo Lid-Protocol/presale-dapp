@@ -1,5 +1,23 @@
 import React from 'react';
 import { ThemeProvider, CSSReset, theme } from '@chakra-ui/core';
+import { Global, css } from '@emotion/core';
+
+const GlobalStyles = css`
+  /*
+    This will hide the focus indicator if the element receives focus    via the mouse,
+    but it will still show up on keyboard focus.
+  */
+  .js-focus-visible :focus:not([data-focus-visible-added]) {
+    outline: none;
+    box-shadow: none;
+  }
+  a {
+    text-decoration: none;
+  }
+  a:focus {
+    outline: none;
+  }
+`;
 
 const customTheme = {
   ...theme,
@@ -23,8 +41,8 @@ const customTheme = {
     body: 'Gotham, sans-serif',
     heading: 'Gotham, serif',
     mono: 'Menlo, monospace'
-  },
-  breakpoints: ['650px', '900px', '1240px', '1920px']
+  }
+  // breakpoints: ['650px', '900px', '1240px', '1920px']
 };
 
 interface IThemeWrapper {
@@ -35,6 +53,7 @@ const ThemeWrapper: React.FC<IThemeWrapper> = ({ children }) => {
   return (
     <ThemeProvider theme={customTheme}>
       <CSSReset />
+      <Global styles={GlobalStyles} />
       {children}
     </ThemeProvider>
   );
