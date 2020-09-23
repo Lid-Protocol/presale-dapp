@@ -6,6 +6,7 @@ import Header from 'components/sections/Header';
 import Footer from 'components/Footer';
 import Projects from 'components/sections/Projects';
 import { data } from 'templates/data';
+import Head from 'layout/Head';
 
 interface IProps {
   address: string;
@@ -16,6 +17,27 @@ interface IProps {
 export default (props: IProps) => {
   return (
     <Fragment>
+      <Head
+        meta={{
+          tokenName: '',
+          tokenSymbol: '',
+          tokenOwnerWebsite: '',
+          siteUrl: '',
+          totalPresale: '',
+          referralBP: '',
+          basisPoint: '',
+          accountCap: '',
+          favicon: '',
+          addresses: {
+            presale: '',
+            redeemer: '',
+            timer: '',
+            token: '',
+            access: '',
+            staking: ''
+          }
+        }}
+      />
       <Header />
       <Flex direction="column" maxW={{ xl: '1200px' }} m="0 auto" {...props}>
         <Hero />
