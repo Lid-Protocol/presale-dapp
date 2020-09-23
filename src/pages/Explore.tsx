@@ -1,6 +1,11 @@
-import React from 'react';
-import Hero from 'components/sections/Hero';
+import React, { Fragment } from 'react';
 import { DappMetaData } from 'types';
+import { Flex } from '@chakra-ui/core';
+import Hero from 'components/sections/Hero';
+import Header from 'components/sections/Header';
+import Footer from 'components/Footer';
+import Projects from 'components/sections/Projects';
+import { data } from 'templates/data';
 
 interface IProps {
   address: string;
@@ -10,9 +15,13 @@ interface IProps {
 }
 export default (props: IProps) => {
   return (
-    <Hero
-      title="LID Protocol Certified Presale"
-      subtitle="Raising funds for your project can be a daunting task - with investor uncertainty a major factor, a solution was needed to change DEX presale landscape - that solution, is LID Certified Presales. LID Certified Presales take advantage of the presale process with the Initial Liquidty Offering (ILO) model. Offering a secure Initial Liquidity Offering (ILO) presale to your potential investors is the first major step you can take in improving your presale success"
-    />
+    <Fragment>
+      <Header />
+      <Flex direction="column" maxW={{ xl: '1200px' }} m="0 auto" {...props}>
+        <Hero />
+        <Projects items={data} />
+      </Flex>
+      <Footer />
+    </Fragment>
   );
 };

@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
         display="inline-block"
         target="_blank"
         rel="noreferrer noopener"
-        href="https://lid.sh"
+        href="/"
         m="0px"
       >
         <Image
