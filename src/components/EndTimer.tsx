@@ -2,14 +2,21 @@ import React from 'react';
 import { Text, Box } from '@chakra-ui/core';
 import { fromWei } from 'utils';
 import CountDown from './CountDown';
-import { tokenName } from '../config';
+import { DappMetaData } from '../types';
 
 interface IEndTimer {
   expiryTimestamp: number | null;
   hardcap: string;
+  hardCapTimer: number;
+  meta: DappMetaData;
 }
 
-const EndTimer: React.FC<IEndTimer> = ({ expiryTimestamp, hardcap }) => {
+const EndTimer: React.FC<IEndTimer> = ({
+  expiryTimestamp,
+  hardcap,
+  hardCapTimer,
+  meta
+}) => {
   return (
     <Box
       display="block"
@@ -23,7 +30,7 @@ const EndTimer: React.FC<IEndTimer> = ({ expiryTimestamp, hardcap }) => {
       textAlign="center"
     >
       <Text fontSize={['28px', '36px']} fontWeight="bold">
-        {`${tokenName} Presale ends in`}
+        {`${meta.tokenSymbol} Presale ends in`}
       </Text>
       <CountDown
         expiryTimestamp={
@@ -31,10 +38,10 @@ const EndTimer: React.FC<IEndTimer> = ({ expiryTimestamp, hardcap }) => {
         }
       />
       <Text fontSize={['12px', '14px']} fontWeight="light" mt="-20px">
-        48 hour timer.
+        {hardCapTimer} hour timer.
       </Text>
       <Text fontSize={['12px', '14px']} fontWeight="light">
-        Ends after 48 hours or {fromWei(hardcap)} ETH.
+        Ends after {hardCapTimer} hours or {fromWei(hardcap)} ETH.
       </Text>
     </Box>
   );

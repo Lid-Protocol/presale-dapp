@@ -67,7 +67,13 @@ const DepositForm: React.FC<IDepositForm> = ({
     } else if (Number(event.target.value) < 0) {
       setDisplayVal('0');
     } else {
-      setDisplayVal(event.target.value);
+      const inputStr = event.target.value;
+      setDisplayVal(
+        inputStr.indexOf('.') >= 0
+          ? inputStr.substr(0, inputStr.indexOf('.')) +
+              inputStr.substr(inputStr.indexOf('.'), 19)
+          : inputStr
+      );
     }
   };
 
@@ -125,16 +131,17 @@ const DepositForm: React.FC<IDepositForm> = ({
         borderColor="lid.stroke"
       >
         <Text fontSize={['24px', '36px']} fontWeight="bold">
-          {`Deposit ETH for ${meta.tokenName}`}
+          {`Deposit ETH for ${meta.tokenSymbol}`}
         </Text>
         <Text fontSize="18px" color="blue.500">
-          Minimum 0.01 ETH, Maximum {removeDecimal(fromWei(hardcap))} ETH
+          Minimum 0.01 ETH, Maximum {removeDecimal(fromWei(meta.accountCap))}{' '}
+          ETH
         </Text>
         <Text fontSize="18px" color="red.500">
           Your Available Max: {removeDecimal(fromWei(availableMax))} ETH
         </Text>
         <Text fontSize="18px">
-          {`Estimated ${meta.tokenName}: `}
+          {`Estimated ${meta.tokenSymbol}: `}
           {!depositVal
             ? '0'
             : removeDecimal(

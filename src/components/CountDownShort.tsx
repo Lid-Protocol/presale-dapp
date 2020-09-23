@@ -7,13 +7,14 @@ interface ICountDownShort {
 }
 
 const CountDownShort: React.FC<ICountDownShort> = ({ expiryTimestamp }) => {
-  const { seconds, minutes, restart } = useTimer({
+  const { seconds, minutes, restart, start } = useTimer({
     expiryTimestamp,
     onExpire: () => console.warn('onExpire called')
   });
 
   useEffect(() => {
     restart(expiryTimestamp);
+    start();
   }, [expiryTimestamp]);
 
   return (

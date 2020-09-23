@@ -93,24 +93,18 @@ export default ({ meta }: IProps) => {
           }
         />
 
-        {/* <meta
+          <meta
             property="og:image"
-            content={`${
-              formatAssetUrl(meta.tokenName, 'opengraph.jpg')
-            }`}
+            content={`${formatAssetUrl(meta.tokenName, 'opengraph.jpg')}`}
           />
           <meta
             itemProp="image"
-            content={`${
-              formatAssetUrl(meta.tokenName, 'opengraph.jpg')
-            }`}
+            content={`${formatAssetUrl(meta.tokenName, 'opengraph.jpg')}`}
           />
           <meta
             name="twitter:image"
-            content={`${
-              formatAssetUrl(meta.tokenName, 'opengraph.jpg')
-            }`}
-          /> */}
+            content={`${formatAssetUrl(meta.tokenName, 'opengraph.jpg')}`}
+          />
 
         <title>
           {meta.tokenSymbol

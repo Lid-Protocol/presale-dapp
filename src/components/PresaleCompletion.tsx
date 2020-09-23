@@ -42,7 +42,7 @@ const PresaleCompletion: React.FC<IPresaleCompletion> = ({
       textAlign="center"
     >
       <Text fontSize="18px" m="0" p="0" color="lid.fg">
-        {`To Complete ${meta.tokenName} Presale:`}
+        {`To Complete ${meta.tokenSymbol} Presale:`}
       </Text>
       {!isEnded && (
         <Text fontSize="14px" m="0" p="0" color="lid.fgMed">

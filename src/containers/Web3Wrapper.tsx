@@ -22,46 +22,41 @@ const Web3Wrapper: React.FC<IWeb3Wrapper> = ({ children }) => {
   );
   const [web3, setWeb3] = useState<Web3 | null>(new Web3(provider));
 
-  // const resetApp = async () => {
-  //   if (
-  //     web3 &&
-  //     web3.currentProvider &&
-  //     (web3.currentProvider as WebsocketProvider).connection
-  //   ) {
-  //     await (web3.currentProvider as WebsocketProvider).connection.close();
-  //   }
-  //   await web3Modal.clearCachedProvider();
-  //   setAddress('');
-  //   setWeb3(null);
-  //   setProvider(null);
-  // };
-
-  // //TODO: event subscriptions to auto update UI
-  // const subscribeProvider = async (provider: Web3Provider) => {
-  //   if (!provider.hasOwnProperty('on')) {
-  //     return;
-  //   }
-
-  //   (provider as IpcProvider | WebsocketProvider).on('close', () => resetApp());
-  //   (provider as IpcProvider | WebsocketProvider).on(
-  //     'accountsChanged',
-  //     (accounts: string[]) => {
-  //       console.log('accounts', accounts);
-  //       setAddress(accounts[0]);
-  //     }
-  //   );
-  // };
-
   const onConnect = async () => {
     const provider = await web3Modal.connect();
     const web3 = await new Web3(provider);
-    // await subscribeProvider(provider, web3);
     const accounts = await web3.eth.getAccounts();
-    const address = accounts[0];
 
-    setAddress(address);
+    setAddress(accounts[0]);
     setProvider(provider);
     setWeb3(web3);
+
+    // Subscribe to accounts change
+    provider.on('accountsChanged', (accounts: string[]) => {
+      setAddress(accounts[0]);
+    });
+
+    // Subscribe to provider disconnection
+    provider.on('disconnect', (error: { code: number; message: string }) => {
+      console.log(error);
+      setAddress('');
+      const infuraProvider = new Web3.providers.HttpProvider(
+        `https://mainnet.infura.io/v3/${getRandomInfuraId()}`
+      );
+      setProvider(infuraProvider);
+      setWeb3(new Web3(infuraProvider));
+    });
+
+    // TODO: handle the network change, should only allow only mainnet
+    // // Subscribe to chainId change
+    // provider.on('chainChanged', (chainId: number) => {
+    //   console.log(chainId);
+    // });
+
+    // // Subscribe to provider connection
+    // provider.on('connect', (info: { chainId: number }) => {
+    //   console.log(info);
+    // });
   };
 
   useEffect(() => {

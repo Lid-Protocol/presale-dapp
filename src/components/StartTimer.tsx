@@ -30,7 +30,7 @@ const StartTimer: React.FC<IStartTimer> = ({
       textAlign="center"
     >
       <Text fontSize={['28px', '36px']} fontWeight="bold">
-        {`Your ${meta.tokenName} Access Starts In:`}
+        {`Your ${meta.tokenSymbol} Access Starts In:`}
       </Text>
       <CountDown expiryTimestamp={accessTime} />
       <Text>

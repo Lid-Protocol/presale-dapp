@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, Box, Button, Grid } from '@chakra-ui/core';
 import { shortEther, toBN, toWei } from 'utils';
 import { Contract } from 'web3-eth-contract';
@@ -13,6 +13,8 @@ interface IClaimer {
   accountShares: string;
   accountRedeemable: string;
   accountClaimedTokens: string;
+  redeemBP: string;
+  redeemInterval: string;
   meta: DappMetaData;
 }
 
@@ -24,14 +26,38 @@ const Claimer: React.FC<IClaimer> = ({
   accountShares,
   accountRedeemable,
   accountClaimedTokens,
+  redeemBP,
+  redeemInterval,
   meta
 }) => {
+  const [active, setActive] = useState(true);
+
+  const redeemPercent = Math.floor(
+    Number(redeemBP) / 100 / (Number(redeemInterval) / 3600)
+  );
+
+  const claimPeriod = toBN(finalEndTime)
+    .add(toBN(redeemInterval).mul(toBN(10000)).div(toBN(redeemBP)))
+    .toNumber();
+
+  useEffect(() => {
+    if (Date.now() / 1000 < claimPeriod) {
+      setActive(true);
+      let interval = setInterval(() => {
+        setActive(Date.now() / 1000 < claimPeriod);
+      }, 500);
+      return () => clearInterval(interval);
+    } else {
+      setActive(false);
+    }
+  }, [redeemBP, redeemInterval]);
+
   const handleClaim = async function () {
     if (!lidPresaleSC) {
       return;
     }
     if (toBN(accountRedeemable).lt(toBN('1'))) {
-      alert(`You must have at least 1 wei of ${meta.tokenName} to claim.`);
+      alert(`You must have at least 1 wei of ${meta.tokenSymbol} to claim.`);
       return;
     }
     await lidPresaleSC.methods.redeem().send({ from: address });
@@ -62,13 +88,13 @@ const Claimer: React.FC<IClaimer> = ({
         p="20px"
       >
         <Text fontSize={['24px', '36px']} fontWeight="bold">
-          {`Claim Your ${meta.tokenName}`}
+          {`Claim Your ${meta.tokenSymbol}`}
         </Text>
         <Text fontSize="18px" color="blue.500">
-          2% released / hour
+          {redeemPercent}% released / hour
         </Text>
         <Text fontSize="18px" color="lid.fg">
-          {`${meta.tokenName} to Claim: ${shortEther(accountRedeemable)}`}
+          {`${meta.tokenSymbol} to Claim: ${shortEther(accountRedeemable)}`}
         </Text>
         <Button
           isDisabled={accountRedeemable === '0'}
@@ -107,7 +133,7 @@ const Claimer: React.FC<IClaimer> = ({
           bg="lid.bg"
         >
           <Text fontSize="18px" m="0" p="0" color="lid.fgMed">
-            {`Total ${meta.tokenName} Claimed`}
+            {`Total ${meta.tokenSymbol} Claimed`}
           </Text>
           <Text fontSize="38px" w="100%" fontWeight="bold">
             {shortEther(accountClaimedTokens)}
@@ -122,7 +148,7 @@ const Claimer: React.FC<IClaimer> = ({
           bg="lid.bg"
         >
           <Text fontSize="18px" m="0" p="0" color="lid.fgMed">
-            {`${meta.tokenName} / Hour`}
+            {`${meta.tokenSymbol} / Hour`}
           </Text>
           <Text fontSize="38px" w="100%" fontWeight="bold">
             {maxShares !== '0'
@@ -149,15 +175,18 @@ const Claimer: React.FC<IClaimer> = ({
         mb="20px"
         p="20px"
       >
-        <Text fontSize="18px" color="lid.fg">
-          {`More ${meta.tokenName} available to claim in`}
-        </Text>
-        <CountDownShort
-          expiryTimestamp={toBN(finalEndTime)
-            .add(toBN('3600').mul(toBN('50')))
-            .mul(toBN('1000'))
-            .toNumber()}
-        />
+        {active ? (
+          <>
+            <Text fontSize="18px" color="lid.fg">
+              {`More ${meta.tokenSymbol} available to claim in`}
+            </Text>
+            <CountDownShort expiryTimestamp={claimPeriod} />
+          </>
+        ) : (
+          <Text fontSize="18px" color="lid.fg">
+            {`All ${meta.tokenSymbol} available to claim`}
+          </Text>
+        )}
       </Box>
     </Box>
   );

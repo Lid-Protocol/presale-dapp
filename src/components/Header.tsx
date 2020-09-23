@@ -64,7 +64,7 @@ const Header: React.FC<IHeader> = ({ address, onConnect, meta }) => {
         ) : (
           <Button
             variant="solid"
-            background="lid.buttonBgDk"
+            bg="lid.brand"
             color="lid.bg"
             ml="auto"
             p="25px"
