@@ -50,7 +50,7 @@ const Claimer: React.FC<IClaimer> = ({
     } else {
       setActive(false);
     }
-  }, [redeemBP, redeemInterval]);
+  }, [claimPeriod]);
 
   const handleClaim = async function () {
     if (!lidPresaleSC) {
@@ -180,7 +180,7 @@ const Claimer: React.FC<IClaimer> = ({
             <Text fontSize="18px" color="lid.fg">
               {`More ${meta.tokenSymbol} available to claim in`}
             </Text>
-            <CountDownShort expiryTimestamp={claimPeriod} />
+            <CountDownShort expiryTimestamp={claimPeriod * 1000} />
           </>
         ) : (
           <Text fontSize="18px" color="lid.fg">
