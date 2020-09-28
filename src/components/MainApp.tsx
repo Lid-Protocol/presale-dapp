@@ -98,10 +98,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     interval: 10000
   };
 
-  function get_isRasied() {
-
-  }
-
   useEffect(() => {
     if (!web3) {
       return;
