@@ -1,4 +1,41 @@
 import Web3 from 'web3';
+
+export const BonusRange = [ 
+  {
+    eth: "0",
+    reward: "8%"
+  },
+  {
+    eth: "100",
+    reward: "7%"
+  },
+  {
+    eth: "200",
+    reward: "6%"
+  },
+  {
+    eth: "300",
+    reward: "5%"
+  },
+  {
+    eth: "400",
+    reward: "4%"
+  },
+  {
+    eth: "500",
+    reward: "3%"
+  },
+  {
+    eth: "1000",
+    reward: "2.5%"
+  },
+  {
+    eth: "1500",
+    reward: "0%"
+  },
+];
+
+
 export const infuraIds = [
   '0764bdc3bf3f4eb7b38dc5b45d652bc9',
   '23427d6792604256b324ceaebd638800',
