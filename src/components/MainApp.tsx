@@ -20,6 +20,9 @@ import PresaleCompletion from './PresaleCompletion';
 import Claimer from './Claimer';
 import { DappMetaData } from 'types';
 
+import BonusRange from './BonusRange'
+
+
 const defaultWatcher = createWatcher([], {});
 const walletWatcher = createWatcher([], {});
 
@@ -278,6 +281,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
 
   return (
     <>
+      <BonusRange />
       <Header address={address} meta={meta} onConnect={onConnect} />
       <SubHeading
         totalEth={totalEth}
