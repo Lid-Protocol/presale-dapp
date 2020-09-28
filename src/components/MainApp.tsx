@@ -170,7 +170,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           target: addresses.redeemer,
           call: ['redeemInterval()(uint256)'],
           returns: [['redeemInterval', (val: any) => val.toString()]]
-        }, 
+        }
       ],
       multiCallConfig
     );

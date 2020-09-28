@@ -77,7 +77,7 @@ const Claimer: React.FC<IClaimer> = ({
     } else {
       setActive(false);
     }
-}, [redeemBP, redeemInterval]);
+  }, [claimPeriod]);
 
   const handleClaim = async function () {
     if (!lidPresaleSC) {
