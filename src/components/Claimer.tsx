@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, Box, Button, Grid } from '@chakra-ui/core';
+import { Text, Box, Button, Grid, Input, Textarea } from '@chakra-ui/core';
 import { shortEther, toBN, toWei } from 'utils';
 import { Contract } from 'web3-eth-contract';
 import CountDownShort from './CountDownShort';
@@ -16,6 +16,7 @@ interface IClaimer {
   redeemBP: string;
   redeemInterval: string;
   meta: DappMetaData;
+  isRefunding: boolean;
 }
 
 const Claimer: React.FC<IClaimer> = ({
@@ -28,13 +29,39 @@ const Claimer: React.FC<IClaimer> = ({
   accountClaimedTokens,
   redeemBP,
   redeemInterval,
-  meta
+  meta,
+  isRefunding
 }) => {
   const [active, setActive] = useState(true);
+  const [accountAddress, setAccountAddress] = useState("placeHolder");
 
   const redeemPercent = Math.floor(
     Number(redeemBP) / 100 / (Number(redeemInterval) / 3600)
   );
+
+  const updateAddress = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAccountAddress(event.target.value);
+  }
+
+  const handleSubmit = async function () {
+    if (!lidPresaleSC) {
+      return;
+    }
+
+    await lidPresaleSC.methods.getRefundableEth(accountAddress).call(function (error: any, result: any){
+      if (result <= 0) {
+        alert("Refundable Eth is less than 0");
+        return;
+      }
+    })
+
+    await lidPresaleSC.methods
+      .claimRefund(accountAddress)
+      .send({from: accountAddress });
+    alert(
+      'Deposit request sent. Check your wallet to see when it has completed, then refresh this page.'
+    );
+  };
 
   const claimPeriod = toBN(finalEndTime)
     .add(toBN(redeemInterval).mul(toBN(10000)).div(toBN(redeemBP)))
@@ -65,6 +92,70 @@ const Claimer: React.FC<IClaimer> = ({
       'Claim request sent. Check your wallet to see when it has completed, then refresh this page.'
     );
   };
+
+  if (isRefunding) {
+    return (
+      <>
+    <Box
+        w="100%"
+        maxWidth="1200px"
+        ml="auto"
+        mr="auto"
+        mt="60px"
+        mb="60px"
+        px={['20px', '20px', 0]}
+      >
+        <Box
+          textAlign="center"
+          border="solid 1px"
+          borderRadius="5px"
+          borderColor="lid.stroke"
+          bg="white"
+          display="block"
+          w="100%"
+          mb="20px"
+          p="20px"
+        >
+          <Text fontSize={['24px', '36px']} fontWeight="bold">
+            {`Claim Refund`}
+          </Text>
+    
+          <Input
+            fontSize="18px"
+            w="100%"
+            maxW="600px"
+            mb="0px"
+            display="inline-block"
+            min={0.01}
+            mt="10px"
+            onChange={updateAddress}
+          />
+
+          <Button
+            isDisabled={accountRedeemable === '0'}
+            variantColor="blue"
+            bg="lid.brand"
+            color="white"
+            border="none"
+            display="block"
+            borderRadius="25px"
+            w="200px"
+            h="50px"
+            m="0px"
+            mt="30px"
+            fontWeight="regular"
+            fontSize="18px"
+            ml="auto"
+            mr="auto"
+            onClick={handleSubmit}
+          >
+            Send
+          </Button>
+        </Box>
+        </Box>
+        </>
+        )
+  } else {
 
   return (
     <Box
@@ -180,7 +271,7 @@ const Claimer: React.FC<IClaimer> = ({
             <Text fontSize="18px" color="lid.fg">
               {`More ${meta.tokenSymbol} available to claim in`}
             </Text>
-            <CountDownShort expiryTimestamp={claimPeriod * 1000} />
+            <CountDownShort expiryTimestamp={claimPeriod} />
           </>
         ) : (
           <Text fontSize="18px" color="lid.fg">
@@ -190,6 +281,7 @@ const Claimer: React.FC<IClaimer> = ({
       </Box>
     </Box>
   );
+        }
 };
 
 export default Claimer;
