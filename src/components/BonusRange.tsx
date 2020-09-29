@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BonusRange } from '../config';
 import { Box } from '@chakra-ui/core';
 
 import Modal from 'react-modal';
 
-const customStyles = {
+const customStylesDesktop = {
   content: {
     top: '220px',
     left: '70%',
@@ -23,6 +23,9 @@ const BonusStructure: any = () => {
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
+  const [marginBottom, setMarginBotom] = useState("");
+  const [paddingTop, setPaddingTop] = useState("")
+
   function openModal() {
     setIsOpen(true);
   }
@@ -35,30 +38,40 @@ const BonusStructure: any = () => {
     setIsOpen(false);
   }
 
-  return (
-    <>
-      <Box ml="900px" mb="-50px" pt="20px">
-        <button onClick={openModal}>Bonuses</button>
-      </Box>
+  useEffect( () => {
+    if (window.innerWidth > 999) {
+      setMarginBotom("-50px");
+      setPaddingTop("20px")
+    } else {
+      setMarginBotom("-10%")
+      setPaddingTop("0px")
+    }
+  }, [])
+  
+    return (
+      <>
+        <Box ml="69%" mb={marginBottom} pt={paddingTop}>
+          <button onClick={openModal}>Bonuses</button>
+        </Box>
 
-      <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={customStyles}
-      >
-        <h2 ref={(_subtitle) => (subtitle = _subtitle)}> BonusRange </h2>
+        <Modal
+          isOpen={modalIsOpen}
+          onAfterOpen={afterOpenModal}
+          onRequestClose={closeModal}
+          style={customStylesDesktop}
+        >
+          <h2 ref={(_subtitle) => (subtitle = _subtitle)}> BonusRange </h2>
 
-        {BonusRange.map((data) => (
-          <p key={data.eth}>
-            {' '}
-            {data.eth} ETH : {data.reward}{' '}
-          </p>
-        ))}
+          {BonusRange.map((data) => (
+            <p key={data.eth}>
+              {' '}
+              {data.eth} ETH : {data.reward}{' '}
+            </p>
+          ))}
 
-        <button onClick={closeModal}>close</button>
-      </Modal>
-    </>
+          <button onClick={closeModal}>close</button>
+        </Modal>
+      </>
   );
 };
 
