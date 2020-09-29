@@ -12,8 +12,11 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)'
-  }
+  },
+  overlay: { zIndex: 1000 }
 };
+
+Modal.setAppElement('#root');
 
 const BonusStructure: any = () => {
   var subtitle: any;
@@ -47,7 +50,7 @@ const BonusStructure: any = () => {
         <h2 ref={(_subtitle) => (subtitle = _subtitle)}> BonusRange </h2>
 
         {BonusRange.map((data) => (
-          <p>
+          <p key={data.eth}>
             {' '}
             {data.eth} ETH : {data.reward}{' '}
           </p>
