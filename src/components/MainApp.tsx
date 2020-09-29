@@ -20,8 +20,7 @@ import PresaleCompletion from './PresaleCompletion';
 import Claimer from './Claimer';
 import { DappMetaData } from 'types';
 
-import BonusRange from './BonusRange'
-
+import BonusRange from './BonusRange';
 
 const defaultWatcher = createWatcher([], {});
 const walletWatcher = createWatcher([], {});
@@ -33,13 +32,11 @@ interface IMainApp {
   meta: DappMetaData;
 }
 
-
-
 const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
   const { addresses } = meta;
   const [lidPresaleSC, setLidPresale] = useState<Contract | null>(null);
   const [isActive, setIsActive] = useState(false);
-  
+
   const [state, setState] = useState({
     startTime: Date.UTC(2020, 8, 1, 3, 45, 0, 0),
     accessTime: Date.UTC(2020, 8, 1, 4, 0, 0, 0),
@@ -393,5 +390,3 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
 };
 
 export default MainApp;
-
-
