@@ -4,7 +4,7 @@ import { Box } from '@chakra-ui/core';
 
 import Modal from 'react-modal';
 
-const customStylesDesktop = {
+const customStyles = {
   content: {
     top: '220px',
     left: '70%',
@@ -58,7 +58,7 @@ const BonusStructure: any = () => {
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
-          style={customStylesDesktop}
+          style={customStyles}
         >
           <h2 ref={(_subtitle) => (subtitle = _subtitle)}> BonusRange </h2>
 
