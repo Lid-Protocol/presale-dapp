@@ -10,7 +10,7 @@ import { DappMetaData } from 'types';
 
 interface ISubHeading {
   totalEth: string;
-  maxShares: string;
+  totalShares: string;
   stakingLid: string;
   totalDepositors: string;
   accountEthDeposit: string;
@@ -23,7 +23,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
   totalDepositors,
   accountEthDeposit,
   accountShares,
-  maxShares,
+  totalShares,
   stakingLid,
   meta
 }) => {
@@ -137,11 +137,11 @@ const SubHeadings: React.FC<ISubHeading> = ({
               {`Your ${meta.tokenSymbol} Tokens`}
             </Text>
             <Text fontSize="38px" w="100%" fontWeight="bold">
-              {maxShares !== '0'
+              {totalShares !== '0'
                 ? shortEther(
                     toBN(accountShares)
                       .mul(toBN(toWei(meta.totalPresale)))
-                      .div(toBN(maxShares))
+                      .div(toBN(totalShares))
                       .toString()
                   )
                 : '0'}

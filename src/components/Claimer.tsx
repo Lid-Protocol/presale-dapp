@@ -8,7 +8,7 @@ import { DappMetaData } from 'types';
 interface IClaimer {
   lidPresaleSC: Contract | null;
   address: string;
-  maxShares: string;
+  totalShares: string;
   finalEndTime: string;
   accountShares: string;
   accountRedeemable: string;
@@ -22,7 +22,7 @@ interface IClaimer {
 const Claimer: React.FC<IClaimer> = ({
   lidPresaleSC,
   address,
-  maxShares,
+  totalShares,
   finalEndTime,
   accountShares,
   accountRedeemable,
@@ -243,12 +243,12 @@ const Claimer: React.FC<IClaimer> = ({
               {`${meta.tokenSymbol} / Hour`}
             </Text>
             <Text fontSize="38px" w="100%" fontWeight="bold">
-              {maxShares !== '0'
+              {totalShares !== '0'
                 ? shortEther(
                     toBN(accountShares)
                       .mul(toBN(toWei(meta.totalPresale)))
-                      .div(toBN(maxShares))
-                      .mul(toBN('2'))
+                      .div(toBN(totalShares))
+                      .mul(toBN(redeemPercent))
                       .div(toBN('100'))
                       .toString()
                   )
