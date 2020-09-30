@@ -8,6 +8,9 @@ import imgLidLogo from 'assets/images/common/logo-lid.png';
 import imgDepositor from 'assets/images/common/depositor.png';
 import { DappMetaData } from 'types';
 
+import EndTimer from './EndTimer';
+
+
 interface ISubHeading {
   totalEth: string;
   maxShares: string;
@@ -16,6 +19,9 @@ interface ISubHeading {
   accountEthDeposit: string;
   accountShares: string;
   meta: DappMetaData;
+  expiryTimestamp: number | null;
+  hardcap: string;
+  hardCapTimer: number;
 }
 
 const SubHeadings: React.FC<ISubHeading> = ({
@@ -25,7 +31,10 @@ const SubHeadings: React.FC<ISubHeading> = ({
   accountShares,
   maxShares,
   stakingLid,
-  meta
+  meta,
+  expiryTimestamp,
+  hardcap,
+  hardCapTimer
 }) => {
   const { addresses } = meta;
   return (
@@ -222,6 +231,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
               {shortEther(toWei(meta.totalPresale))}
             </Text>
           </Box>
+
           <Box
             w="100%"
             border="solid 1px"
@@ -247,6 +257,27 @@ const SubHeadings: React.FC<ISubHeading> = ({
               {shortEther(stakingLid)}
             </Text>
           </Box>
+
+          <Box
+            w={["100%", "205%"]}
+            border="solid 1px"
+            borderColor="lid.stroke"
+            color="lid.fg"
+            borderRadius="5px"
+            p="25px"
+            bg="lid.bg"
+          >
+
+        <EndTimer
+            expiryTimestamp={expiryTimestamp}
+            hardcap={hardcap}
+            hardCapTimer={hardCapTimer}
+            meta={meta}
+          />
+
+          </Box>
+
+
         </Grid>
       </Flex>
     </Box>

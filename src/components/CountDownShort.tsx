@@ -24,7 +24,6 @@ const CountDownShort: React.FC<ICountDownShort> = ({ expiryTimestamp }) => {
           {minutes.toString().padStart(2, '0')}
         </Text>
         <Text
-          fontSize={['12px', '16px']}
           color="lid.fgLight"
           w="100%"
           textAlign="center"
@@ -44,7 +43,7 @@ const CountDownShort: React.FC<ICountDownShort> = ({ expiryTimestamp }) => {
         </Text>
       </Box>
       <Box display="inline-block" w={['40px', '90px']} m="105pxx">
-        <Text fontSize={['24px', '48px']} color="lid.brand">
+        <Text fontSize="48px" color="lid.brand">
           {seconds.toString().padStart(2, '0')}
         </Text>
         <Text

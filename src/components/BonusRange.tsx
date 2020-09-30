@@ -42,7 +42,7 @@ const BonusStructure: React.FC<IBonusStructure> = ({bonusData}) => {
 
           <Box float="left">
             <Text fontSize="16px"
-                  color="blue.500"
+                  color="lid.brand"
                   mt="5px"
                   mb="5px"
                   fontWeight="bold">
@@ -53,7 +53,7 @@ const BonusStructure: React.FC<IBonusStructure> = ({bonusData}) => {
                 <Text fontSize="16px"
                       color="lid.fgMed"
                       mt="5px"
-                      float="left">
+                      display="inline-block">
                   {data.eth} 
                 </Text>
                 <br />
@@ -64,7 +64,7 @@ const BonusStructure: React.FC<IBonusStructure> = ({bonusData}) => {
           <Box float="left"
                ml="5%">
             <Text fontSize="16px"
-                  color="blue.500"
+                  color="lid.brand"
                   mt="5px"
                   mb="5px"
                   fontWeight="bold">
@@ -75,7 +75,7 @@ const BonusStructure: React.FC<IBonusStructure> = ({bonusData}) => {
                 <Text fontSize="16px"
                       color="lid.fgMed"
                       mt="5px"
-                      float="left">
+                      display="inline-block">
                   {data.reward} 
                 </Text>
                 <br />
@@ -86,7 +86,7 @@ const BonusStructure: React.FC<IBonusStructure> = ({bonusData}) => {
           <Box display="inline-block"
                ml="5%">
             <Text fontSize="16px"
-                  color="blue.500"
+                  color="lid.brand"
                   mt='5px'
                   mb="5px"
                   fontWeight="bold">
@@ -105,9 +105,9 @@ const BonusStructure: React.FC<IBonusStructure> = ({bonusData}) => {
             ))}
           </Box>
               
-          <Text mt="10px"
-                color="lid.fgMed"
-                fontSize="14px">
+          <Text mt="20px"
+                color="lid.fgLight"
+                fontSize="15px">
             Presale ends when it's harcap is reached
           </Text>
           </Box>

@@ -309,6 +309,10 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
         accountShares={accountShares}
         maxShares={maxShares}
         stakingLid={stakingLid}
+
+        expiryTimestamp={endTime}
+        hardcap={hardcap}
+        hardCapTimer={hardCapTimer}
       />
       {isPaused && (
         <>
@@ -342,14 +346,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
       )}
       {isActive && isEnded && !isPaused && (
         <>
-          {endTime !== 0 && (
-            <EndTimer
-              expiryTimestamp={endTime}
-              hardcap={hardcap}
-              hardCapTimer={hardCapTimer}
-              meta={meta}
-            />
-          )}
           <DepositForm
             web3={web3}
             address={address}
