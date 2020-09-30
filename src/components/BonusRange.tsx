@@ -1,76 +1,117 @@
 import React, { useState, useEffect } from 'react';
 import { BonusRange } from '../config';
-import { Box } from '@chakra-ui/core';
+import {
+  Box,
+  Text,
+  Button,
+  NumberInput,
+  NumberInputField
+} from '@chakra-ui/core';
 
-import Modal from 'react-modal';
+interface IBonusStructure{
+  bonusData: ReadonlyArray<number>;
+}
 
-const customStyles = {
-  content: {
-    top: '220px',
-    left: '70%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  },
-  overlay: { zIndex: 1000 }
-};
-
-Modal.setAppElement('#root');
-
-const BonusStructure: any = () => {
-  var subtitle: any;
-
-  const [modalIsOpen, setIsOpen] = useState(false);
-
-  const [marginBottom, setMarginBotom] = useState("");
-  const [paddingTop, setPaddingTop] = useState("")
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function afterOpenModal() {
-    subtitle.style.color = '#f00';
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  useEffect( () => {
-    if (window.innerWidth > 999) {
-      setMarginBotom("-50px");
-      setPaddingTop("20px")
-    } else {
-      setMarginBotom("-10%")
-      setPaddingTop("0px")
-    }
-  }, [])
-  
+const BonusStructure: React.FC<IBonusStructure> = ({bonusData}) => {
     return (
       <>
-        <Box ml="69%" mb={marginBottom} pt={paddingTop}>
-          <button onClick={openModal}>Bonuses</button>
-        </Box>
-
-        <Modal
-          isOpen={modalIsOpen}
-          onAfterOpen={afterOpenModal}
-          onRequestClose={closeModal}
-          style={customStyles}
+        <Box
+          w="100%"
+          maxWidth="1200px"
+          ml="auto"
+          mr="auto"
+          mt="60px"
+          mb="60px"
+          px={['20px', '20px', 0]}
         >
-          <h2 ref={(_subtitle) => (subtitle = _subtitle)}> BonusRange </h2>
+          <Box
+            w="100%"
+            p="20px"
+            textAlign="left"
+            color="lid.fg"
+            position="relative"
+            border="solid 1px"
+            borderColor="lid.stroke"
+          >
+            <Text fontSize="20px"
+                  color="lid.fg"
+                  fontWeight="bold"
+                  mb="10px">
+              Bonus For Deposit
+            </Text>
 
-          {BonusRange.map((data) => (
-            <p key={data.eth}>
-              {' '}
-              {data.eth} ETH : {data.reward}{' '}
-            </p>
-          ))}
+          <Box float="left">
+            <Text fontSize="16px"
+                  color="blue.500"
+                  mt="5px"
+                  mb="5px"
+                  fontWeight="bold">
+              ETH
+            </Text>
+            {BonusRange.map((data) => (
+              <p key={data.eth}>
+                <Text fontSize="16px"
+                      color="lid.fgMed"
+                      mt="5px"
+                      float="left">
+                  {data.eth} 
+                </Text>
+                <br />
+              </p>
+            ))}
+          </Box>
+          
+          <Box float="left"
+               ml="5%">
+            <Text fontSize="16px"
+                  color="blue.500"
+                  mt="5px"
+                  mb="5px"
+                  fontWeight="bold">
+              Bonus
+            </Text>
+            {BonusRange.map((data) => (
+              <p key={data.eth}>
+                <Text fontSize="16px"
+                      color="lid.fgMed"
+                      mt="5px"
+                      float="left">
+                  {data.reward} 
+                </Text>
+                <br />
+              </p>
+            ))}
+          </Box>
 
-          <button onClick={closeModal}>close</button>
-        </Modal>
+          <Box display="inline-block"
+               ml="5%">
+            <Text fontSize="16px"
+                  color="blue.500"
+                  mt='5px'
+                  mb="5px"
+                  fontWeight="bold">
+              Price (After Referal Fees)
+            </Text>
+            {BonusRange.map((data) => (
+              <p key={data.eth}>
+                <Text fontSize="16px"
+                      color="lid.fgMed"
+                      mt="5px"
+                      display="inline-block">
+                  {data.price}
+                </Text>
+                <br />
+                </p>
+            ))}
+          </Box>
+              
+          <Text mt="10px"
+                color="lid.fgMed"
+                fontSize="14px">
+            Presale ends when it's harcap is reached
+          </Text>
+          </Box>
+        </Box>
       </>
   );
 };

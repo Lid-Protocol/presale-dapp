@@ -60,7 +60,8 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     redeemInterval: '1',
     isEnded: false,
     isPaused: false,
-    isRefunding: false
+    isRefunding: false,
+    bonusRangeBP: []
   });
 
   const {
@@ -86,7 +87,8 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     redeemInterval,
     isEnded,
     isPaused,
-    isRefunding
+    isRefunding,
+    bonusRangeBP
   } = state;
 
   let referralAddress = window.location.hash.substr(2);
@@ -127,6 +129,11 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           call: ['totalDepositors()(uint256)'],
           returns: [['totalDepositors', (val: any) => val.toString()]]
         },
+        // { 
+        //   target: addresses.redeemer,
+        //   call: ['bonusRangeBP()(uint256[])'],
+        //   returns: [['bonusRangeBP', (val:any) => val.toNumber()]]
+        // },
         {
           target: addresses.presale,
           call: ['finalEndTime()(uint256)'],
@@ -275,7 +282,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
         [type]: value
       }));
     });
-
     walletWatcher.start();
   }, [web3, address, finalEndTime, totalEth, startTime, hardcap]);
 
@@ -289,11 +295,11 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     } else {
       setIsActive(true);
     }
+  
   }, [accessTime]);
 
   return (
     <>
-      <BonusRange />
       <Header address={address} meta={meta} onConnect={onConnect} />
       <SubHeading
         totalEth={totalEth}
@@ -319,7 +325,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           </Text>
         </>
       )}
-      {isActive && isEnded && !isPaused && (
+      {isActive && !isEnded && !isPaused && (
         <Claimer
           lidPresaleSC={lidPresaleSC}
           address={address}
@@ -334,7 +340,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           isRefunding={isRefunding}
         />
       )}
-      {isActive && !isEnded && !isPaused && (
+      {isActive && isEnded && !isPaused && (
         <>
           {endTime !== 0 && (
             <EndTimer
@@ -356,6 +362,8 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
             currentPrice={currentPrice}
             hardcap={hardcap}
           />
+
+          <BonusRange bonusData={bonusRangeBP} />
         </>
       )}
       {!isActive && !isEnded && !isPaused && (
