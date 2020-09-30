@@ -139,6 +139,11 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
         },
         {
           target: addresses.presale,
+          call: ['paused()(bool)'],
+          returns: [['isPaused']]
+        },
+        {
+          target: addresses.presale,
           call: ['maxBuyPerAddress()(uint256)'],
           returns: [['maxDeposit', (val: any) => val.toString()]]
         },
