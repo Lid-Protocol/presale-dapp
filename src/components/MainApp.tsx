@@ -337,7 +337,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           isRefunding={isRefunding}
         />
       )}
-      {isActive && isEnded && !isPaused && (
+      {isActive && !isEnded && !isPaused && (
         <>
           <DepositForm
             web3={web3}
@@ -353,7 +353,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           />
         </>
       )}
-      {!isActive && !isEnded && !isPaused && (
+      {!isActive && isEnded && !isPaused && (
         <StartTimer
           startTime={startTime}
           accessTime={accessTime}
