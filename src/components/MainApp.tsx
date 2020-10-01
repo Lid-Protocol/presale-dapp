@@ -307,7 +307,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
 
   return (
     <>
-      <BonusRange />
+
       <Header address={address} meta={meta} onConnect={onConnect} />
       <SubHeading
         totalEth={totalEth}
@@ -370,6 +370,8 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
             currentPrice={currentPrice}
             hardcap={hardcap}
           />
+
+        <BonusRange />
         </>
       )}
       {!isActive && !isEnded && !isPaused && (
