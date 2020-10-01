@@ -362,7 +362,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
             currentPrice={currentPrice}
             hardcap={hardcap}
           />
-
           <BonusRange bonusData={bonusRangeBP} />
         </>
       )}
