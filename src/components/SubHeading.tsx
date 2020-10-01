@@ -279,13 +279,14 @@ const SubHeadings: React.FC<ISubHeading> = ({
               top="-3px"
             />
 
-        <EndTimer
-            expiryTimestamp={expiryTimestamp}
-            hardcap={hardcap}
-            hardCapTimer={hardCapTimer}
-            meta={meta}
-          />
-
+        {expiryTimestamp !== 0 && (
+          <EndTimer
+              expiryTimestamp={expiryTimestamp}
+              hardcap={hardcap}
+              hardCapTimer={hardCapTimer}
+              meta={meta}
+            />
+         )}
           </Box>
 
 
