@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, Box, Button, Grid, Input, Textarea } from '@chakra-ui/core';
+import { Text, Box, Button, Grid, Input } from '@chakra-ui/core';
 import { shortEther, toBN, toWei } from 'utils';
 import { Contract } from 'web3-eth-contract';
 import CountDownShort from './CountDownShort';

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Box, Image, Text, Link, Flex, Grid, Heading } from '@chakra-ui/core';
 
 interface ProjectsProps {
