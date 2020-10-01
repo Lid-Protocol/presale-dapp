@@ -8,11 +8,11 @@ import {
 
 import imgPresent from 'assets/images/common/Bonus_1x.png'
 
-interface IBonusStructure{
-  bonusData: ReadonlyArray<number>;
-}
+// interface IBonusStructure{
+//   bonusData: ReadonlyArray<number>;
+// }
 
-const BonusStructure: React.FC<IBonusStructure> = ({bonusData}) => {
+const BonusStructure: any = () => {
   const [Header, setHeader] = useState("Bonus For Deposit");
 
   useEffect( () => {

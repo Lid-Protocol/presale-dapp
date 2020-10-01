@@ -61,8 +61,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     isEnded: false,
     isPaused: false,
     isRefunding: false,
-    hasSentToUniswap: false,
-    bonusRangeBP: []
+    hasSentToUniswap: false
   });
 
   const {
@@ -89,8 +88,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     isEnded,
     isPaused,
     isRefunding,
-    hasSentToUniswap,
-    bonusRangeBP
+    hasSentToUniswap
   } = state;
 
   let referralAddress = window.location.hash.substr(2);
@@ -361,7 +359,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
             hardcap={hardcap}
           />
 
-        <BonusRange bonusData={bonusRangeBP} />
+        <BonusRange />
         </>
       )}
       {!isActive && !isEnded && !isPaused && (
