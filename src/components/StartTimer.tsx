@@ -18,18 +18,8 @@ const StartTimer: React.FC<IStartTimer> = ({
   meta
 }) => {
   return (
-    <Box
-      display="block"
-      w="100%"
-      mt="40px"
-      mb="40px"
-      px={['20px', '20px', 0]}
-      maxW="1200px"
-      ml="auto"
-      mr="auto"
-      textAlign="center"
-    >
-      <Text fontSize={['28px', '36px']} fontWeight="bold">
+    <>
+    <Text ml="10px" mt="5px" color="lid.fgMed" display="inline-block">
         {`Your ${meta.tokenSymbol} Access Starts In:`}
       </Text>
       <CountDown expiryTimestamp={accessTime} />
@@ -44,7 +34,7 @@ const StartTimer: React.FC<IStartTimer> = ({
         Your {shortEther(stakingLid)} staked LID gets you access{' '}
         {((startTime + 960000 - accessTime) / 60000).toFixed(0)} minutes early.
       </Text>
-    </Box>
+    </>
   );
 };
 

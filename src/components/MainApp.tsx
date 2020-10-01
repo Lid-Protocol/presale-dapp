@@ -306,6 +306,9 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
         expiryTimestamp={endTime}
         hardcap={hardcap}
         hardCapTimer={hardCapTimer}
+        isActive={isActive}
+        startTime={startTime}
+        accessTime={accessTime}
       />
       {isPaused && (
         <>

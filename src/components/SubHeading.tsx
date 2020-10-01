@@ -11,6 +11,8 @@ import imgClock from 'assets/images/common/Timer_2x.png'
 import { DappMetaData } from 'types';
 
 import EndTimer from './EndTimer';
+import StartTimer from './StartTimer';
+
 
 interface ISubHeading {
   totalEth: string;
@@ -23,6 +25,9 @@ interface ISubHeading {
   expiryTimestamp: number | null;
   hardcap: string;
   hardCapTimer: number;
+  isActive: boolean;
+  startTime: number;
+  accessTime: number;
 }
 
 const SubHeadings: React.FC<ISubHeading> = ({
@@ -35,7 +40,10 @@ const SubHeadings: React.FC<ISubHeading> = ({
   meta,
   expiryTimestamp,
   hardcap,
-  hardCapTimer
+  hardCapTimer,
+  isActive,
+  startTime,
+  accessTime
 }) => {
   const { addresses } = meta;
   return (
@@ -279,7 +287,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
               top="-3px"
             />
 
-        {expiryTimestamp !== 0 && (
+        {expiryTimestamp !== 0 && isActive && (
           <EndTimer
               expiryTimestamp={expiryTimestamp}
               hardcap={hardcap}
@@ -287,8 +295,17 @@ const SubHeadings: React.FC<ISubHeading> = ({
               meta={meta}
             />
          )}
-          </Box>
 
+        {!isActive && (
+          <StartTimer
+            startTime={startTime}
+            accessTime={accessTime}
+            meta={meta}
+            stakingLid={stakingLid}
+          />
+        )}
+
+          </Box>
 
         </Grid>
       </Flex>
