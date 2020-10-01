@@ -6,10 +6,11 @@ import imgETHLogo from 'assets/images/common/ethereum-eth-logo.png';
 import imgETHLogoWhite from 'assets/images/common/ethereum-eth-logo-white.png';
 import imgLidLogo from 'assets/images/common/logo-lid.png';
 import imgDepositor from 'assets/images/common/depositor.png';
+import imgClock from 'assets/images/common/Timer_2x.png'
+
 import { DappMetaData } from 'types';
 
 import EndTimer from './EndTimer';
-
 
 interface ISubHeading {
   totalEth: string;
@@ -267,6 +268,16 @@ const SubHeadings: React.FC<ISubHeading> = ({
             p="25px"
             bg="lid.bg"
           >
+
+          <Image
+              src={imgClock}
+              alt="img clock"
+              w="auto"
+              h="25px"
+              display="inline-block"
+              position="relative"
+              top="-3px"
+            />
 
         <EndTimer
             expiryTimestamp={expiryTimestamp}

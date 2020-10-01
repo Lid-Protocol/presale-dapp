@@ -3,16 +3,29 @@ import { BonusRange } from '../config';
 import {
   Box,
   Text,
+  Image,
   Button,
   NumberInput,
   NumberInputField
 } from '@chakra-ui/core';
+
+import imgPresent from 'assets/images/common/Bonus_1x.png'
 
 interface IBonusStructure{
   bonusData: ReadonlyArray<number>;
 }
 
 const BonusStructure: React.FC<IBonusStructure> = ({bonusData}) => {
+  const [Header, setHeader] = useState("Bonus For Deposit");
+
+  useEffect( () => {
+    if (window.innerWidth > 999) {
+      setHeader("Bonus For Deposit")
+    } else {
+      setHeader("Bonus")
+    }
+  })
+
     return (
       <>
         <Box
@@ -33,24 +46,36 @@ const BonusStructure: React.FC<IBonusStructure> = ({bonusData}) => {
             border="solid 1px"
             borderColor="lid.stroke"
           >
+            <Image
+              src={imgPresent}
+              alt="img clock"
+              w="auto"
+              h="25px"
+              display="inline-block"
+              position="relative"
+              top="-3px"
+            />
+
             <Text fontSize="20px"
                   color="lid.fg"
                   fontWeight="bold"
-                  mb="10px">
-              Bonus For Deposit
+                  ml="37px"
+                  mt="-26px"
+                  mb="15px">
+              {Header}
             </Text>
 
           <Box float="left">
-            <Text fontSize="16px"
+            <Text fontSize={['16px', '16px']}
                   color="lid.brand"
-                  mt="5px"
-                  mb="5px"
+                  mt={['10px', '5px']}
+                  mb={['15px', "5px"]}
                   fontWeight="bold">
               ETH
             </Text>
             {BonusRange.map((data) => (
               <p key={data.eth}>
-                <Text fontSize="16px"
+                <Text fontSize={["16px" , "16px"]}
                       color="lid.fgMed"
                       mt="5px"
                       display="inline-block">
@@ -63,16 +88,16 @@ const BonusStructure: React.FC<IBonusStructure> = ({bonusData}) => {
           
           <Box float="left"
                ml="5%">
-            <Text fontSize="16px"
+            <Text fontSize={['16px', '16px']}
                   color="lid.brand"
-                  mt="5px"
-                  mb="5px"
+                  mt={['10px', '5px']}
+                  mb={['15px', "5px"]}
                   fontWeight="bold">
               Bonus
             </Text>
             {BonusRange.map((data) => (
               <p key={data.eth}>
-                <Text fontSize="16px"
+                <Text fontSize={["16px" , "16px"]}
                       color="lid.fgMed"
                       mt="5px"
                       display="inline-block">
@@ -84,17 +109,18 @@ const BonusStructure: React.FC<IBonusStructure> = ({bonusData}) => {
           </Box>
 
           <Box display="inline-block"
-               ml="5%">
-            <Text fontSize="16px"
+               ml={["8%" , "5%"]}>
+            <Text fontSize={['16px', '16px']}
                   color="lid.brand"
-                  mt='5px'
-                  mb="5px"
+                  mt={['0px', '5px']}
+                  mb={['5px', '5px']}
+                  w={['110px', '100%']}
                   fontWeight="bold">
               Price (After Referal Fees)
             </Text>
             {BonusRange.map((data) => (
               <p key={data.eth}>
-                <Text fontSize="16px"
+                <Text fontSize={["16px" , "16px"]}
                       color="lid.fgMed"
                       mt="5px"
                       display="inline-block">
@@ -107,7 +133,8 @@ const BonusStructure: React.FC<IBonusStructure> = ({bonusData}) => {
               
           <Text mt="20px"
                 color="lid.fgLight"
-                fontSize="15px">
+                fontWeight="light"
+                fontSize={[ "13px" , "15px"]}>
             Presale ends when it's harcap is reached
           </Text>
           </Box>
