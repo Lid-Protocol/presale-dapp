@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Text, Box } from '@chakra-ui/core';
 
@@ -275,7 +276,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
         [type]: value
       }));
     });
-
     walletWatcher.start();
   }, [web3, address, finalEndTime, totalEth, startTime, hardcap]);
 
@@ -289,11 +289,11 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     } else {
       setIsActive(true);
     }
+  
   }, [accessTime]);
 
   return (
     <>
-      <BonusRange />
       <Header address={address} meta={meta} onConnect={onConnect} />
       <SubHeading
         totalEth={totalEth}
@@ -303,6 +303,9 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
         accountShares={accountShares}
         maxShares={maxShares}
         stakingLid={stakingLid}
+        expiryTimestamp={endTime}
+        hardcap={hardcap}
+        hardCapTimer={hardCapTimer}
       />
       {isPaused && (
         <>
@@ -319,7 +322,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           </Text>
         </>
       )}
-      {isActive && isEnded && !isPaused && (
+      {isActive && !isEnded && !isPaused && (
         <Claimer
           lidPresaleSC={lidPresaleSC}
           address={address}
@@ -334,16 +337,8 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           isRefunding={isRefunding}
         />
       )}
-      {isActive && !isEnded && !isPaused && (
+      {isActive && isEnded && !isPaused && (
         <>
-          {endTime !== 0 && (
-            <EndTimer
-              expiryTimestamp={endTime}
-              hardcap={hardcap}
-              hardCapTimer={hardCapTimer}
-              meta={meta}
-            />
-          )}
           <DepositForm
             web3={web3}
             address={address}

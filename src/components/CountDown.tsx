@@ -18,16 +18,15 @@ const CountDown: React.FC<ICountDown> = ({ expiryTimestamp }) => {
   }, [expiryTimestamp]);
 
   return (
-    <Box w="100%" textAlign="center" mb="40px" position="relative">
-      <Box display="inline-block" w={['40px', '90px']} m="5px">
-        <Text fontSize={['24px', '48px']} color="lid.brand">
+    <Box w="100%" textAlign={[ "left", "center"]} ml={["0%", "-26%"]}>
+      <Box display="inline-block" w={['50px', '90px']}>
+        <Text fontSize={['28px' ,'38px']} fontWeight="bold" color="lid.brand">
           {days.toString().padStart(2, '0')}
         </Text>
         <Text
-          fontSize={['12px', '16px']}
+          fontSize={['12px', '14px']}
           color="lid.fgLight"
           w="100%"
-          textAlign="center"
           fontWeight="light"
         >
           DAYS
@@ -35,23 +34,21 @@ const CountDown: React.FC<ICountDown> = ({ expiryTimestamp }) => {
       </Box>
       <Box
         display="inline-block"
-        m="5px"
         position="relative"
-        top={['-24px', '-36px']}
+        top={['-28px', '-35px']}
       >
-        <Text fontSize={['24px', '48px']} color="lid.brand" m="0px">
+        <Text fontSize={['28px' ,'38px']} fontWeight="bold" color="lid.brand" mr={[ '10px' ,"0"]}>
           :
         </Text>
       </Box>
-      <Box display="inline-block" w={['40px', '90px']} m="5px">
-        <Text fontSize={['24px', '48px']} color="lid.brand">
+      <Box display="inline-block" w={['50px', '90px']} m="0">
+        <Text fontSize={['28px' ,'38px']} fontWeight="bold" color="lid.brand">
           {hours.toString().padStart(2, '0')}
         </Text>
         <Text
-          fontSize={['12px', '16px']}
+          fontSize={['12px', '14px']}
           color="lid.fgLight"
           w="100%"
-          textAlign="center"
           fontWeight="light"
         >
           HOURS
@@ -59,23 +56,21 @@ const CountDown: React.FC<ICountDown> = ({ expiryTimestamp }) => {
       </Box>
       <Box
         display="inline-block"
-        m="5px"
         position="relative"
-        top={['-24px', '-36px']}
+        top={['-28px', '-35px']}
       >
-        <Text fontSize={['24px', '48px']} color="lid.brand" m="0px">
+        <Text fontSize={['28px' ,'38px']} fontWeight="bold" color="lid.brand" mr={[ '10px' ,"0"]}>
           :
         </Text>
       </Box>
-      <Box display="inline-block" w={['40px', '90px']} m="5px">
-        <Text fontSize={['24px', '48px']} color="lid.brand">
+      <Box display="inline-block" w={['50px', '90px']} m="0">
+        <Text fontSize={['28px' ,'38px']} fontWeight="bold" color="lid.brand">
           {minutes.toString().padStart(2, '0')}
         </Text>
         <Text
-          fontSize={['12px', '16px']}
+          fontSize={['12px', '14px']}
           color="lid.fgLight"
           w="100%"
-          textAlign="center"
           fontWeight="light"
         >
           MINUTES
@@ -83,23 +78,21 @@ const CountDown: React.FC<ICountDown> = ({ expiryTimestamp }) => {
       </Box>
       <Box
         display="inline-block"
-        m="5px"
         position="relative"
-        top={['-24px', '-36px']}
+        top={['-28px', '-35px']}
       >
-        <Text fontSize={['24px', '48px']} color="lid.brand" m="0px">
+        <Text fontSize={['28px' ,'38px']} fontWeight="bold" color="lid.brand" mr={[ '10px' ,"0"]}>
           :
         </Text>
       </Box>
-      <Box display="inline-block" w={['40px', '90px']} m="105pxx">
-        <Text fontSize={['24px', '48px']} color="lid.brand">
+      <Box display="inline-block" w={['50px', '90px']} m="105pxx">
+        <Text fontSize={['28px' ,'38px']} fontWeight="bold" color="lid.brand">
           {seconds.toString().padStart(2, '0')}
         </Text>
         <Text
-          fontSize={['12px', '16px']}
+          fontSize={['12px', '14px']}
           color="lid.fgLight"
           w="100%"
-          textAlign="center"
           fontWeight="light"
         >
           SECONDS
