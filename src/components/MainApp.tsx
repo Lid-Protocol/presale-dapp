@@ -61,6 +61,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     isEnded: false,
     isPaused: false,
     isRefunding: false,
+    hasSentToUniswap: false,
     bonusRangeBP: []
   });
 
@@ -88,6 +89,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     isEnded,
     isPaused,
     isRefunding,
+    hasSentToUniswap,
     bonusRangeBP
   } = state;
 
