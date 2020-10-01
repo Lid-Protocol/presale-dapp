@@ -60,7 +60,8 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     redeemInterval: '1',
     isEnded: false,
     isPaused: false,
-    isRefunding: false
+    isRefunding: false,
+    bonusRangeBP: []
   });
 
   const {
@@ -86,7 +87,8 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     redeemInterval,
     isEnded,
     isPaused,
-    isRefunding
+    isRefunding,
+    bonusRangeBP
   } = state;
 
   let referralAddress = window.location.hash.substr(2);
@@ -293,7 +295,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
 
   return (
     <>
-      <BonusRange />
+
       <Header address={address} meta={meta} onConnect={onConnect} />
       <SubHeading
         totalEth={totalEth}
@@ -356,6 +358,8 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
             currentPrice={currentPrice}
             hardcap={hardcap}
           />
+
+        <BonusRange bonusData={bonusRangeBP} />
         </>
       )}
       {!isActive && !isEnded && !isPaused && (
