@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
         />
       </Link>
       <Text mt="20px" fontSize="14px">
-        LID Links
+        {' '}
       </Text>
       <Link
         display="inline-block"

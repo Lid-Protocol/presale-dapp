@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Box, Image, Text, Link, Flex, Grid, Heading } from '@chakra-ui/core';
 
 interface ProjectsProps {
@@ -16,16 +16,18 @@ export default function Projects({ items }: any) {
       direction="column"
       justifyContent="center"
     >
-      <Heading
-        as="h1"
-        size="lg"
-        fontWeight="bold"
-        color="lid.fg"
-        mb="1rem"
-        textAlign={['left', 'left', 'left', 'left']}
-      >
-        Presales launched on LID Certified Presale Protocol
-      </Heading>
+      <Box py={{ base: '2em', md: 0 }}>
+        <Heading
+          as="h1"
+          size="lg"
+          fontWeight="bold"
+          color="lid.fg"
+          py={{ base: 0, md: '2em' }}
+          textAlign={['left', 'left', 'left', 'left']}
+        >
+          Presales launched on LID Certified Presale Protocol
+        </Heading>
+      </Box>
       <Grid
         templateColumns={{
           base: 'repeat(1, 1fr)',

@@ -1,17 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Box,
-  Button,
-  Flex,
-  Image,
-  Link,
-  Heading,
-  Stack,
-  Text
-} from '@chakra-ui/core';
+import { Flex, Image, Heading, Stack } from '@chakra-ui/core';
+import styled from 'styled-components';
 
 import certifiedImage from 'assets/images/common/certified.png';
+
+const StyledContainer = styled.div`
+  background-color: #d3d3d3;
+`;
 
 interface HeroProps {
   title: string;
@@ -30,55 +26,63 @@ export default function Hero({
   ...rest
 }: Partial<HeroProps>) {
   return (
-    <Flex
-      justify={{
-        base: 'center',
-        sm: 'space-between',
-        md: 'space-around',
-        xl: 'space-between'
-      }}
-      direction={{ base: 'column-reverse', md: 'row' }}
-      wrap="nowrap"
-      minH="70vh"
-      align="center"
-      px={{ base: 0, sm: 0, md: 0 }}
-      mb={16}
-      {...rest}
-    >
-      <Stack
-        spacing={4}
-        w={{ base: '90%', md: '40%' }}
-        mt={30}
-        align={['left', 'left', 'flex-start', 'flex-start']}
-      >
-        <Heading
-          as="h1"
-          size="xl"
-          fontWeight="bold"
-          color="primary.800"
-          textAlign={['left', 'left', 'left', 'left']}
+    <StyledContainer>
+      <Flex direction="column" maxW={{ xl: '1200px' }} m="0 auto">
+        <Flex
+          justify={{
+            base: 'center',
+            sm: 'space-between',
+            md: 'space-around',
+            xl: 'space-between'
+          }}
+          direction={{ base: 'column-reverse', md: 'row' }}
+          wrap="nowrap"
+          minH="60vh"
+          align="center"
+          px={{ base: 0, sm: 0, md: 0 }}
+          mb={0}
+          {...rest}
         >
-          {title}
-        </Heading>
-        <Heading
-          as="h2"
-          size="md"
-          opacity={0.8}
-          fontWeight="normal"
-          lineHeight={1.5}
-          textAlign={['left', 'left', 'left', 'left']}
-        >
-          {subtitle}
-        </Heading>
-      </Stack>
-      <Box w={{ base: '100%', sm: '100%', md: '50%' }} mb={{ base: 12, md: 0 }}>
-        <Image
-          src={image}
-          w={{ base: '100%', sm: '100%', md: '70%' }}
-          rounded="1rem"
-        />
-      </Box>
-    </Flex>
+          <Stack
+            spacing={4}
+            w={{ base: '90%', md: '40%' }}
+            mt={30}
+            align={['left', 'left', 'flex-start', 'flex-start']}
+          >
+            <Heading
+              as="h1"
+              size="xl"
+              fontWeight="bold"
+              color="primary.800"
+              textAlign={['left', 'left', 'left', 'left']}
+            >
+              {title}
+            </Heading>
+            <Heading
+              as="h2"
+              size="md"
+              opacity={0.8}
+              fontWeight="normal"
+              lineHeight={1.5}
+              textAlign={['left', 'left', 'left', 'left']}
+            >
+              {subtitle}
+            </Heading>
+          </Stack>
+          <Flex
+            justifyContent="center"
+            w={{ base: '100%', sm: '100%', md: '40%' }}
+            mb={{ base: 12, md: 0 }}
+          >
+            <Image
+              src={image}
+              w={{ base: '100%', sm: '100%', md: '70%' }}
+              rounded="1rem"
+            />
+          </Flex>
+        </Flex>
+      </Flex>
+    </StyledContainer>
   );
 }
 
