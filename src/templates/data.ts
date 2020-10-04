@@ -1,21 +1,21 @@
 export const data = [
   {
-    projectUrl: 'https://sales.lid.sh/swapfolio',
+    projectUrl: 'https://sale.lid.sh/swapfolio',
     projectName: 'Dex Trust',
     projectImage: 'https://swapfolio.lid.sh/opengraph.jpg'
   },
   {
-    projectUrl: 'https://sales.lid.sh/finswap',
+    projectUrl: 'https://sale.lid.sh/finswap',
     projectName: 'Finswap',
     projectImage: 'https://finswap.lid.sh/opengraph.jpg'
   },
   {
-    projectUrl: 'https://sales.lid.sh/leadwallet',
+    projectUrl: 'https://sale.lid.sh/leadwallet',
     projectName: 'Lead Wallet',
     projectImage: 'https://leadwallet.lid.sh/opengraph.jpg'
   },
   {
-    projectUrl: 'https://sales.lid.sh/xfi',
+    projectUrl: 'https://sale.lid.sh/xfi',
     projectName: 'XFI',
     projectImage: 'https://xfi.lid.sh/opengraph.jpg'
   }
