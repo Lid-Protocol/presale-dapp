@@ -18,6 +18,11 @@ export const data = [
     projectUrl: 'https://sale.lid.sh/xfi',
     projectName: 'XFI',
     projectImage: 'https://xfi.lid.sh/opengraph.jpg'
+  },
+  {
+    projectUrl: 'https://swapfolio.lid.sh',
+    projectName: 'SwapFolio',
+    projectImage: 'https://swapfolio.lid.sh/opengraph.jpg'
   }
   // {
   //   projectUrl: 'https://myx.lid.sh',
