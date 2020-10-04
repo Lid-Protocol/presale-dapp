@@ -1,8 +1,8 @@
 export const data = [
   {
-    projectUrl: 'https://sale.lid.sh/swapfolio',
+    projectUrl: 'https://sale.lid.sh/dextrust',
     projectName: 'Dex Trust',
-    projectImage: 'https://swapfolio.lid.sh/opengraph.jpg'
+    projectImage: 'https://dextrust.lid.sh/opengraph.jpg'
   },
   {
     projectUrl: 'https://sale.lid.sh/finswap',
