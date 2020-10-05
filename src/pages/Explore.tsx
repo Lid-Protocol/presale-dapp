@@ -27,7 +27,7 @@ export default (props: IProps) => {
           referralBP: '',
           basisPoint: '',
           accountCap: '',
-          favicon: '',
+          favicon: '/assets/images/icons/favicon.ico',
           addresses: {
             presale: '',
             redeemer: '',
@@ -39,8 +39,8 @@ export default (props: IProps) => {
         }}
       />
       <Header />
+      <Hero />
       <Flex direction="column" maxW={{ xl: '1200px' }} m="0 auto" {...props}>
-        <Hero />
         <Projects items={data} />
       </Flex>
       <Footer />

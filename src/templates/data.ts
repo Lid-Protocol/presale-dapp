@@ -1,21 +1,21 @@
 export const data = [
   {
-    projectUrl: 'https://dextrust.lid.sh',
+    projectUrl: 'https://sale.lid.sh/dextrust',
     projectName: 'Dex Trust',
     projectImage: 'https://dextrust.lid.sh/opengraph.jpg'
   },
   {
-    projectUrl: 'https://finswap.lid.sh',
+    projectUrl: 'https://sale.lid.sh/finswap',
     projectName: 'Finswap',
     projectImage: 'https://finswap.lid.sh/opengraph.jpg'
   },
   {
-    projectUrl: 'https://leadwallet.lid.sh',
+    projectUrl: 'https://sale.lid.sh/leadwallet',
     projectName: 'Lead Wallet',
     projectImage: 'https://leadwallet.lid.sh/opengraph.jpg'
   },
   {
-    projectUrl: 'https://xfi.lid.sh',
+    projectUrl: 'https://sale.lid.sh/xfi',
     projectName: 'XFI',
     projectImage: 'https://xfi.lid.sh/opengraph.jpg'
   },
