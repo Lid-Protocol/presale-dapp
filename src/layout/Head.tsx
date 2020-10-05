@@ -40,10 +40,14 @@ export default ({ meta }: IProps) => {
           sizes="96x96"
           href={`${formatAssetUrl(meta.tokenName, 'favicon-96x96.png')}`}
         />
-        <link
-          rel="icon"
-          href={`${formatAssetUrl(meta.tokenName, 'favicon.ico')}`}
-        />
+        {meta.favicon ? (
+          <link rel="icon" href={`${meta.favicon}`} />
+        ) : (
+          <link
+            rel="icon"
+            href={`${formatAssetUrl(meta.tokenName, 'favicon.ico')}`}
+          />
+        )}
 
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta
@@ -93,18 +97,18 @@ export default ({ meta }: IProps) => {
           }
         />
 
-          <meta
-            property="og:image"
-            content={`${formatAssetUrl(meta.tokenName, 'opengraph.jpg')}`}
-          />
-          <meta
-            itemProp="image"
-            content={`${formatAssetUrl(meta.tokenName, 'opengraph.jpg')}`}
-          />
-          <meta
-            name="twitter:image"
-            content={`${formatAssetUrl(meta.tokenName, 'opengraph.jpg')}`}
-          />
+        <meta
+          property="og:image"
+          content={`${formatAssetUrl(meta.tokenName, 'opengraph.jpg')}`}
+        />
+        <meta
+          itemProp="image"
+          content={`${formatAssetUrl(meta.tokenName, 'opengraph.jpg')}`}
+        />
+        <meta
+          name="twitter:image"
+          content={`${formatAssetUrl(meta.tokenName, 'opengraph.jpg')}`}
+        />
 
         <title>
           {meta.tokenSymbol

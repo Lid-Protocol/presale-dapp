@@ -8,6 +8,8 @@ import Projects from 'components/sections/Projects';
 import { data } from 'templates/data';
 import Head from 'layout/Head';
 
+import favicon from '../assets/images/icons/favicon.ico';
+
 interface IProps {
   address: string;
   onConnect: () => void;
@@ -27,7 +29,7 @@ export default (props: IProps) => {
           referralBP: '',
           basisPoint: '',
           accountCap: '',
-          favicon: '/assets/images/icons/favicon.ico',
+          favicon,
           addresses: {
             presale: '',
             redeemer: '',
