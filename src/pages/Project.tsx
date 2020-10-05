@@ -62,7 +62,7 @@ export default ({ address, onConnect, web3 }: IProps) => {
         setShowError(true);
       }
     };
-
+    
     loadProject();
   }, []);
 

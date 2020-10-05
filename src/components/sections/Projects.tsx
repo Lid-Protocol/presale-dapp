@@ -1,10 +1,14 @@
 import React from 'react';
 import { Box, Image, Text, Link, Flex, Grid, Heading } from '@chakra-ui/core';
 
+import EndTimer from '../EndTimer'
+import StartTimer from '../StartTimer'
+
 interface ProjectsProps {
   projectName: string;
   projectUrl: string;
   projectImage: string;
+  isActive: boolean;
 }
 
 export default function Projects({ items }: any) {
@@ -66,6 +70,28 @@ export default function Projects({ items }: any) {
                 opacity={0.6}
               >
                 {item.projectName}
+              </Text>
+
+              <Text textAlign="center">
+
+              {item.isActive && (
+                  <EndTimer
+                    expiryTimestamp={endTime}
+                    hardcap={hardcap}
+                    hardCapTimer={hardCapTimer}
+                    meta={meta}
+                  />
+            
+              )}
+              {!item.isActive && (
+                  <StartTimer
+                    startTime={startTime}
+                    accessTime={accessTime}
+                    meta={meta}
+                    stakingLid={stakingLid}
+                  />
+              )}
+
               </Text>
             </Box>
           </Link>
