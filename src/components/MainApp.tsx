@@ -332,7 +332,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           </Text>
         </>
       )}
-      {isActive && isEnded && !isPaused && (
+      {isActive && !isEnded && !isPaused && (
         <Claimer
           lidPresaleSC={lidPresaleSC}
           address={address}
@@ -347,7 +347,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           isRefunding={isRefunding}
         />
       )}
-      {isActive && !isEnded && !isPaused && (
+      {isActive && isEnded && !isPaused && (
         <>
           {endTime !== 0 && (
             <EndTimer

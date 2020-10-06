@@ -74,7 +74,7 @@ export default function Projects({ items }: any) {
 
               <Text textAlign="center">
 
-              {item.isActive && (
+               {/* {item.isActive && (
                   <EndTimer
                     expiryTimestamp={endTime}
                     hardcap={hardcap}
@@ -90,7 +90,7 @@ export default function Projects({ items }: any) {
                     meta={meta}
                     stakingLid={stakingLid}
                   />
-              )}
+              )}  */}
 
               </Text>
             </Box>
