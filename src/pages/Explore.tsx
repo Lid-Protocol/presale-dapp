@@ -8,6 +8,8 @@ import Projects from 'components/sections/Projects';
 import { data } from 'templates/data';
 import Head from 'layout/Head';
 
+import favicon from '../assets/images/icons/favicon.ico';
+
 interface IProps {
   address: string;
   onConnect: () => void;
