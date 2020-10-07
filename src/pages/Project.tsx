@@ -39,30 +39,22 @@ export default ({ address, onConnect, web3 }: IProps) => {
 
   useEffect(() => {
     const loadProject = async () => {
+      let response;
+      
       try {
         const project: string = history.location.pathname
-          .split('/')[1]
-          .toLowerCase();
-        const input = {
-          apiKey: process.env.REACT_APP_FLEEK_API_KEY || '',
-          apiSecret: process.env.REACT_APP_FLEEK_API_SECRET || '',
-          key: `${project}/config.${project}.json`
-        };
+        .split('/')[1]
+        .toLowerCase();
 
-        let { data, bucket } = await fleekStorage.get(input);
-
-        let config: DappMetaData = JSON.parse(data);
-
-        setMeta({
-          ...config,
-          accountCap: Web3.utils.toWei(config.accountCap),
-          favicon: ''
-        });
-      } catch (error) {
+        response = await fetch(`https://ipfs.io/ipns/lid-team-bucket.storage.fleek.co/${project}/config.${project}.json`)
+                  .then(res => res.json())
+                  .then(data => setMeta({...data,
+                                          accountCap: Web3.utils.toWei(data.accountCap),
+                                          favicon: ''}))
+      } catch (ex) {
         setShowError(true);
       }
-    };
-
+    }
     loadProject();
   }, []);
 
