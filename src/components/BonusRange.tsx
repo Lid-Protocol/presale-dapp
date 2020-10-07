@@ -1,63 +1,138 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BonusRange } from '../config';
-import { Box } from '@chakra-ui/core';
+import { Box, Text, Image } from '@chakra-ui/core';
 
-import Modal from 'react-modal';
+import imgPresent from 'assets/images/common/Bonus_1x.png';
 
-const customStyles = {
-  content: {
-    top: '220px',
-    left: '70%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  },
-  overlay: { zIndex: 1000 }
-};
+const BonusStructure: React.FC = () => {
+  const [Header, setHeader] = useState('Bonus For Deposit');
 
-Modal.setAppElement('#root');
-
-const BonusStructure: any = () => {
-  var subtitle: any;
-
-  const [modalIsOpen, setIsOpen] = useState(false);
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function afterOpenModal() {
-    subtitle.style.color = '#f00';
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
+  useEffect(() => {
+    if (window.innerWidth > 999) {
+      setHeader('Bonus For Deposit');
+    } else {
+      setHeader('Bonus');
+    }
+  });
 
   return (
     <>
-      <Box ml="900px" mb="-50px" pt="20px">
-        <button onClick={openModal}>Bonuses</button>
-      </Box>
-
-      <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={customStyles}
+      <Box
+        w="100%"
+        maxWidth="1200px"
+        mx="auto"
+        my="60px"
+        px={['20px', '20px', 0]}
       >
-        <h2 ref={(_subtitle) => (subtitle = _subtitle)}> BonusRange </h2>
+        <Box
+          w="100%"
+          p="20px"
+          textAlign="left"
+          color="lid.fg"
+          position="relative"
+          border="solid 1px"
+          borderColor="lid.stroke"
+          borderRadius="5px"
+        >
+          <Image
+            src={imgPresent}
+            alt="img clock"
+            w="auto"
+            h="25px"
+            display="inline-block"
+            position="relative"
+            top="-3px"
+          />
 
-        {BonusRange.map((data) => (
-          <p key={data.eth}>
-            {' '}
-            {data.eth} ETH : {data.reward}{' '}
-          </p>
-        ))}
+          <Text
+            fontSize="20px"
+            color="lid.fg"
+            fontWeight="bold"
+            ml="37px"
+            mt="-26px"
+            mb="15px"
+          >
+            {Header}
+          </Text>
 
-        <button onClick={closeModal}>close</button>
-      </Modal>
+          <Box float="left">
+            <Text
+              display="block"
+              fontSize={['14px', '16px']}
+              color="lid.brand"
+              mt={['10px', '5px']}
+              mb={['15px', '5px']}
+              fontWeight="bold"
+            >
+              ETH
+            </Text>
+            {BonusRange.map((data) => (
+              <Text
+                key={data.eth}
+                fontSize={['14px', '16px']}
+                color="lid.fgMed"
+                mt="5px"
+              >
+                {data.eth}
+              </Text>
+            ))}
+          </Box>
+
+          <Box float="left" ml="5%">
+            <Text
+              fontSize={['14px', '16px']}
+              color="lid.brand"
+              mt={['10px', '5px']}
+              mb={['15px', '5px']}
+              fontWeight="bold"
+            >
+              Bonus
+            </Text>
+            {BonusRange.map((data) => (
+              <Text
+                key={data.reward}
+                fontSize={['14px', '16px']}
+                color="lid.fgMed"
+                mt="5px"
+              >
+                {data.reward}
+              </Text>
+            ))}
+          </Box>
+
+          <Box display="inline-block" ml={['5%']}>
+            <Text
+              fontSize={['14px', '16px']}
+              color="lid.brand"
+              mt={['0px', '5px']}
+              mb={['5px', '5px']}
+              w={['110px', '100%']}
+              fontWeight="bold"
+            >
+              Price (After Referal Fees)
+            </Text>
+            {BonusRange.map((data) => (
+              <Text
+                key={data.price}
+                fontSize={['14px', '16px']}
+                color="lid.fgMed"
+                mt="5px"
+              >
+                {data.price}
+              </Text>
+            ))}
+          </Box>
+
+          <Text
+            mt="20px"
+            color="lid.fgLight"
+            fontWeight="light"
+            fontSize={['13px', '15px']}
+          >
+            Presale ends when it's harcap is reached
+          </Text>
+        </Box>
+      </Box>
     </>
   );
 };

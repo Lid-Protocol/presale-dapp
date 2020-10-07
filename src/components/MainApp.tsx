@@ -53,6 +53,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     accountRedeemable: '0',
     accountClaimedTokens: '0',
     maxShares: '0',
+    totalShares: '0',
     hardcap: '0',
     hardCapTimer: 0,
     stakingLid: '0',
@@ -60,7 +61,8 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     redeemInterval: '1',
     isEnded: false,
     isPaused: false,
-    isRefunding: false
+    isRefunding: false,
+    hasSentToUniswap: false
   });
 
   const {
@@ -79,6 +81,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     accountRedeemable,
     accountClaimedTokens,
     maxShares,
+    totalShares,
     hardcap,
     hardCapTimer,
     stakingLid,
@@ -86,7 +89,8 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     redeemInterval,
     isEnded,
     isPaused,
-    isRefunding
+    isRefunding,
+    hasSentToUniswap
   } = state;
 
   let referralAddress = window.location.hash.substr(2);
@@ -128,6 +132,11 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           returns: [['totalDepositors', (val: any) => val.toString()]]
         },
         {
+          target: addresses.redeemer,
+          call: ['totalShares()(uint256)'],
+          returns: [['totalShares', (val: any) => val.toString()]]
+        },
+        {
           target: addresses.presale,
           call: ['finalEndTime()(uint256)'],
           returns: [['finalEndTime', (val: any) => val.toString()]]
@@ -136,6 +145,16 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           target: addresses.presale,
           call: ['isPresaleEnded()(bool)'],
           returns: [['isEnded']]
+        },
+        {
+          target: addresses.presale,
+          call: ['paused()(bool)'],
+          returns: [['isPaused']]
+        },
+        {
+          target: addresses.presale,
+          call: ['hasSentToUniswap()(bool)'],
+          returns: [['hasSentToUniswap']]
         },
         {
           target: addresses.presale,
@@ -288,7 +307,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
 
   return (
     <>
-      <BonusRange />
       <Header address={address} meta={meta} onConnect={onConnect} />
       <SubHeading
         totalEth={totalEth}
@@ -296,7 +314,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
         totalDepositors={totalDepositors}
         accountEthDeposit={accountEthDeposit}
         accountShares={accountShares}
-        maxShares={maxShares}
+        totalShares={hasSentToUniswap ? totalShares : maxShares}
         stakingLid={stakingLid}
       />
       {isPaused && (
@@ -319,7 +337,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           lidPresaleSC={lidPresaleSC}
           address={address}
           meta={meta}
-          maxShares={maxShares}
+          totalShares={hasSentToUniswap ? totalShares : maxShares}
           redeemBP={redeemBP}
           redeemInterval={redeemInterval}
           finalEndTime={finalEndTime}
@@ -351,6 +369,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
             currentPrice={currentPrice}
             hardcap={hardcap}
           />
+          <BonusRange />
         </>
       )}
       {!isActive && !isEnded && !isPaused && (

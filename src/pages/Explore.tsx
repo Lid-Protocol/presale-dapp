@@ -29,7 +29,7 @@ export default (props: IProps) => {
           referralBP: '',
           basisPoint: '',
           accountCap: '',
-          favicon,
+          favicon: '/assets/images/icons/favicon.ico',
           addresses: {
             presale: '',
             redeemer: '',
