@@ -27,6 +27,12 @@ const EndTimer: React.FC<IEndTimer> = ({
         expiryTimestamp === null ? Date.now() : expiryTimestamp
       }
     />
+      <Text fontSize={['12px', '14px']} fontWeight="light" ml="5px;" mt="-5px">
+        {hardCapTimer} hour timer.
+      </Text>
+      <Text fontSize={['12px', '14px']} ml="5px" fontWeight="light">
+        Ends after {hardCapTimer} hours or {fromWei(hardcap)} ETH.
+      </Text>
     </>
   );
 };
