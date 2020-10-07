@@ -39,11 +39,14 @@ export default ({ address, onConnect, web3 }: IProps) => {
 
   useEffect(() => {
     const loadProject = async () => {
-      
       let response;
       
       try {
-        response = await fetch(`https://ipfs.io/ipfs/QmUuydwDFCnghVs9eBoryVgpNB52WszaNKBKYZpZp2KipF/cxn/config.cxn.json`)
+        const project: string = history.location.pathname
+        .split('/')[1]
+        .toLowerCase();
+
+        response = await fetch(`https://ipfs.io/ipfs/QmUuydwDFCnghVs9eBoryVgpNB52WszaNKBKYZpZp2KipF/${project}/config.${project}.json`)
                   .then(res => res.json())
                   .then(data => setMeta({...data,
                                           accountCap: Web3.utils.toWei(data.accountCap),
@@ -52,32 +55,7 @@ export default ({ address, onConnect, web3 }: IProps) => {
         setShowError(true);
         console.log(ex);
       }
-    
-      //   try {
-      //   const project: string = history.location.pathname
-      //     .split('/')[1]
-      //     .toLowerCase();
-      //   const input = {
-      //     apiKey: process.env.REACT_APP_FLEEK_API_KEY || '',
-      //     apiSecret: process.env.REACT_APP_FLEEK_API_SECRET || '',
-      //     key: `${project}/config.${project}.json`
-      //   };
-      //   let { data, bucket } = await fleekStorage.get(input);
-
-      //   let config: DappMetaData = JSON.parse(data);
-
-      //   setMeta({
-      //     ...config,
-      //     accountCap: Web3.utils.toWei(config.accountCap),
-      //     favicon: ''
-      //   });
-      // } catch (error) {
-      //   setShowError(true);
-      //   console.log(error);
-      // }
-
     }
-
     loadProject();
   }, []);
 
