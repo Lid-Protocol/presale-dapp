@@ -53,7 +53,6 @@ export default ({ address, onConnect, web3 }: IProps) => {
                                           favicon: ''}))
       } catch (ex) {
         setShowError(true);
-        console.log(ex);
       }
     }
     loadProject();
