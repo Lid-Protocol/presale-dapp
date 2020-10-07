@@ -46,7 +46,7 @@ export default ({ address, onConnect, web3 }: IProps) => {
         .split('/')[1]
         .toLowerCase();
 
-        response = await fetch(`https://ipfs.io/ipfs/QmUuydwDFCnghVs9eBoryVgpNB52WszaNKBKYZpZp2KipF/${project}/config.${project}.json`)
+        response = await fetch(`https://ipfs.io/ipns/lid-team-bucket.storage.fleek.co/${project}/config.${project}.json`)
                   .then(res => res.json())
                   .then(data => setMeta({...data,
                                           accountCap: Web3.utils.toWei(data.accountCap),
