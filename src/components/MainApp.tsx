@@ -191,6 +191,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     );
 
     defaultWatcher.subscribe((update: any) => {
+      console.log(update.type + "  "  + update.value)
       setState((prevState) => ({
         ...prevState,
         [update.type]: update.value
@@ -283,6 +284,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     );
 
     walletWatcher.subscribe((update: any) => {
+      console.log((update.type + "  " + update.value))
       const { type, value } = update;
       setState((prevState) => ({
         ...prevState,
@@ -332,7 +334,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           </Text>
         </>
       )}
-      {isActive && !isEnded && !isPaused && (
+      {isActive && isEnded && !isPaused && (
         <Claimer
           lidPresaleSC={lidPresaleSC}
           address={address}
@@ -347,7 +349,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           isRefunding={isRefunding}
         />
       )}
-      {isActive && isEnded && !isPaused && (
+      {isActive && !isEnded && !isPaused && (
         <>
           {endTime !== 0 && (
             <EndTimer
