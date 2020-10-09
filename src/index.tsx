@@ -1,11 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+
+import TagManager from 'react-gtm-module';
 import Router from 'pages';
 
 import * as serviceWorker from './serviceWorker';
 import 'assets/styles/global.css';
 import ThemeWrapper from 'containers/ThemeWrapper';
+
+TagManager.initialize({
+  gtmId: 'UA-180234058-1',
+});
 
 ReactDOM.render(
   <React.StrictMode>
