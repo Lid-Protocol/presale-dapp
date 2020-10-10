@@ -80,10 +80,12 @@ export const importAll = (r: __WebpackModuleApi.RequireContext) => {
 };
 
 export const formatAssetUrl = (project: string, link: string) => {
+  console.log(project);
   if (project) {
     return `${
       process.env.REACT_APP_FLEEK_BUCKET
     }${project.toLowerCase()}/${link}`;
+  } else {
+    return `lid/${link}`;
   }
-  return `lid/${link}`;
 };
