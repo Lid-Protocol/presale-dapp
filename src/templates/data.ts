@@ -1,5 +1,10 @@
 export const data = [
   {
+    projectUrl: 'https://sale.lid.sh/qrx',
+    projectName: 'QuiverX',
+    projectImage: 'https://lid-team-bucket.storage.fleek.co/qrx/opengraph.jpg'
+  },
+  {
     projectUrl: 'https://sale.lid.sh/dextrust',
     projectName: 'Dex Trust',
     projectImage: 'https://dextrust.lid.sh/opengraph.jpg'
