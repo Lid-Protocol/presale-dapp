@@ -6,7 +6,13 @@ import imgETHLogo from 'assets/images/common/ethereum-eth-logo.png';
 import imgETHLogoWhite from 'assets/images/common/ethereum-eth-logo-white.png';
 import imgLidLogo from 'assets/images/common/logo-lid.png';
 import imgDepositor from 'assets/images/common/depositor.png';
+import imgClock from 'assets/images/common/Timer_2x.png'
+
 import { DappMetaData } from 'types';
+
+import EndTimer from './EndTimer';
+import StartTimer from './StartTimer';
+
 
 interface ISubHeading {
   totalEth: string;
@@ -16,6 +22,12 @@ interface ISubHeading {
   accountEthDeposit: string;
   accountShares: string;
   meta: DappMetaData;
+  expiryTimestamp: number | null;
+  hardcap: string;
+  hardCapTimer: number;
+  isActive: boolean;
+  startTime: number;
+  accessTime: number;
 }
 
 const SubHeadings: React.FC<ISubHeading> = ({
@@ -25,7 +37,13 @@ const SubHeadings: React.FC<ISubHeading> = ({
   accountShares,
   totalShares,
   stakingLid,
-  meta
+  meta,
+  expiryTimestamp,
+  hardcap,
+  hardCapTimer,
+  isActive,
+  startTime,
+  accessTime
 }) => {
   const { addresses } = meta;
   return (
@@ -222,6 +240,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
               {shortEther(toWei(meta.totalPresale))}
             </Text>
           </Box>
+
           <Box
             w="100%"
             border="solid 1px"
@@ -247,6 +266,47 @@ const SubHeadings: React.FC<ISubHeading> = ({
               {shortEther(stakingLid)}
             </Text>
           </Box>
+
+          <Box
+            w={["100%", "205%"]}
+            border="solid 1px"
+            borderColor="lid.stroke"
+            color="lid.fg"
+            borderRadius="5px"
+            p="25px"
+            bg="lid.bg"
+          >
+
+          <Image
+              src={imgClock}
+              alt="img clock"
+              w="auto"
+              h="25px"
+              display="inline-block"
+              position="relative"
+              top="-3px"
+            />
+
+        {expiryTimestamp !== 0 && isActive && (
+          <EndTimer
+              expiryTimestamp={expiryTimestamp}
+              hardcap={hardcap}
+              hardCapTimer={hardCapTimer}
+              meta={meta}
+            />
+         )}
+
+        {!isActive && (
+          <StartTimer
+            startTime={startTime}
+            accessTime={accessTime}
+            meta={meta}
+            stakingLid={stakingLid}
+          />
+        )}
+
+          </Box>
+
         </Grid>
       </Flex>
     </Box>

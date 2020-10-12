@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Text, Box } from '@chakra-ui/core';
 
@@ -289,7 +290,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
         [type]: value
       }));
     });
-
     walletWatcher.start();
   }, [web3, address, finalEndTime, totalEth, startTime, hardcap]);
 
@@ -303,6 +303,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     } else {
       setIsActive(true);
     }
+  
   }, [accessTime]);
 
   return (
@@ -316,6 +317,12 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
         accountShares={accountShares}
         totalShares={hasSentToUniswap ? totalShares : maxShares}
         stakingLid={stakingLid}
+        expiryTimestamp={endTime}
+        hardcap={hardcap}
+        hardCapTimer={hardCapTimer}
+        isActive={isActive}
+        startTime={startTime}
+        accessTime={accessTime}
       />
       {isPaused && (
         <>
@@ -349,14 +356,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
       )}
       {isActive && !isEnded && !isPaused && (
         <>
-          {endTime !== 0 && (
-            <EndTimer
-              expiryTimestamp={endTime}
-              hardcap={hardcap}
-              hardCapTimer={hardCapTimer}
-              meta={meta}
-            />
-          )}
           <DepositForm
             web3={web3}
             address={address}
@@ -372,7 +371,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           <BonusRange />
         </>
       )}
-      {!isActive && !isEnded && !isPaused && (
+      {!isActive && isEnded && !isPaused && (
         <StartTimer
           startTime={startTime}
           accessTime={accessTime}

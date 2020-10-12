@@ -18,32 +18,22 @@ const EndTimer: React.FC<IEndTimer> = ({
   meta
 }) => {
   return (
-    <Box
-      display="block"
-      w="100%"
-      mt="40px"
-      mb="40px"
-      px={['20px', '20px', 0]}
-      maxW="1200px"
-      ml="auto"
-      mr="auto"
-      textAlign="center"
-    >
-      <Text fontSize={['28px', '36px']} fontWeight="bold">
-        {`${meta.tokenSymbol} Presale ends in`}
-      </Text>
-      <CountDown
-        expiryTimestamp={
-          expiryTimestamp === null ? Date.now() : expiryTimestamp
-        }
-      />
-      <Text fontSize={['12px', '14px']} fontWeight="light" mt="-20px">
+    <>
+    <Text ml="10px" mt="5px" color="lid.fgMed" display="inline-block">
+      {`${meta.tokenSymbol} Presale ends in`}
+    </Text>
+    <CountDown
+      expiryTimestamp={
+        expiryTimestamp === null ? Date.now() : expiryTimestamp
+      }
+    />
+      <Text fontSize={['12px', '14px']} fontWeight="light" ml="5px;" mt="-5px">
         {hardCapTimer} hour timer.
       </Text>
-      <Text fontSize={['12px', '14px']} fontWeight="light">
+      <Text fontSize={['12px', '14px']} ml="5px" fontWeight="light">
         Ends after {hardCapTimer} hours or {fromWei(hardcap)} ETH.
       </Text>
-    </Box>
+    </>
   );
 };
 
