@@ -4,6 +4,8 @@ import { DappMetaData } from 'types';
 import Web3 from 'web3';
 import NotFound from './NotFound';
 import MainApp from 'components/MainApp';
+import IndexDB from './indexDB'
+import { data } from 'templates/data';
 
 interface IProps {
   address: string;
@@ -38,24 +40,29 @@ export default ({ address, onConnect, web3 }: IProps) => {
 
   useEffect(() => {
     const loadProject = async () => {
-      try {
-        const project: string = history.location.pathname
-          .split('/')[1]
-          .toLowerCase();
 
-        const response = await fetch(
-          `https://ipfs.io/ipns/lid-team-bucket.storage.fleek.co/${project}/config.${project}.json`
-        );
-        const data = await response.json();
+      const cached_data = await IndexDB(data);
+      
 
-        setMeta({
-          ...data,
-          accountCap: Web3.utils.toWei(data.accountCap),
-          favicon: ''
-        });
-      } catch (ex) {
-        setShowError(true);
-      }
+        try {
+          const project: string = history.location.pathname
+            .split('/')[1]
+            .toLowerCase();
+
+          const response = await fetch(
+            `https://ipfs.io/ipns/lid-team-bucket.storage.fleek.co/${project}/config.${project}.json`
+          );
+          const data = await response.json();
+
+          setMeta({
+            ...data,
+            accountCap: Web3.utils.toWei(data.accountCap),
+            favicon: ''
+          });
+
+        } catch (ex) {
+          setShowError(true);
+        }
     };
     loadProject();
   }, []);
