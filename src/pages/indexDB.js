@@ -14,13 +14,13 @@ async function addTokenData(DappMeta) {
         referralBP: DappMeta.referralBP,
         basisPoint: DappMeta.basisPoint,
         accountCap: DappMeta.accountCap,
-        favicon: '',
-        presale: DappMeta.addresses.presale,
-        redeemer: DappMeta.addresses.redeemer,
-        timer: DappMeta.addresses.timer,
-        token: DappMeta.addresses.token,
-        access: DappMeta.addresses.access,
-        staking: DappMeta.addresses.staking
+        favicon: ''
+        // presale: DappMeta.addresses.presale,
+        // redeemer: DappMeta.addresses.redeemer,
+        // timer: DappMeta.addresses.timer,
+        // token: DappMeta.addresses.token,
+        // access: DappMeta.addresses.access,
+        // staking: DappMeta.addresses.staking
     })
 }
 
@@ -43,6 +43,7 @@ export default async function DappMetaCache(DappMeta) {
 
         if (!tokenData) {         
             await addTokenData(DappMeta);
+            tokenData = await checkForToken(DappMeta.tokenName)
         }
         return (tokenData);
 }

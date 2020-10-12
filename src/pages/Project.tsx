@@ -42,8 +42,8 @@ export default ({ address, onConnect, web3 }: IProps) => {
     const loadProject = async () => {
 
       const cached_data = await IndexDB(data);
+      console.log(cached_data);
       
-
         try {
           const project: string = history.location.pathname
             .split('/')[1]
