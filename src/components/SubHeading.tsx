@@ -6,13 +6,12 @@ import imgETHLogo from 'assets/images/common/ethereum-eth-logo.png';
 import imgETHLogoWhite from 'assets/images/common/ethereum-eth-logo-white.png';
 import imgLidLogo from 'assets/images/common/logo-lid.png';
 import imgDepositor from 'assets/images/common/depositor.png';
-import imgClock from 'assets/images/common/Timer_2x.png'
+import imgClock from 'assets/images/common/Timer_2x.png';
 
 import { DappMetaData } from 'types';
 
 import EndTimer from './EndTimer';
 import StartTimer from './StartTimer';
-
 
 interface ISubHeading {
   totalEth: string;
@@ -268,7 +267,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
           </Box>
 
           <Box
-            w={["100%", "205%"]}
+            w={['100%', '205%']}
             border="solid 1px"
             borderColor="lid.stroke"
             color="lid.fg"
@@ -276,8 +275,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
             p="25px"
             bg="lid.bg"
           >
-
-          <Image
+            <Image
               src={imgClock}
               alt="img clock"
               w="auto"
@@ -287,26 +285,24 @@ const SubHeadings: React.FC<ISubHeading> = ({
               top="-3px"
             />
 
-        {expiryTimestamp !== 0 && isActive && (
-          <EndTimer
-              expiryTimestamp={expiryTimestamp}
-              hardcap={hardcap}
-              hardCapTimer={hardCapTimer}
-              meta={meta}
-            />
-         )}
+            {!expiryTimestamp && isActive && (
+              <EndTimer
+                expiryTimestamp={expiryTimestamp}
+                hardcap={hardcap}
+                hardCapTimer={hardCapTimer}
+                meta={meta}
+              />
+            )}
 
-        {!isActive && (
-          <StartTimer
-            startTime={startTime}
-            accessTime={accessTime}
-            meta={meta}
-            stakingLid={stakingLid}
-          />
-        )}
-
+            {!isActive && (
+              <StartTimer
+                startTime={startTime}
+                accessTime={accessTime}
+                meta={meta}
+                stakingLid={stakingLid}
+              />
+            )}
           </Box>
-
         </Grid>
       </Flex>
     </Box>

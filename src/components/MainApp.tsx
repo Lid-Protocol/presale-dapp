@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Text, Box } from '@chakra-ui/core';
 
@@ -303,7 +302,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     } else {
       setIsActive(true);
     }
-  
   }, [accessTime]);
 
   return (
@@ -368,7 +366,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
             currentPrice={currentPrice}
             hardcap={hardcap}
           />
-          
         </>
       )}
       {!isActive && isEnded && !isPaused && (
