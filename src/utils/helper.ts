@@ -80,7 +80,6 @@ export const importAll = (r: __WebpackModuleApi.RequireContext) => {
 };
 
 export const formatAssetUrl = (project: string, link: string) => {
-  console.log(project);
   if (project) {
     return `${
       process.env.REACT_APP_FLEEK_BUCKET
