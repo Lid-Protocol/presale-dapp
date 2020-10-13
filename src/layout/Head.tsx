@@ -14,38 +14,38 @@ export default ({ meta }: IProps) => {
         <link
           rel="apple-touch-icon"
           sizes="180x180"
-          href={`${formatAssetUrl(meta.tokenName, 'apple-icon-180x180.png')}`}
+          href={`${formatAssetUrl(meta.project, 'apple-icon-180x180.png')}`}
         />
         <link
           rel="icon"
           type="image/png"
           sizes="192x192"
-          href={`${formatAssetUrl(meta.tokenName, 'android-icon-192x192.png')}`}
+          href={`${formatAssetUrl(meta.project, 'android-icon-192x192.png')}`}
         />
         <link
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href={`${formatAssetUrl(meta.tokenName, 'favicon-16x16.png')}`}
+          href={`${formatAssetUrl(meta.project, 'favicon-16x16.png')}`}
         />
         <link
           rel="icon"
           type="image/png"
           sizes="32x32"
-          href={`${formatAssetUrl(meta.tokenName, 'favicon-32x32.png')}`}
+          href={`${formatAssetUrl(meta.project, 'favicon-32x32.png')}`}
         />
         <link
           rel="icon"
           type="image/png"
           sizes="96x96"
-          href={`${formatAssetUrl(meta.tokenName, 'favicon-96x96.png')}`}
+          href={`${formatAssetUrl(meta.project, 'favicon-96x96.png')}`}
         />
         {meta.favicon ? (
           <link rel="icon" href={`${meta.favicon}`} />
         ) : (
           <link
             rel="icon"
-            href={`${formatAssetUrl(meta.tokenName, 'favicon.ico')}`}
+            href={`${formatAssetUrl(meta.project, 'favicon.ico')}`}
           />
         )}
 
@@ -53,9 +53,9 @@ export default ({ meta }: IProps) => {
         <meta
           name="msapplication-TileImage"
           content={`${formatAssetUrl(
-            meta.tokenName,
+            meta.project,
             ''
-          )}${meta.tokenName.toLowerCase()}/ms-icon-144x144.png)`}
+          )}${meta.project.toLowerCase()}/ms-icon-144x144.png)`}
         />
 
         <meta
@@ -99,15 +99,15 @@ export default ({ meta }: IProps) => {
 
         <meta
           property="og:image"
-          content={`${formatAssetUrl(meta.tokenName, 'opengraph.jpg')}`}
+          content={`${formatAssetUrl(meta.project, 'opengraph.jpg')}`}
         />
         <meta
           itemProp="image"
-          content={`${formatAssetUrl(meta.tokenName, 'opengraph.jpg')}`}
+          content={`${formatAssetUrl(meta.project, 'opengraph.jpg')}`}
         />
         <meta
           name="twitter:image"
-          content={`${formatAssetUrl(meta.tokenName, 'opengraph.jpg')}`}
+          content={`${formatAssetUrl(meta.project, 'opengraph.jpg')}`}
         />
 
         <title>

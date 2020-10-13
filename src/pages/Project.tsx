@@ -22,6 +22,7 @@ export default ({ address, onConnect, web3 }: IProps) => {
     basisPoint: '0',
     accountCap: '0',
     favicon: '',
+    project: '',
     addresses: {
       access: '',
       presale: '',
@@ -51,7 +52,8 @@ export default ({ address, onConnect, web3 }: IProps) => {
         setMeta({
           ...data,
           accountCap: Web3.utils.toWei(data.accountCap),
-          favicon: ''
+          favicon: '',
+          project: project
         });
       } catch (ex) {
         setShowError(true);

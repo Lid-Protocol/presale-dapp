@@ -143,7 +143,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
             background="linear-gradient(0deg, rgba(12,101,235,1) 0%, rgba(28,158,247,1) 100%)"
           >
             <Image
-              src={formatAssetUrl(meta.tokenName, 'logo.png')}
+              src={formatAssetUrl(meta.project, 'logo.png')}
               alt="token logo"
               w="auto"
               h="25px"
@@ -225,7 +225,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
             bg="lid.bg"
           >
             <Image
-              src={formatAssetUrl(meta.tokenName, 'logo.png')}
+              src={formatAssetUrl(meta.project, 'logo.png')}
               alt="token logo"
               w="auto"
               h="25px"

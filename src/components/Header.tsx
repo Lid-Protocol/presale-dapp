@@ -30,7 +30,7 @@ const Header: React.FC<IHeader> = ({ address, onConnect, meta }) => {
           ml="-3px"
         >
           <Image
-            src={`${formatAssetUrl(meta.tokenName, 'logo.png')}`}
+            src={`${formatAssetUrl(meta.project, 'logo.png')}`}
             alt="token logo"
             w="auto"
             h="60px"
