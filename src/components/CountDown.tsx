@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTimer } from 'react-timer-hook';
 import { Text, Box } from '@chakra-ui/core';
+import { table } from 'console';
 
 interface ICountDown {
   expiryTimestamp: number;
 }
 
 const CountDown: React.FC<ICountDown> = ({ expiryTimestamp }) => {
+  const [tabletLength, setTabletLength] = useState("0%");
+
   const { seconds, minutes, hours, days, start, restart } = useTimer({
     expiryTimestamp,
     onExpire: () => console.warn('onExpire called')
@@ -15,10 +18,17 @@ const CountDown: React.FC<ICountDown> = ({ expiryTimestamp }) => {
   useEffect(() => {
     restart(expiryTimestamp);
     start();
+    if (window.innerWidth > 800) {
+      setTabletLength("-26%");
+    } else if (window.innerWidth > 700 && window.innerWidth < 800 ) {
+      setTabletLength("-9.5%")
+    } else {
+      setTabletLength("0%");
+    }
   }, [expiryTimestamp]);
 
   return (
-    <Box w="100%" textAlign={[ "left", "center"]} ml={["0%", "-26%"]}>
+    <Box w="100%" textAlign={[ "left", "center"]} ml={tabletLength}>
       <Box display="inline-block" w={['50px', '90px']}>
         <Text fontSize={['28px' ,'38px']} fontWeight="bold" color="lid.brand">
           {days.toString().padStart(2, '0')}
