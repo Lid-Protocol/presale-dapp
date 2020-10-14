@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from 'react';
 import Dexie from 'dexie';
 
-var db = new Dexie("DappMetas");
+var db = new Dexie("NewDappMeta");
 var tokenData = "";
 
 async function addTokenData(DappMeta) {
@@ -14,13 +13,13 @@ async function addTokenData(DappMeta) {
         referralBP: DappMeta.referralBP,
         basisPoint: DappMeta.basisPoint,
         accountCap: DappMeta.accountCap,
-        favicon: ''
-        // presale: DappMeta.addresses.presale,
-        // redeemer: DappMeta.addresses.redeemer,
-        // timer: DappMeta.addresses.timer,
-        // token: DappMeta.addresses.token,
-        // access: DappMeta.addresses.access,
-        // staking: DappMeta.addresses.staking
+        favicon: '',
+        presale: DappMeta.addresses.presale,
+        redeemer: DappMeta.addresses.redeemer,
+        timer: DappMeta.addresses.timer,
+        token: DappMeta.addresses.token,
+        access: DappMeta.addresses.access,
+        staking: DappMeta.addresses.staking
     })
 }
 
@@ -31,7 +30,7 @@ async function checkForToken(target_name) {
     return (data);
 }
   
-export default async function DappMetaCache(DappMeta) {   
+export default async function DappMetaCache(DappMeta) {  
         db.version(1).stores({ friends: "++id,&tokenName,\
                                         tokenSymbol,tokenOwnerWebsite,\
                                         siteUrl,totalPresale,referralBP,\
