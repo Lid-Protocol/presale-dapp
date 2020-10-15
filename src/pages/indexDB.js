@@ -1,7 +1,25 @@
 import Dexie from 'dexie';
 
-var db = new Dexie("NewDappMeta");
-var tokenData = "";
+var db = new Dexie("BrandNewDappMeta");
+var tokenData = { 
+    tokenName: '',
+    tokenSymbol: '',
+    tokenOwnerWebsite: '',
+    siteUrl: '',
+    totalPresale: '0',
+    referralBP: '0',
+    basisPoint: '0',
+    accountCap: '0',
+    favicon: '',
+    addresses: {
+        access: '',
+        presale: '',
+        redeemer: '',
+        timer: '',
+        staking: '',
+        token: ''
+    }
+}
 
 async function addTokenData(DappMeta) {
     await db.friends.add({
@@ -38,11 +56,17 @@ export default async function DappMetaCache(DappMeta) {
                                         redeemer,timer,token,access,staking" });
         db.open();
 
-        tokenData = await checkForToken(DappMeta.tokenName);
+        tokenData = await checkForToken(DappMeta);
 
-        if (!tokenData) {         
+        //If there is not an entry, and no data aviable to be added return null
+        if (!tokenData && !DappMeta.tokenSymbol) {   
+            db.close();
+            return (tokenData)
+        } else if (!tokenData) {
+        //Else add the token data to cache, and then return data.  
             await addTokenData(DappMeta);
             tokenData = await checkForToken(DappMeta.tokenName)
         }
+        db.close();
         return (tokenData);
 }

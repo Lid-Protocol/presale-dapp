@@ -5,7 +5,6 @@ import Web3 from 'web3';
 import NotFound from './NotFound';
 import MainApp from 'components/MainApp';
 import IndexDB from './indexDB'
-import { data } from 'templates/data';
 
 interface IProps {
   address: string;
@@ -39,29 +38,36 @@ export default ({ address, onConnect, web3 }: IProps) => {
   const history = useHistory();
 
   useEffect(() => {
-    const loadProject = async () => {
-
-      const cached_data = await IndexDB(data);
-      console.log(cached_data);
-      
+    const loadProject = async () => { 
         try {
           const project: string = history.location.pathname
             .split('/')[1]
             .toLowerCase();
+          
+          //Check to see if the data is cached
+          const cached_data : DappMetaData | null = await IndexDB(project);
 
-          const response = await fetch(
-            `https://ipfs.io/ipns/lid-team-bucket.storage.fleek.co/${project}/config.${project}.json`
-          );
-          const data = await response.json();
+          console.log("cached data: " + cached_data);
+          //Set data to cached data if it is already stored, otherwise get data and add to cache
+          if (cached_data) {
+            setMeta(cached_data);
+          } else {
+            const response = await fetch(
+              `https://ipfs.io/ipns/lid-team-bucket.storage.fleek.co/${project}/config.${project}.json`
+            );
+            const data = await response.json();
 
-          setMeta({
-            ...data,
-            accountCap: Web3.utils.toWei(data.accountCap),
-            favicon: ''
-          });
-
+            setMeta({
+              ...data,
+              accountCap: Web3.utils.toWei(data.accountCap),
+              favicon: ''
+            });
+            //Adds data to cache
+            await IndexDB(data);
+          }
         } catch (ex) {
           setShowError(true);
+          console.log("show error : " + showError)
         }
     };
     loadProject();
