@@ -32,12 +32,14 @@ async function addTokenData(DappMeta) {
         basisPoint: DappMeta.basisPoint,
         accountCap: DappMeta.accountCap,
         favicon: '',
-        presale: DappMeta.addresses.presale,
-        redeemer: DappMeta.addresses.redeemer,
-        timer: DappMeta.addresses.timer,
-        token: DappMeta.addresses.token,
-        access: DappMeta.addresses.access,
-        staking: DappMeta.addresses.staking
+        addresses: {
+            presale: DappMeta.addresses.presale,
+            redeemer: DappMeta.addresses.redeemer,
+            timer: DappMeta.addresses.timer,
+            token: DappMeta.addresses.token,
+            access: DappMeta.addresses.access,
+            staking: DappMeta.addresses.staking
+        }
     })
 }
 
@@ -56,6 +58,8 @@ export default async function DappMetaCache(DappMeta) {
                                         redeemer,timer,token,access,staking" });
         db.open();
 
+        console.log("DappMeta: " +  DappMeta);
+
         tokenData = await checkForToken(DappMeta);
 
         //If there is not an entry, and no data aviable to be added return null
@@ -63,7 +67,7 @@ export default async function DappMetaCache(DappMeta) {
             db.close();
             return (tokenData)
         } else if (!tokenData) {
-        //Else add the token data to cache, and then return data.  
+        //Else add the token data to cache, and then read in data and set variable to return  
             await addTokenData(DappMeta);
             tokenData = await checkForToken(DappMeta.tokenName)
         }

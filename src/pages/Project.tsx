@@ -44,10 +44,10 @@ export default ({ address, onConnect, web3 }: IProps) => {
             .split('/')[1]
             .toLowerCase();
           
-          //Check to see if the data is cached
-          const cached_data : DappMetaData | null = await IndexDB(project);
+          //Check to see if the data is cached if not return null.
+          const cached_data : DappMetaData | null = await IndexDB(project.toUpperCase());
 
-          console.log("cached data: " + cached_data);
+          console.log("cached data: " + cached_data.addresses);
           //Set data to cached data if it is already stored, otherwise get data and add to cache
           if (cached_data) {
             setMeta(cached_data);
