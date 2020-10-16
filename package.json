@@ -1,7 +1,7 @@
 {
   "name": "lid-presale",
   "version": "0.1.0",
-  "private": true,
+  "license": "GPL-3.0-only",
   "dependencies": {
     "@chakra-ui/core": "^0.8.0",
     "@emotion/core": "^10.0.35",
