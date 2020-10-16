@@ -1,6 +1,6 @@
 import Dexie from 'dexie';
 
-var db = new Dexie("LidDappMeta");
+var db = new Dexie("DappMetaV2");
 
 //Added Like This Due To TypeScrtip Interface
 var tokenData = { 
@@ -24,7 +24,7 @@ var tokenData = {
 }
 
 async function addTokenData(DappMeta) {
-    await db.friends.add({
+    await db.DappMeta.add({
         tokenName: DappMeta.tokenName, 
         tokenSymbol: DappMeta.tokenSymbol,
         tokenOwnerWebsite: DappMeta.tokenOwnerWebsite,
@@ -46,7 +46,7 @@ async function addTokenData(DappMeta) {
 }
 
 async function checkForToken(target_name) {
-    const data = await db.friends.where({
+    const data = await db.DappMeta.where({
         tokenSymbol: target_name
     }).first();
     return (data);
@@ -56,7 +56,7 @@ export default async function DappMetaCache(DappMeta) {
 
         //Can check if database exists or not but according to Dexie documenation
         //it is not reccomened nor needed.
-        db.version(1).stores({ friends: "++id,tokenName,\
+        db.version(1).stores({ DappMeta: "++id,tokenName,\
                                         &tokenSymbol,tokenOwnerWebsite,\
                                         siteUrl,totalPresale,referralBP,\
                                         basisPoint,accountCap,favicon,presale,\
