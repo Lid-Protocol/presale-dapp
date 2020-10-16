@@ -53,12 +53,17 @@ async function checkForToken(target_name) {
 }
   
 export default async function DappMetaCache(DappMeta) {  
+
+        //Can check if database exists or not but according to Dexie documenation
+        //it is not reccomened nor needed.
         db.version(1).stores({ friends: "++id,tokenName,\
                                         &tokenSymbol,tokenOwnerWebsite,\
                                         siteUrl,totalPresale,referralBP,\
                                         basisPoint,accountCap,favicon,presale,\
                                         redeemer,timer,token,access,staking" });
-        db.open();
+        db.open().catch(function (err) {
+            console.error (err.stack || err);
+        });
 
         //if DappMeta.tokenSymbol is undefined then check for data, if undefinded return null
         //if data was retrvied, return token data.
