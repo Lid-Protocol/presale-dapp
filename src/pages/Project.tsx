@@ -47,10 +47,13 @@ export default ({ address, onConnect, web3 }: IProps) => {
           //Check to see if the data is cached if not return null.
           const cached_data : DappMetaData | null = await IndexDB(project.toUpperCase());
 
-          console.log("cached data: " + cached_data.addresses);
           //Set data to cached data if it is already stored, otherwise get data and add to cache
           if (cached_data) {
-            setMeta(cached_data);
+            setMeta({
+              ...cached_data,
+              accountCap: Web3.utils.toWei(cached_data.accountCap),
+              favicon: ''
+            });
           } else {
             const response = await fetch(
               `https://ipfs.io/ipns/lid-team-bucket.storage.fleek.co/${project}/config.${project}.json`
@@ -62,7 +65,7 @@ export default ({ address, onConnect, web3 }: IProps) => {
               accountCap: Web3.utils.toWei(data.accountCap),
               favicon: ''
             });
-            //Adds data to cache
+           //Add data to cache
             await IndexDB(data);
           }
         } catch (ex) {
