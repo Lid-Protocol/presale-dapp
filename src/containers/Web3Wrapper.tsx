@@ -59,10 +59,6 @@ const Web3Wrapper: React.FC<IWeb3Wrapper> = ({ children }) => {
     // });
   };
 
-  useEffect(() => {
-    if (window.web3) onConnect();
-  }, []);
-
   return <>{children(address, web3, onConnect)}</>;
 };
 

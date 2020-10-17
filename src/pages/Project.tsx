@@ -5,6 +5,7 @@ import Web3 from 'web3';
 import NotFound from './NotFound';
 import MainApp from 'components/MainApp';
 import IndexDB from './indexDB';
+import { CONNECT_BUTTON_CLASSNAME } from 'web3modal';
 
 interface IProps {
   address: string;
@@ -49,7 +50,10 @@ export default ({ address, onConnect, web3 }: IProps) => {
         const cached_data : DappMetaData | null = await IndexDB(project.toUpperCase());
 
         //Set data to cached data if it is already stored, otherwise get data and add to cache
+        console.log("data: " + cached_data)
         if (cached_data) {
+          console.log("Firing");
+          console.log(cached_data);
           setMeta({
             ...cached_data,
             accountCap: Web3.utils.toWei(cached_data.accountCap),
