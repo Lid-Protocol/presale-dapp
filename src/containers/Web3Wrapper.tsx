@@ -22,6 +22,10 @@ const Web3Wrapper: React.FC<IWeb3Wrapper> = ({ children }) => {
   );
   const [web3, setWeb3] = useState<Web3 | null>(new Web3(provider));
 
+  useEffect(() => {
+    if (window.web3 || window.ethereum) onConnect();
+  }, []);
+
   const onConnect = async () => {
     const provider = await web3Modal.connect();
     const web3 = await new Web3(provider);
