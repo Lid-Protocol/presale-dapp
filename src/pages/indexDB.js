@@ -1,8 +1,7 @@
 import Dexie from 'dexie';
 
-var db = new Dexie("DappMetaV2");
+var db = new Dexie("DappMetaV10");
 
-//Added Like This Due To TypeScrtip Interface
 var tokenData = {
     tokenName: '',
     tokenSymbol: '',
@@ -24,8 +23,11 @@ var tokenData = {
     }
 }
 
-async function addTokenData(DappMeta) {
+async function addTokenData(DappMeta, ProjectName) {
+    console.log("token data start");
+    console.log(ProjectName);
     await db.DappMeta.add({
+        project: ProjectName,
         tokenName: DappMeta.tokenName, 
         tokenSymbol: DappMeta.tokenSymbol,
         tokenOwnerWebsite: DappMeta.tokenOwnerWebsite,
@@ -44,21 +46,20 @@ async function addTokenData(DappMeta) {
             staking: DappMeta.addresses.staking
         }
     })
+    console.log("token data end");
 }
 
-async function checkForToken(target_name) {
+async function checkForToken(ProjectName) {
     const data = await db.DappMeta.where({
-        tokenSymbol: target_name
+        project: ProjectName
     }).first();
     return (data);
 }
   
-export default async function DappMetaCache(DappMeta) {  
+export default async function DappMetaCache(DappMeta, ProjectName, adding) {  
 
-        //Can check if database exists or not but according to Dexie documenation
-        //it is not reccomened nor needed.
-        db.version(1).stores({ DappMeta: "++id,tokenName,\
-                                        &tokenSymbol,tokenOwnerWebsite,\
+        db.version(1).stores({ DappMeta: "++id,&project,tokenName,\
+                                        tokenSymbol,tokenOwnerWebsite,\
                                         siteUrl,totalPresale,referralBP,\
                                         basisPoint,accountCap,favicon,presale,\
                                         redeemer,timer,token,access,staking" });
@@ -66,21 +67,14 @@ export default async function DappMetaCache(DappMeta) {
             console.error (err.stack || err);
         });
 
-        //if DappMeta.tokenSymbol is undefined then check for data, if undefinded return null
-        //if data was retrvied, return token data.
-        if (DappMeta.tokenSymbol == undefined) {
-            tokenData = await checkForToken(DappMeta);
-            if (tokenData == undefined) {
+        tokenData = await checkForToken(ProjectName);
+
+        if (tokenData == undefined && adding == false) {
                 db.close();
                 return(null);
-            } else {
-                db.close();
-                return(tokenData);
-            }
-        } else {
-                await addTokenData(DappMeta);
+        } else if (tokenData == undefined) {
+                await addTokenData(DappMeta, ProjectName);
         }
-
         db.close();
-        return (null);
+        return (tokenData);
 }

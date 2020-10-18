@@ -46,14 +46,9 @@ export default ({ address, onConnect, web3 }: IProps) => {
           .split('/')[1]
           .toLowerCase();
         
-        //Check to see if the data is cached if not return null.
-        const cached_data : DappMetaData | null = await IndexDB(project.toUpperCase());
+        const cached_data : DappMetaData | null = await IndexDB(project.toUpperCase(), project, false);
 
-        //Set data to cached data if it is already stored, otherwise get data and add to cache
-        console.log("data: " + cached_data)
         if (cached_data) {
-          console.log("Firing");
-          console.log(cached_data);
           setMeta({
             ...cached_data,
             accountCap: Web3.utils.toWei(cached_data.accountCap),
@@ -70,8 +65,7 @@ export default ({ address, onConnect, web3 }: IProps) => {
             accountCap: Web3.utils.toWei(data.accountCap),
             favicon: ''
           });
-         //Add data to cache
-          await IndexDB(data);
+          await IndexDB(data, project, true);
         }
       } catch (ex) {
         setShowError(true);
