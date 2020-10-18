@@ -71,6 +71,7 @@ export default async function DappMetaCache(DappMeta, ProjectName, adding) {
                 return(null);
         } else if (tokenData == undefined) {
                 await addTokenData(DappMeta, ProjectName);
+                db.close();
                 return (null);
         }
         db.close();
