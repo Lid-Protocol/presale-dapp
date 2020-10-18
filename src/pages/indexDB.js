@@ -24,8 +24,6 @@ var tokenData = {
 }
 
 async function addTokenData(DappMeta, ProjectName) {
-    console.log("token data start");
-    console.log(ProjectName);
     await db.DappMeta.add({
         project: ProjectName,
         tokenName: DappMeta.tokenName, 
@@ -46,7 +44,6 @@ async function addTokenData(DappMeta, ProjectName) {
             staking: DappMeta.addresses.staking
         }
     })
-    console.log("token data end");
 }
 
 async function checkForToken(ProjectName) {
@@ -74,6 +71,7 @@ export default async function DappMetaCache(DappMeta, ProjectName, adding) {
                 return(null);
         } else if (tokenData == undefined) {
                 await addTokenData(DappMeta, ProjectName);
+                return (null);
         }
         db.close();
         return (tokenData);
