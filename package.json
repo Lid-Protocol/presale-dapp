@@ -14,6 +14,7 @@
     "@walletconnect/web3-provider": "^1.2.1",
     "authereum": "^0.0.4-beta.191",
     "blockies-ts": "^1.0.0",
+    "dexie": "^3.0.2",
     "emotion-theming": "^10.0.27",
     "fortmatic": "^2.2.1",
     "ipfs-http-client": "^46.1.0",
