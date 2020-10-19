@@ -10,7 +10,7 @@ export const data = [
     projectImage: 'https://dextrust.lid.sh/opengraph.jpg'
   },
   {
-    projectUrl: 'https://sale.lid.sh/finswap',
+    projectUrl: 'https://sale.lid.sh/fnsp',
     projectName: 'Finswap',
     projectImage: 'https://finswap.lid.sh/opengraph.jpg'
   },
