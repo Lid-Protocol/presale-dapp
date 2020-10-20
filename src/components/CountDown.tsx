@@ -18,10 +18,11 @@ const CountDown: React.FC<ICountDown> = ({ expiryTimestamp }) => {
   useEffect(() => {
     restart(expiryTimestamp);
     start();
-    if (window.innerWidth > 800) {
-      setTabletLength('-26%');
-    } else if (window.innerWidth > 700 && window.innerWidth < 800) {
-      setTabletLength('-9.5%');
+    console.log(window.innerWidth * 0.02);
+    if (window.innerWidth > 900) {
+      setTabletLength('-' + window.innerWidth * 0.02 + '%');
+    } else if (window.innerWidth) {
+      setTabletLength('-' + window.innerWidth * 0.017 + '%');
     } else {
       setTabletLength('0%');
     }
