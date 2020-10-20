@@ -7,12 +7,14 @@ interface IReferralCode {
   address: string;
   earnedReferrals: string;
   referralCounts: string;
+  projectName: string;
 }
 
 const ReferralCode: React.FC<IReferralCode> = ({
   address,
   earnedReferrals,
-  referralCounts
+  referralCounts,
+  projectName
 }) => {
   const siteUrl = window.location.origin;
 
@@ -37,7 +39,7 @@ const ReferralCode: React.FC<IReferralCode> = ({
         mb="20px"
         p="20px"
       >
-        <CopyToClipboard text={`${siteUrl}/#/${address}`}>
+        <CopyToClipboard text={`${siteUrl}/${projectName}/${address}`}>
           <Button
             display="block"
             color="lid.fgLight"
@@ -67,7 +69,7 @@ const ReferralCode: React.FC<IReferralCode> = ({
           borderRadius="28px"
           w="100%"
         >
-          {`${siteUrl}/#/${address}`}
+          {`${siteUrl}/${projectName}/${address}`}
         </Text>
       </Box>
       <Grid
