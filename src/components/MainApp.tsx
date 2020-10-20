@@ -93,7 +93,8 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     hasSentToUniswap
   } = state;
 
-  let referralAddress = window.location.hash.substr(2);
+  let referralAddress = window.location.toString().split('/')[4];
+
   if (!referralAddress || referralAddress.length !== 42)
     referralAddress = '0x0000000000000000000000000000000000000000';
   const multiCallConfig = {
