@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { DappMetaData } from 'types';
@@ -40,13 +39,17 @@ export default ({ address, onConnect, web3 }: IProps) => {
   const history = useHistory();
 
   useEffect(() => {
-    const loadProject = async () => { 
+    const loadProject = async () => {
       try {
         const project: string = history.location.pathname
           .split('/')[1]
           .toLowerCase();
-        
-        const cached_data : DappMetaData | null = await IndexDB(project.toUpperCase(), project, false);
+
+        const cached_data: DappMetaData | null = await IndexDB(
+          project.toUpperCase(),
+          project,
+          false
+        );
 
         if (cached_data) {
           setMeta({
@@ -70,9 +73,9 @@ export default ({ address, onConnect, web3 }: IProps) => {
       } catch (ex) {
         setShowError(true);
       }
-  };
+    };
     loadProject();
-  }, []);
+  }, [history.location.pathname]);
 
   return (
     <>
