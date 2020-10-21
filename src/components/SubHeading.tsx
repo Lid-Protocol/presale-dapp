@@ -45,7 +45,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
   accessTime
 }) => {
   const { addresses } = meta;
-  console.log(expiryTimestamp)
+
   return (
     <Box
       w="100%"
@@ -288,10 +288,9 @@ const SubHeadings: React.FC<ISubHeading> = ({
 
             {!expiryTimestamp && isActive && (
               <p>Countdown timer will start once softcap is hit.</p>
-            )
-            }
+            )}
 
-            {(expiryTimestamp && isActive) && (
+            {!!expiryTimestamp && isActive && (
               <EndTimer
                 expiryTimestamp={expiryTimestamp}
                 hardcap={hardcap}
