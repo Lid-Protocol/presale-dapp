@@ -95,7 +95,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
   } = state;
 
   const history = useHistory();
-  let referralAddress = history.location.pathname.split('/')[4];
+  let referralAddress = history.location.pathname.split('/')[2];
 
   if (!referralAddress || referralAddress.length !== 42)
     referralAddress = '0x0000000000000000000000000000000000000000';
