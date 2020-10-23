@@ -19,6 +19,7 @@ import DepositForm from './DepositForm';
 import PresaleCompletion from './PresaleCompletion';
 import Claimer from './Claimer';
 import { DappMetaData } from 'types';
+import { useHistory } from 'react-router-dom';
 
 import BonusRange from './BonusRange';
 
@@ -93,7 +94,8 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     hasSentToUniswap
   } = state;
 
-  let referralAddress = window.location.toString().split('/')[4];
+  const history = useHistory();
+  let referralAddress = history.location.pathname.split('/')[2];
 
   if (!referralAddress || referralAddress.length !== 42)
     referralAddress = '0x0000000000000000000000000000000000000000';
