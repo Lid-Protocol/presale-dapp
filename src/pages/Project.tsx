@@ -4,6 +4,7 @@ import { DappMetaData } from 'types';
 import Web3 from 'web3';
 import NotFound from './NotFound';
 import MainApp from 'components/MainApp';
+import IndexDB from './indexDB';
 
 interface IProps {
   address: string;
@@ -44,23 +45,37 @@ export default ({ address, onConnect, web3 }: IProps) => {
           .split('/')[1]
           .toLowerCase();
 
-        const response = await fetch(
-          `https://ipfs.io/ipns/lid-team-bucket.storage.fleek.co/${project}/config.${project}.json`
+        const cached_data: DappMetaData | null = await IndexDB(
+          project.toUpperCase(),
+          project,
+          false
         );
-        const data = await response.json();
 
-        setMeta({
-          ...data,
-          accountCap: Web3.utils.toWei(data.accountCap),
-          favicon: '',
-          project: project
-        });
+        if (cached_data) {
+          setMeta({
+            ...cached_data,
+            accountCap: Web3.utils.toWei(cached_data.accountCap),
+            favicon: ''
+          });
+        } else {
+          const response = await fetch(
+            `https://ipfs.io/ipns/lid-team-bucket.storage.fleek.co/${project}/config.${project}.json`
+          );
+          const data = await response.json();
+
+          setMeta({
+            ...data,
+            accountCap: Web3.utils.toWei(data.accountCap),
+            favicon: ''
+          });
+          await IndexDB(data, project, true);
+        }
       } catch (ex) {
         setShowError(true);
       }
     };
     loadProject();
-  }, []);
+  }, [history.location.pathname]);
 
   return (
     <>
