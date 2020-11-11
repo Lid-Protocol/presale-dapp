@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, Box, Button, Grid, Input } from '@chakra-ui/core';
-import { shortEther, toBN, toWei } from 'utils';
+import { shortEther, toBN, toWei, fromWei } from 'utils';
 import { Contract } from 'web3-eth-contract';
 import CountDownShort from './CountDownShort';
 import { DappMetaData } from 'types';
@@ -16,6 +16,7 @@ interface IClaimer {
   redeemBP: string;
   redeemInterval: string;
   meta: DappMetaData;
+  refundable: string;
   isRefunding: boolean;
 }
 
@@ -30,36 +31,28 @@ const Claimer: React.FC<IClaimer> = ({
   redeemBP,
   redeemInterval,
   meta,
+  refundable,
   isRefunding
 }) => {
   const [active, setActive] = useState(true);
-  const [accountAddress, setAccountAddress] = useState('placeHolder');
+  const [refundAddress, setRefundAddress] = useState(address);
 
   const redeemPercent = Math.floor(
     Number(redeemBP) / 100 / (Number(redeemInterval) / 3600)
   );
 
   const updateAddress = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAccountAddress(event.target.value);
+    setRefundAddress(event.target.value);
   };
 
-  const handleSubmit = async function () {
+  const handleRefund = async function () {
     if (!lidPresaleSC) {
       return;
     }
 
     await lidPresaleSC.methods
-      .getRefundableEth(accountAddress)
-      .call(function (error: any, result: any) {
-        if (result <= 0) {
-          alert('Refundable Eth is less than 0');
-          return;
-        }
-      });
-
-    await lidPresaleSC.methods
-      .claimRefund(accountAddress)
-      .send({ from: accountAddress });
+      .claimRefund(refundAddress)
+      .send({ from: address });
     alert(
       'Deposit request sent. Check your wallet to see when it has completed, then refresh this page.'
     );
@@ -119,9 +112,11 @@ const Claimer: React.FC<IClaimer> = ({
             p="20px"
           >
             <Text fontSize={['24px', '36px']} fontWeight="bold">
-              {`Claim Refund`}
+              {`Claim Refund: `} {`${fromWei(refundable)} ETH`}
             </Text>
-            <Text fontSize={['12px', '14px']}>Enter the address to refund</Text>
+            <Text fontSize={['12px', '14px']}>
+              Enter the address to receive refund
+            </Text>
             <Input
               fontSize="18px"
               w="100%"
@@ -130,11 +125,11 @@ const Claimer: React.FC<IClaimer> = ({
               display="inline-block"
               min={0.01}
               mt="10px"
+              value={refundAddress}
               onChange={updateAddress}
             />
-
             <Button
-              isDisabled={accountRedeemable === '0'}
+              isDisabled={refundable === '0'}
               variantColor="blue"
               bg="lid.brand"
               color="white"
@@ -149,7 +144,7 @@ const Claimer: React.FC<IClaimer> = ({
               fontSize="18px"
               ml="auto"
               mr="auto"
-              onClick={handleSubmit}
+              onClick={handleRefund}
             >
               Send
             </Button>

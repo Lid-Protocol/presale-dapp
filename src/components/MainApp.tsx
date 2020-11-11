@@ -51,6 +51,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     earnedReferrals: '0',
     referralCounts: '0',
     finalEndTime: '0',
+    refundable: '0',
     accountRedeemable: '0',
     accountClaimedTokens: '0',
     maxShares: '0',
@@ -79,6 +80,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     earnedReferrals,
     referralCounts,
     finalEndTime,
+    refundable,
     accountRedeemable,
     accountClaimedTokens,
     maxShares,
@@ -247,6 +249,11 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           returns: [['referralCounts', (val: any) => val.toString()]]
         },
         {
+          target: addresses.presale,
+          call: ['getRefundableEth(address)(uint256)', address],
+          returns: [['refundable', (val: any) => val.toString()]]
+        },
+        {
           target: addresses.redeemer,
           call: ['accountClaimedTokens(address)(uint256)', address],
           returns: [['accountClaimedTokens', (val: any) => val.toString()]]
@@ -349,6 +356,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           redeemBP={redeemBP}
           redeemInterval={redeemInterval}
           finalEndTime={finalEndTime}
+          refundable={refundable}
           accountShares={accountShares}
           accountRedeemable={accountRedeemable}
           accountClaimedTokens={accountClaimedTokens}
