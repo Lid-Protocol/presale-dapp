@@ -121,7 +121,7 @@ const Claimer: React.FC<IClaimer> = ({
             <Text fontSize={['24px', '36px']} fontWeight="bold">
               {`Claim Refund`}
             </Text>
-
+            <Text fontSize={['12px', '14px']}>Enter the address to refund</Text>
             <Input
               fontSize="18px"
               w="100%"
