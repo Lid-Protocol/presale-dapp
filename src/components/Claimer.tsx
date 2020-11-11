@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, Box, Button, Grid, Input } from '@chakra-ui/core';
-import { shortEther, toBN, toWei, fromWei } from 'utils';
+import { shortEther, toBN, toWei } from 'utils';
 import { Contract } from 'web3-eth-contract';
 import CountDownShort from './CountDownShort';
 import { DappMetaData } from 'types';
@@ -112,7 +112,7 @@ const Claimer: React.FC<IClaimer> = ({
             p="20px"
           >
             <Text fontSize={['24px', '36px']} fontWeight="bold">
-              {`Claim Refund: `} {`${fromWei(refundable)} ETH`}
+              {`Claim Refund: `} {`${shortEther(refundable)} ETH`}
             </Text>
             <Text fontSize={['12px', '14px']}>
               Enter the address to receive refund
