@@ -4,6 +4,7 @@ import { infuraIds } from '../config';
 export const toBN = Web3.utils.toBN;
 export const toWei = Web3.utils.toWei;
 export const fromWei = Web3.utils.fromWei;
+export const isAddress = Web3.utils.isAddress;
 
 export const getRandomInfuraId = () => {
   return infuraIds[Math.floor(Math.random() * 1000) % infuraIds.length];

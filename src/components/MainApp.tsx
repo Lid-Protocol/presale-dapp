@@ -11,17 +11,15 @@ import abis from 'contracts/abis';
 
 import Header from './Header';
 import SubHeading from './SubHeading';
-import EndTimer from './EndTimer';
 import StartTimer from './StartTimer';
 import ReferralCode from './ReferralCode';
 import Footer from './Footer';
+import Refunder from './Refunder';
 import DepositForm from './DepositForm';
 import PresaleCompletion from './PresaleCompletion';
 import Claimer from './Claimer';
 import { DappMetaData } from 'types';
 import { useHistory } from 'react-router-dom';
-
-import BonusRange from './BonusRange';
 
 const defaultWatcher = createWatcher([], {});
 const walletWatcher = createWatcher([], {});
@@ -51,7 +49,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     earnedReferrals: '0',
     referralCounts: '0',
     finalEndTime: '0',
-    refundable: '0',
     accountRedeemable: '0',
     accountClaimedTokens: '0',
     maxShares: '0',
@@ -80,7 +77,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     earnedReferrals,
     referralCounts,
     finalEndTime,
-    refundable,
     accountRedeemable,
     accountClaimedTokens,
     maxShares,
@@ -249,11 +245,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           returns: [['referralCounts', (val: any) => val.toString()]]
         },
         {
-          target: addresses.presale,
-          call: ['getRefundableEth(address)(uint256)', address],
-          returns: [['refundable', (val: any) => val.toString()]]
-        },
-        {
           target: addresses.redeemer,
           call: ['accountClaimedTokens(address)(uint256)', address],
           returns: [['accountClaimedTokens', (val: any) => val.toString()]]
@@ -347,7 +338,10 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           </Text>
         </>
       )}
-      {((isActive && isEnded && !isPaused) || isRefunding) && (
+      {isRefunding && (
+        <Refunder lidPresaleSC={lidPresaleSC} address={address} />
+      )}
+      {isActive && isEnded && !isPaused && (
         <Claimer
           lidPresaleSC={lidPresaleSC}
           address={address}
@@ -356,13 +350,12 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           redeemBP={redeemBP}
           redeemInterval={redeemInterval}
           finalEndTime={finalEndTime}
-          refundable={refundable}
           accountShares={accountShares}
           accountRedeemable={accountRedeemable}
           accountClaimedTokens={accountClaimedTokens}
-          isRefunding={isRefunding}
         />
       )}
+
       {isActive && !isEnded && !isPaused && (
         <>
           <DepositForm
