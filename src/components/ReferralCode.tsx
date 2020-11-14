@@ -2,19 +2,22 @@ import React from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { Text, Box, Button, Grid } from '@chakra-ui/core';
 import { shortEther } from 'utils';
+import { METAMASK } from 'web3modal/dist/providers/injected';
 
 interface IReferralCode {
   address: string;
   earnedReferrals: string;
   referralCounts: string;
   projectName: string;
+  referralBP: string;
 }
 
 const ReferralCode: React.FC<IReferralCode> = ({
   address,
   earnedReferrals,
   referralCounts,
-  projectName
+  projectName,
+  referralBP
 }) => {
   const siteUrl = window.location.origin;
 
@@ -57,7 +60,7 @@ const ReferralCode: React.FC<IReferralCode> = ({
           Referral Code
         </Text>
         <Text color="lid.brand" mt="10px" mb="10px">
-          2.5% rewards when anyone uses to deposit
+          {referralBP}% rewards when anyone uses to deposit
         </Text>
         <Text
           wordBreak="break-word"

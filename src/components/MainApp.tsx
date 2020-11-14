@@ -380,12 +380,15 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           stakingLid={stakingLid}
         />
       )}
-      <ReferralCode
-        address={address}
-        earnedReferrals={earnedReferrals}
-        referralCounts={referralCounts}
-        projectName={meta.project}
-      />
+      {!(meta.referralBP == '0') &&
+        <ReferralCode
+          address={address}
+          earnedReferrals={earnedReferrals}
+          referralCounts={referralCounts}
+          projectName={meta.project}
+          referralBP={meta.referralBP}
+        />
+      }
       <Box
         w="100%"
         maxW="1200px"
