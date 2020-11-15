@@ -60,7 +60,7 @@ const ReferralCode: React.FC<IReferralCode> = ({
           Referral Code
         </Text>
         <Text color="lid.brand" mt="10px" mb="10px">
-          {referralBP}% rewards when anyone uses to deposit
+          {parseFloat(referralBP) / 100}% rewards when anyone uses to deposit
         </Text>
         <Text
           wordBreak="break-word"

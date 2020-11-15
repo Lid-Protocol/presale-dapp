@@ -199,7 +199,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     );
 
     defaultWatcher.subscribe((update: any) => {
-      console.log(update);
       setState((prevState) => ({
         ...prevState,
         [update.type]: update.value
