@@ -26,7 +26,6 @@ export default (props: IProps) => {
           tokenOwnerWebsite: '',
           siteUrl: '',
           totalPresale: '',
-          referralBP: '',
           basisPoint: '',
           accountCap: '',
           favicon: '/assets/images/icons/favicon.ico',

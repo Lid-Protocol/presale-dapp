@@ -18,7 +18,6 @@ export default ({ address, onConnect, web3 }: IProps) => {
     tokenOwnerWebsite: '',
     siteUrl: '',
     totalPresale: '0',
-    referralBP: '0',
     basisPoint: '0',
     accountCap: '0',
     favicon: '',

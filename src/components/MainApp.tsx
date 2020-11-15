@@ -53,6 +53,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     accountClaimedTokens: '0',
     maxShares: '0',
     totalShares: '0',
+    referralBP: '0',
     hardcap: '0',
     hardCapTimer: 0,
     stakingLid: '0',
@@ -81,6 +82,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     accountClaimedTokens,
     maxShares,
     totalShares,
+    referralBP,
     hardcap,
     hardCapTimer,
     stakingLid,
@@ -174,6 +176,11 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
         },
         {
           target: addresses.presale,
+          call: ['referralBP()(uint256)'],
+          returns: [['referralBP', (val: any) => val.toString()]]
+        },
+        {
+          target: addresses.presale,
           call: ['hardcap()(uint256)'],
           returns: [['hardcap', (val: any) => val.toString()]]
         },
@@ -192,6 +199,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     );
 
     defaultWatcher.subscribe((update: any) => {
+      console.log(update);
       setState((prevState) => ({
         ...prevState,
         [update.type]: update.value
@@ -369,6 +377,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
             totalEth={totalEth}
             currentPrice={currentPrice}
             hardcap={hardcap}
+            referralBP={referralBP}
           />
         </>
       )}
@@ -380,12 +389,14 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           stakingLid={stakingLid}
         />
       )}
-      <ReferralCode
-        address={address}
-        earnedReferrals={earnedReferrals}
-        referralCounts={referralCounts}
-        projectName={meta.project}
-      />
+      {referralBP !== '0' && (
+        <ReferralCode
+          address={address}
+          earnedReferrals={earnedReferrals}
+          referralCounts={referralCounts}
+          projectName={meta.project}
+        />
+      )}
       <Box
         w="100%"
         maxW="1200px"

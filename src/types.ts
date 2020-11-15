@@ -4,17 +4,16 @@ export interface DappMetaData {
   tokenOwnerWebsite?: string;
   siteUrl?: string;
   totalPresale: string;
-  referralBP: string;
   basisPoint: string;
   accountCap: string;
   favicon: string;
   project: string;
   addresses: {
-    presale: string,
-    redeemer: string,
-    timer: string,
-    token: string,
-    access: string,
-    staking: string
+    presale: string;
+    redeemer: string;
+    timer: string;
+    token: string;
+    access: string;
+    staking: string;
   };
 }
