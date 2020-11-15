@@ -395,6 +395,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           earnedReferrals={earnedReferrals}
           referralCounts={referralCounts}
           projectName={meta.project}
+          referralBP={referralBP}
         />
       )}
       <Box
