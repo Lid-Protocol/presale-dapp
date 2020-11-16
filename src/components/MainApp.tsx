@@ -111,6 +111,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
 
     defaultWatcher.stop();
 
+
     defaultWatcher.recreate(
       [
         {
@@ -163,11 +164,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           returns: [['endTime', (val: any) => val.toNumber() * 1000]]
         },
         {
-          target: addresses.timer,
-          call: ['hardCapTimer()(uint256)'],
-          returns: [['hardCapTimer', (val: any) => val.toNumber() / 3600]]
-        },
-        {
           target: addresses.presale,
           call: ['hardcap()(uint256)'],
           returns: [['hardcap', (val: any) => val.toString()]]
@@ -202,7 +198,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     }
 
     walletWatcher.stop();
-
     walletWatcher.recreate(
       [
         {
@@ -242,9 +237,8 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
         {
           target: addresses.redeemer,
           call: [
-            'calculateRatePerEth(uint256,uint256,uint256)(uint256)',
+            'calculateRatePerEth(uint256,uint256)(uint256)',
             toWei(meta.totalPresale),
-            totalEth,
             hardcap
           ],
           returns: [['currentPrice', (val: any) => val.toString()]]
