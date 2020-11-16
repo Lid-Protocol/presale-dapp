@@ -12,7 +12,6 @@ import abis from 'contracts/abis';
 import Header from './Header';
 import SubHeading from './SubHeading';
 import StartTimer from './StartTimer';
-import ReferralCode from './ReferralCode';
 import Footer from './Footer';
 import Refunder from './Refunder';
 import DepositForm from './DepositForm';
@@ -46,14 +45,11 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     accountEthDeposit: '0',
     currentPrice: '0',
     maxDeposit: '0',
-    earnedReferrals: '0',
-    referralCounts: '0',
     finalEndTime: '0',
     accountRedeemable: '0',
     accountClaimedTokens: '0',
     maxShares: '0',
     totalShares: '0',
-    referralBP: '0',
     hardcap: '0',
     hardCapTimer: 0,
     stakingLid: '0',
@@ -75,14 +71,11 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     accountEthDeposit,
     currentPrice,
     maxDeposit,
-    earnedReferrals,
-    referralCounts,
     finalEndTime,
     accountRedeemable,
     accountClaimedTokens,
     maxShares,
     totalShares,
-    referralBP,
     hardcap,
     hardCapTimer,
     stakingLid,
@@ -176,11 +169,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
         },
         {
           target: addresses.presale,
-          call: ['referralBP()(uint256)'],
-          returns: [['referralBP', (val: any) => val.toString()]]
-        },
-        {
-          target: addresses.presale,
           call: ['hardcap()(uint256)'],
           returns: [['hardcap', (val: any) => val.toString()]]
         },
@@ -240,16 +228,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           target: addresses.redeemer,
           call: ['accountDeposits(address)(uint256)', address],
           returns: [['accountEthDeposit', (val: any) => val.toString()]]
-        },
-        {
-          target: addresses.presale,
-          call: ['earnedReferrals(address)(uint256)', address],
-          returns: [['earnedReferrals', (val: any) => val.toString()]]
-        },
-        {
-          target: addresses.presale,
-          call: ['referralCounts(address)(uint256)', address],
-          returns: [['referralCounts', (val: any) => val.toString()]]
         },
         {
           target: addresses.redeemer,
@@ -376,7 +354,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
             totalEth={totalEth}
             currentPrice={currentPrice}
             hardcap={hardcap}
-            referralBP={referralBP}
           />
         </>
       )}
@@ -386,15 +363,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           accessTime={accessTime}
           meta={meta}
           stakingLid={stakingLid}
-        />
-      )}
-      {referralBP !== '0' && (
-        <ReferralCode
-          address={address}
-          earnedReferrals={earnedReferrals}
-          referralCounts={referralCounts}
-          projectName={meta.project}
-          referralBP={referralBP}
         />
       )}
       <Box

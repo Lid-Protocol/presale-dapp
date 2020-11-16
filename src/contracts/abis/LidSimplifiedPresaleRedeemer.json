@@ -83,63 +83,6 @@
   },
   {
     "constant": true,
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "bonusRangeBP",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "bonusRangeStart",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "currentBonusIndex",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
     "inputs": [],
     "name": "isOwner",
     "outputs": [
@@ -266,16 +209,6 @@
         "type": "uint256"
       },
       {
-        "internalType": "uint256[]",
-        "name": "_bonusRangeStart",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "_bonusRangeBP",
-        "type": "uint256[]"
-      },
-      {
         "internalType": "address",
         "name": "_presale",
         "type": "address"
@@ -339,11 +272,6 @@
         "internalType": "uint256",
         "name": "deposit",
         "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "postDepositEth",
-        "type": "uint256"
       }
     ],
     "name": "setDeposit",
@@ -362,11 +290,6 @@
       },
       {
         "internalType": "uint256",
-        "name": "depositEth",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
         "name": "hardCap",
         "type": "uint256"
       }
@@ -380,7 +303,7 @@
       }
     ],
     "payable": false,
-    "stateMutability": "view",
+    "stateMutability": "pure",
     "type": "function"
   },
   {
@@ -432,7 +355,7 @@
       }
     ],
     "payable": false,
-    "stateMutability": "view",
+    "stateMutability": "pure",
     "type": "function"
   }
 ]

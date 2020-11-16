@@ -20,7 +20,6 @@ interface IDepositForm {
   accountEthDeposit: string;
   totalEth: string;
   hardcap: string;
-  referralBP: string;
   currentPrice: string;
   meta: DappMetaData;
 }
@@ -33,7 +32,6 @@ const DepositForm: React.FC<IDepositForm> = ({
   maxDeposit,
   accountEthDeposit,
   hardcap,
-  referralBP,
   totalEth,
   currentPrice,
   meta
@@ -47,14 +45,7 @@ const DepositForm: React.FC<IDepositForm> = ({
     ? toBN(meta.accountCap).sub(toBN(accountEthDeposit))
     : toBN('1');
   const availableByTotalDeposit = toBN(hardcap).gte(toBN(totalEth))
-    ? toBN(hardcap)
-        .sub(toBN(totalEth))
-        .add(
-          toBN(hardcap)
-            .sub(toBN(totalEth))
-            .mul(toBN(referralBP))
-            .div(toBN(meta.basisPoint))
-        )
+    ? toBN(hardcap).sub(toBN(totalEth))
     : toBN('1');
 
   const availableMax = availableByAccountDeposit.gte(availableByTotalDeposit)
