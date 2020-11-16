@@ -6,7 +6,7 @@ import Web3 from 'web3';
 import { createWatcher } from '@makerdao/multicall';
 import { AbiItem } from 'web3-utils';
 import { Contract } from 'web3-eth-contract';
-import { toWei } from 'utils';
+import { toBN, toWei } from 'utils';
 import abis from 'contracts/abis';
 
 import Header from './Header';
@@ -36,9 +36,10 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
   const [isActive, setIsActive] = useState(false);
 
   const [state, setState] = useState({
-    startTime: Date.UTC(2020, 8, 1, 3, 45, 0, 0),
-    accessTime: Date.UTC(2020, 8, 1, 4, 0, 0, 0),
-    endTime: null,
+    startTime: 0,
+    accessTime: 0,
+    endTime: 0,
+    refundTime: 0,
     totalEth: '0',
     totalDepositors: '0',
     accountShares: '0',
@@ -50,6 +51,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     accountClaimedTokens: '0',
     maxShares: '0',
     totalShares: '0',
+    softcap: '0',
     hardcap: '0',
     hardCapTimer: 0,
     stakingLid: '0',
@@ -64,6 +66,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
   const {
     startTime,
     accessTime,
+    refundTime,
     endTime,
     totalEth,
     totalDepositors,
@@ -76,6 +79,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     accountClaimedTokens,
     maxShares,
     totalShares,
+    softcap,
     hardcap,
     hardCapTimer,
     stakingLid,
@@ -98,6 +102,8 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     interval: 10000
   };
 
+  const softCapReached = toBN(totalEth).gte(toBN(softcap));
+
   useEffect(() => {
     if (!web3) {
       return;
@@ -111,7 +117,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
 
     defaultWatcher.stop();
 
-
     defaultWatcher.recreate(
       [
         {
@@ -122,6 +127,11 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           target: addresses.timer,
           call: ['startTime()(uint256)'],
           returns: [['startTime', (val: any) => val.toNumber() * 1000]]
+        },
+        {
+          target: addresses.timer,
+          call: ['refundTime()(uint256)'],
+          returns: [['refundTime', (val: any) => val.toNumber() * 1000]]
         },
         {
           target: addresses.redeemer,
@@ -162,6 +172,11 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           target: addresses.timer,
           call: ['endTime()(uint256)'],
           returns: [['endTime', (val: any) => val.toNumber() * 1000]]
+        },
+        {
+          target: addresses.timer,
+          call: ['softCap()(uint256)'],
+          returns: [['softcap', (val: any) => val.toString()]]
         },
         {
           target: addresses.presale,
@@ -301,6 +316,9 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
         isActive={isActive}
         startTime={startTime}
         accessTime={accessTime}
+        refundTime={refundTime}
+        softcap={softcap}
+        softCapReached={softCapReached}
       />
       {isPaused && !isRefunding && (
         <>

@@ -12,6 +12,7 @@ import { DappMetaData } from 'types';
 
 import EndTimer from './EndTimer';
 import StartTimer from './StartTimer';
+import RefundTimer from './RefundTimer';
 
 interface ISubHeading {
   totalEth: string;
@@ -27,6 +28,9 @@ interface ISubHeading {
   isActive: boolean;
   startTime: number;
   accessTime: number;
+  refundTime: number;
+  softcap: string;
+  softCapReached: boolean;
 }
 
 const SubHeadings: React.FC<ISubHeading> = ({
@@ -42,7 +46,10 @@ const SubHeadings: React.FC<ISubHeading> = ({
   hardCapTimer,
   isActive,
   startTime,
-  accessTime
+  accessTime,
+  refundTime,
+  softcap,
+  softCapReached
 }) => {
   const { addresses } = meta;
 
@@ -286,11 +293,15 @@ const SubHeadings: React.FC<ISubHeading> = ({
               top="-3px"
             />
 
-            {!expiryTimestamp && isActive && (
-              <p>Countdown timer will start once softcap is hit.</p>
+            {!softCapReached && isActive && (
+              <RefundTimer
+                expiryTimestamp={refundTime}
+                softcap={softcap}
+                meta={meta}
+              />
             )}
 
-            {!!expiryTimestamp && isActive && (
+            {softCapReached && isActive && (
               <EndTimer
                 expiryTimestamp={expiryTimestamp}
                 hardcap={hardcap}

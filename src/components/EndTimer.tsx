@@ -19,14 +19,14 @@ const EndTimer: React.FC<IEndTimer> = ({
 }) => {
   return (
     <>
-    <Text ml="10px" mt="5px" color="lid.fgMed" display="inline-block">
-      {`${meta.tokenSymbol} Presale ends in`}
-    </Text>
-    <CountDown
-      expiryTimestamp={
-        expiryTimestamp === null ? Date.now() : expiryTimestamp
-      }
-    />
+      <Text ml="10px" mt="5px" color="lid.fgMed" display="inline-block">
+        {`${meta.tokenSymbol} Presale ends in:`}
+      </Text>
+      <CountDown
+        expiryTimestamp={
+          expiryTimestamp === null ? Date.now() : expiryTimestamp
+        }
+      />
       <Text fontSize={['12px', '14px']} fontWeight="light" ml="5px;" mt="-5px">
         {hardCapTimer} hour timer.
       </Text>
