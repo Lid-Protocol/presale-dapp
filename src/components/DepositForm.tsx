@@ -141,8 +141,6 @@ const DepositForm: React.FC<IDepositForm> = ({
                 fromWei(
                   toBN(depositVal)
                     .mul(toBN(currentPrice))
-                    .mul(toBN('10000'))
-                    .div(toBN('10250'))
                     .div(toBN(toWei('1')))
                 )
               )}
