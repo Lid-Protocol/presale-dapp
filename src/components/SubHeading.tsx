@@ -15,6 +15,7 @@ import StartTimer from './StartTimer';
 import RefundTimer from './RefundTimer';
 
 interface ISubHeading {
+  isConnected: boolean;
   totalEth: string;
   totalShares: string;
   stakingLid: string;
@@ -34,6 +35,7 @@ interface ISubHeading {
 }
 
 const SubHeadings: React.FC<ISubHeading> = ({
+  isConnected,
   totalEth,
   totalDepositors,
   accountEthDeposit,
@@ -293,7 +295,13 @@ const SubHeadings: React.FC<ISubHeading> = ({
               top="-3px"
             />
 
-            {!softCapReached && isActive && (
+            {!isConnected && (
+              <Text ml="10px" mt="5px" color="lid.fgMed" display="inline-block">
+                Connect to your web3 wallet to see timer
+              </Text>
+            )}
+
+            {isConnected && !softCapReached && isActive && (
               <RefundTimer
                 expiryTimestamp={refundTime}
                 softcap={softcap}
@@ -301,7 +309,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
               />
             )}
 
-            {softCapReached && isActive && (
+            {isConnected && softCapReached && isActive && (
               <EndTimer
                 expiryTimestamp={expiryTimestamp}
                 hardcap={hardcap}
@@ -310,7 +318,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
               />
             )}
 
-            {!isActive && (
+            {isConnected && !isActive && (
               <StartTimer
                 startTime={startTime}
                 accessTime={accessTime}
