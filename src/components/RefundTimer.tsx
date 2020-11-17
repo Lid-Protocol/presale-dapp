@@ -18,7 +18,7 @@ const RefundTimer: React.FC<RefundTimer> = ({
   return (
     <>
       <Text ml="10px" mt="5px" color="lid.fgMed" display="inline-block">
-        {`${meta.tokenSymbol} Presale refunds in:`}
+        {`${meta.tokenSymbol} Presale softcap timer ends in:`}
       </Text>
       <CountDown
         expiryTimestamp={!expiryTimestamp ? Date.now() : expiryTimestamp}
