@@ -30,6 +30,7 @@ export default (props: IProps) => {
           accountCap: '',
           favicon: '/assets/images/icons/favicon.ico',
           project: '',
+          version: '',
           addresses: {
             presale: '',
             redeemer: '',

@@ -1,5 +1,6 @@
 import React from 'react';
 import MainApp from 'components/MainApp';
+import VersionRedirect from './VersionRedirect';
 import { DappMetaData } from 'types';
 
 interface IProps {
@@ -13,9 +14,11 @@ const App: React.FC<IProps> = (props: IProps) => {
   return (
     <>
       {props.meta.tokenName ? (
-        <>
+        props.meta.version == "1.0.0" ? (
+          <VersionRedirect {...props} />
+        ) : (
           <MainApp {...props} />
-        </>
+        )
       ) : (
         <>Loading</>
       )}

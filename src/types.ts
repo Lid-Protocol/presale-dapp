@@ -8,6 +8,7 @@ export interface DappMetaData {
   accountCap: string;
   favicon: string;
   project: string;
+  version: string;
   addresses: {
     presale: string;
     redeemer: string;

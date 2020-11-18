@@ -4,6 +4,7 @@ import { DappMetaData } from 'types';
 import Web3 from 'web3';
 import NotFound from './NotFound';
 import MainApp from 'components/MainApp';
+import VersionRedirect from './VersionRedirect';
 
 interface IProps {
   address: string;
@@ -22,6 +23,7 @@ export default ({ address, onConnect, web3 }: IProps) => {
     accountCap: '0',
     favicon: '',
     project: '',
+    version: '',
     addresses: {
       access: '',
       presale: '',
@@ -64,16 +66,22 @@ export default ({ address, onConnect, web3 }: IProps) => {
   return (
     <>
       {meta.tokenName && !showError && (
-        <>
+        meta.version == "1.0.0" ? (
+          <VersionRedirect
+            address={address}
+            web3={web3}
+            meta={meta}
+            onConnect={onConnect}
+          />
+        ) : (
           <MainApp
             address={address}
             web3={web3}
             meta={meta}
             onConnect={onConnect}
           />
-        </>
+        )
       )}
-      {showError && !meta.tokenName && <NotFound />}
     </>
-  );
+  )
 };
