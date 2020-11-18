@@ -98,7 +98,7 @@ const Header: React.FC<IHeader> = ({ address, onConnect, meta }) => {
             top="-3px"
           />
           <Text as="span" fontWeight="bold" display="inline-block" ml="5px">
-            Lid Simplified Presale v1.0.0
+            Lid Simplified Presale v2.0.0
           </Text>
         </Link>
         <Text fontSize="12px" color="lid.fgLight">
