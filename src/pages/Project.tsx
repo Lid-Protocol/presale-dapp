@@ -65,8 +65,9 @@ export default ({ address, onConnect, web3 }: IProps) => {
 
   return (
     <>
-      {meta.tokenName && !showError && (
-        meta.version == "1.0.0" ? (
+      {meta.tokenName &&
+        !showError &&
+        (meta.version === '1.0.0' ? (
           <VersionRedirect
             address={address}
             web3={web3}
@@ -80,8 +81,9 @@ export default ({ address, onConnect, web3 }: IProps) => {
             meta={meta}
             onConnect={onConnect}
           />
-        )
-      )}
+        ))}
+
+      {showError && !meta.tokenName && <NotFound />}
     </>
-  )
+  );
 };

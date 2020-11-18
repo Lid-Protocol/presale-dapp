@@ -1,10 +1,9 @@
 import React, { Fragment } from 'react';
-import Web3 from 'web3';
 import styled from 'styled-components';
-import { Link } from '@chakra-ui/core';
+import { Link, Image } from '@chakra-ui/core';
+import { formatAssetUrl } from 'utils';
 import { DappMetaData } from 'types';
 
-import NotFoundImage from 'assets/images/common/404.png';
 import Footer from 'components/Footer';
 
 const StyledContainer = styled.div`
@@ -39,7 +38,18 @@ export default (props: IProps) => {
       <StyledContainer>
         <StyledBody>
           <StyledTextWrapper>
-            <StyledText>{props.meta.tokenName} sale is on version 1.0.0.</StyledText>
+            <Image
+              src={`${formatAssetUrl(props.meta.project, 'logo.png')}`}
+              alt="token logo"
+              w="auto"
+              h="60px"
+              display="inline-block"
+              position="relative"
+              top="-10px"
+            />
+            <StyledText>
+              {props.meta.tokenName} sale is on version 1.0.0.
+            </StyledText>
             <Link
               bg="lid.brand"
               color="white"
@@ -56,7 +66,7 @@ export default (props: IProps) => {
               textAlign="center"
               marginLeft="auto"
               marginRight="auto"
-              href={"https://v1.sale.lid.sh/"+props.meta.project}
+              href={'https://v1.sale.lid.sh/' + props.meta.project}
             >
               Go to Sale
             </Link>
