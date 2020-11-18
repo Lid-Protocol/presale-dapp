@@ -303,6 +303,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     <>
       <Header address={address} meta={meta} onConnect={onConnect} />
       <SubHeading
+        isConnected={!!address}
         totalEth={totalEth}
         meta={meta}
         totalDepositors={totalDepositors}
