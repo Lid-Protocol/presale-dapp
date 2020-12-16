@@ -27,6 +27,7 @@ interface ISubHeading {
   hardcap: string;
   hardCapTimer: number;
   isActive: boolean;
+  isEnded: boolean;
   startTime: number;
   accessTime: number;
   refundTime: number;
@@ -47,6 +48,7 @@ const SubHeadings: React.FC<ISubHeading> = ({
   hardcap,
   hardCapTimer,
   isActive,
+  isEnded,
   startTime,
   accessTime,
   refundTime,
@@ -301,7 +303,22 @@ const SubHeadings: React.FC<ISubHeading> = ({
               </Text>
             )}
 
-            {isConnected && !softCapReached && isActive && (
+            {isConnected && !isActive && (
+              <StartTimer
+                startTime={startTime}
+                accessTime={accessTime}
+                meta={meta}
+                stakingLid={stakingLid}
+              />
+            )}
+
+            {isConnected && isActive && isEnded && (
+              <Text ml="10px" mt="5px" color="lid.fgMed" display="inline-block">
+                Presale is ended
+              </Text>
+            )}
+
+            {isConnected && isActive && !isEnded && !softCapReached && (
               <RefundTimer
                 expiryTimestamp={refundTime}
                 softcap={softcap}
@@ -309,21 +326,12 @@ const SubHeadings: React.FC<ISubHeading> = ({
               />
             )}
 
-            {isConnected && softCapReached && isActive && (
+            {isConnected && isActive && !isEnded && softCapReached && (
               <EndTimer
                 expiryTimestamp={expiryTimestamp}
                 hardcap={hardcap}
                 hardCapTimer={hardCapTimer}
                 meta={meta}
-              />
-            )}
-
-            {isConnected && !isActive && (
-              <StartTimer
-                startTime={startTime}
-                accessTime={accessTime}
-                meta={meta}
-                stakingLid={stakingLid}
               />
             )}
           </Box>

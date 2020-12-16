@@ -11,7 +11,6 @@ import abis from 'contracts/abis';
 
 import Header from './Header';
 import SubHeading from './SubHeading';
-import StartTimer from './StartTimer';
 import Footer from './Footer';
 import Refunder from './Refunder';
 import DepositForm from './DepositForm';
@@ -315,12 +314,14 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
         hardcap={hardcap}
         hardCapTimer={hardCapTimer}
         isActive={isActive}
+        isEnded={isEnded}
         startTime={startTime}
         accessTime={accessTime}
         refundTime={refundTime}
         softcap={softcap}
         softCapReached={softCapReached}
       />
+
       {isPaused && !isRefunding && (
         <>
           <Text
@@ -336,10 +337,12 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           </Text>
         </>
       )}
+
       {isRefunding && (
         <Refunder lidPresaleSC={lidPresaleSC} address={address} />
       )}
-      {isActive && isEnded && !isPaused && (
+
+      {!isPaused && isActive && isEnded && (
         <Claimer
           lidPresaleSC={lidPresaleSC}
           address={address}
@@ -354,41 +357,22 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
         />
       )}
 
-      {isActive && !isEnded && !isPaused && (
-        <>
-          <DepositForm
-            web3={web3}
-            address={address}
-            lidPresaleSC={lidPresaleSC}
-            referralAddress={referralAddress}
-            maxDeposit={maxDeposit}
-            meta={meta}
-            accountEthDeposit={accountEthDeposit}
-            totalEth={totalEth}
-            currentPrice={currentPrice}
-            hardcap={hardcap}
-          />
-        </>
-      )}
-      {!isActive && isEnded && !isPaused && (
-        <StartTimer
-          startTime={startTime}
-          accessTime={accessTime}
+      {!isPaused && isActive && !isEnded && (
+        <DepositForm
+          web3={web3}
+          address={address}
+          lidPresaleSC={lidPresaleSC}
+          referralAddress={referralAddress}
+          maxDeposit={maxDeposit}
           meta={meta}
-          stakingLid={stakingLid}
+          accountEthDeposit={accountEthDeposit}
+          totalEth={totalEth}
+          currentPrice={currentPrice}
+          hardcap={hardcap}
         />
       )}
-      <Box
-        w="100%"
-        maxW="1200px"
-        bg="lid.stroke"
-        height="1px"
-        mt="40px"
-        mb="40px"
-        ml="auto"
-        mr="auto"
-      />
-      {isActive && isEnded && !isPaused && (
+
+      {!isPaused && isActive && isEnded && (
         <PresaleCompletion
           meta={meta}
           isEnded={isEnded}
@@ -396,6 +380,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           lidPresaleSC={lidPresaleSC}
         />
       )}
+
       <Footer />
     </>
   );
