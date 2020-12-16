@@ -7,16 +7,17 @@ import { DappMetaData } from '../types';
 interface IEndTimer {
   expiryTimestamp: number | null;
   hardcap: string;
-  hardCapTimer: number;
   meta: DappMetaData;
 }
 
-const EndTimer: React.FC<IEndTimer> = ({
-  expiryTimestamp,
-  hardcap,
-  hardCapTimer,
-  meta
-}) => {
+const EndTimer: React.FC<IEndTimer> = ({ expiryTimestamp, hardcap, meta }) => {
+  const hardCapTimer =
+    !expiryTimestamp || expiryTimestamp < Date.now()
+      ? 0
+      : (expiryTimestamp - Date.now()) / 1000;
+  const hours = Math.floor(hardCapTimer / 3600);
+  const mins = Math.floor(hardCapTimer / 60);
+
   return (
     <>
       <Text ml="10px" mt="5px" color="lid.fgMed" display="inline-block">
@@ -27,12 +28,12 @@ const EndTimer: React.FC<IEndTimer> = ({
           expiryTimestamp === null ? Date.now() : expiryTimestamp
         }
       />
-      <Text fontSize={['12px', '14px']} fontWeight="light" ml="5px;" mt="-5px">
-        {hardCapTimer} hour timer.
-      </Text>
-      <Text fontSize={['12px', '14px']} ml="5px" fontWeight="light">
-        Ends after {hardCapTimer} hours or {fromWei(hardcap)} ETH.
-      </Text>
+      {!!expiryTimestamp && (
+        <Text fontSize={['12px', '14px']} ml="5px" fontWeight="light">
+          Ends after {hours > 1 ? `${hours} hours` : `${mins} minuts`} or{' '}
+          {fromWei(hardcap)} ETH.
+        </Text>
+      )}
     </>
   );
 };

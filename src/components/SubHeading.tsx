@@ -25,7 +25,6 @@ interface ISubHeading {
   meta: DappMetaData;
   expiryTimestamp: number | null;
   hardcap: string;
-  hardCapTimer: number;
   isActive: boolean;
   isEnded: boolean;
   startTime: number;
@@ -46,7 +45,6 @@ const SubHeadings: React.FC<ISubHeading> = ({
   meta,
   expiryTimestamp,
   hardcap,
-  hardCapTimer,
   isActive,
   isEnded,
   startTime,
@@ -330,7 +328,6 @@ const SubHeadings: React.FC<ISubHeading> = ({
               <EndTimer
                 expiryTimestamp={expiryTimestamp}
                 hardcap={hardcap}
-                hardCapTimer={hardCapTimer}
                 meta={meta}
               />
             )}

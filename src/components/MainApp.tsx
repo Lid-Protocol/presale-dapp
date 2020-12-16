@@ -52,7 +52,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     totalShares: '0',
     softcap: '0',
     hardcap: '0',
-    hardCapTimer: 0,
     stakingLid: '0',
     redeemBP: '1',
     redeemInterval: '1',
@@ -80,7 +79,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
     totalShares,
     softcap,
     hardcap,
-    hardCapTimer,
     stakingLid,
     redeemBP,
     redeemInterval,
@@ -312,7 +310,6 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
         stakingLid={stakingLid}
         expiryTimestamp={endTime}
         hardcap={hardcap}
-        hardCapTimer={hardCapTimer}
         isActive={isActive}
         isEnded={isEnded}
         startTime={startTime}
